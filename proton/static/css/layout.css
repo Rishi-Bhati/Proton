@@ -1,0 +1,82 @@
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+#particles-js {
+    height: 100%; /* Full height of the viewport */
+    width: 100%; /* Full width of the viewport */
+    position: fixed; /* Fixed position */
+    background-color: black;
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    z-index: -1; /* Send to the back */
+    overflow: hidden;
+}
+
+.navbar {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between logo and links */
+    align-items: center; /* Center items vertically */
+    background-color: #00000000;
+    color: rgb(255, 255, 255);
+    margin: 10px; /* This margin can cause overflow */
+    padding: 10px;
+    border: 2px solid #39ff14; /* Neon green border */
+    z-index: 1; /* Higher z-index to be above particles */
+    height: 4rem; /* Fixed height */
+    width: calc(100% - 20px); /* Full width minus margins */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.logo {
+    flex: 0 0 auto; /* Prevent the logo from growing */
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Remove default margin */
+    margin-right: 5px;
+    display: flex; /* Use flexbox for the list */
+}
+
+.navbar li {
+    margin-left: 20px; /* Space between links */
+}
+
+.navbar a {
+    color: yellow; /* Change link color to yellow */
+    text-decoration: none;
+}
+
+#login {
+    color: #02B556; /* Neon green color */
+    text-decoration: none;
+}
+
+#logo {
+    height: 3rem; /* Half the height of the navbar */
+    width: 3rem; /* Half the width of the navbar */
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    position: fixed; /* Fixed position */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    margin: 10px; /* This margin can cause overflow */
+    margin-top: 2px;
+    padding: 10px;
+    height: 88.5vh; /* Full height of the viewport */
+    width: calc(100% - 20px); /* Full width minus margins */
+    color: white;
+    font-size: 2rem;
+    border: #39ff14 2px solid; /* Neon green border */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+
+}

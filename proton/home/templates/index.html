@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css"> 
+{% endblock %}
+
+{% block title %}
+Home | PROTON Home 
+{% endblock %}
+
+{% block content %}
+
+<div class="terminal">
+    <div class="terminal-header">PROTON Terminal</div>
+    <div class="terminal-content">
+        <pre class="ascii-art">
+ ________  ________  ________  _________  ________  ________      
+|\   __  \|\   __  \|\   __  \|\___   ___\\   __  \|\   ___  \    
+\ \  \|\  \ \  \|\  \ \  \|\  \|___ \  \_\ \  \|\  \ \  \\ \  \   
+ \ \   ____\ \   _  _\ \  \\\  \   \ \  \ \ \  \\\  \ \  \\ \  \  
+  \ \  \___|\ \  \\  \\ \  \\\  \   \ \  \ \ \  \\\  \ \  \\ \  \ 
+   \ \__\    \ \__\\ _\\ \_______\   \ \__\ \ \_______\ \__\\ \__\
+    \|__|     \|__|\|__|\|_______|    \|__|  \|_______|\|__| \|__|
+         </pre>
+        <p>Welcome to PROTON</p>
+        <p>(Proactive Organisation for Threats and Online Networks)</p>
+        <p>>> Initializing secure environment...</p>
+        <p>>> Verifying credentials...</p>
+        <p>>> <span class="warning">WARNING!</span> Unauthorized access detected.</p>
+        <p>>> Current user: guest</p>
+        <p>>> Environment status: SECURED ✓</p>
+        <p>>> Ready for exploration!</p>
+        <p>Type 'help' to see available commands.</p>
+        <p class="command-line">proton@guest:<span style="color: #90C0F5">~$</span></p>
+    </div>
+</div>
+{% endblock %}
