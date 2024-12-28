@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block styles %}
+<link href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css"> 
 {% endblock %}
 
@@ -13,26 +14,77 @@ Home | PROTON Home
 
 <div class="terminal">
     <div class="terminal-header">PROTON Terminal</div>
-    <div class="terminal-content">
+    <div id="terminal-art">
         <pre class="ascii-art">
- ________  ________  ________  _________  ________  ________      
-|\   __  \|\   __  \|\   __  \|\___   ___\\   __  \|\   ___  \    
-\ \  \|\  \ \  \|\  \ \  \|\  \|___ \  \_\ \  \|\  \ \  \\ \  \   
- \ \   ____\ \   _  _\ \  \\\  \   \ \  \ \ \  \\\  \ \  \\ \  \  
+ ________  ________  ________  _________  ________  ________     
+|\   __  \|\   __  \|\   __  \|\___   ___\\   __  \|\   ___  \  
+\ \  \|\  \ \  \|\  \ \  \|\  \|___ \  \_\ \  \|\  \ \  \\ \  \  
+ \ \   ____\ \   _  _\ \  \\\  \   \ \  \ \ \  \\\  \ \  \\ \  \ 
   \ \  \___|\ \  \\  \\ \  \\\  \   \ \  \ \ \  \\\  \ \  \\ \  \ 
-   \ \__\    \ \__\\ _\\ \_______\   \ \__\ \ \_______\ \__\\ \__\
-    \|__|     \|__|\|__|\|_______|    \|__|  \|_______|\|__| \|__|
-         </pre>
-        <p>Welcome to PROTON</p>
-        <p>(Proactive Organisation for Threats and Online Networks)</p>
-        <p>>> Initializing secure environment...</p>
-        <p>>> Verifying credentials...</p>
-        <p>>> <span class="warning">WARNING!</span> Unauthorized access detected.</p>
-        <p>>> Current user: guest</p>
-        <p>>> Environment status: SECURED ✓</p>
-        <p>>> Ready for exploration!</p>
-        <p>Type 'help' to see available commands.</p>
-        <p class="command-line">proton@guest:<span style="color: #90C0F5">~$</span></p>
+   \ \__\    \ \__\\ _\\ \_______\   \ \__\ \ \_______\ \__\\ \__\ 
+    \|__|     \|__|\|__|\|_______|    \|__|  \|_______|\|__| \|__| 
+        </pre> 
+        <div id="terminal-content">
+        <script>
+
+        
+            // set up text to print, each item in array is new line
+            var aText = new Array(
+               "<p>Welcome to PROTON</p>",
+                   "<p>(Proactive Organisation for Threats and Online Networks)</p>",
+                   "<p>>> Initializing secure environment...</p>",
+                   "<p>>> Verifying credentials...</p>",
+                    
+                   "{% if user.is_authenticated %}",
+                   '<p>>> <span class="success">SUCCESS!</span> User authenticated.</p>',
+                   "<p>>> Current user: {{ user.username }}</p>",
+                   "{% else %}",
+                   '<p>>> <span class="warning">WARNING!</span> Unauthorized access detected.</p>',
+                   "<p>>> Current user: guest</p>",
+                   "{% endif %}",
+                    
+                   "<p>>> Environment status: SECURED ✓</p>",
+                   "<p>>> Ready for exploration!</p>",
+                   "<p>Type 'help' to see available commands.</p>",
+                   '<p class="command-line">proton@guest:<span style="color: #90C0F5">~$</span></p>'
+               );
+               var iSpeed = 0.1; // time delay of print out
+               var iIndex = 0; // start printing array at this posision
+               var iArrLength = aText[0].length; // the length of the text array
+               var iScrollAt = 20; // start scrolling up at this many lines
+                    
+               var iTextPos = 0; // initialise text position
+               var sContents = ''; // initialise contents variable
+               var iRow; // initialise current row
+                    
+               function typewriter()
+               {
+                sContents =  ' ';
+                iRow = Math.max(0, iIndex-iScrollAt);
+                var destination = document.getElementById("terminal-content");
+                
+                while ( iRow < iIndex ) {
+                 sContents += aText[iRow++];
+                }
+                destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "";
+                if ( iTextPos++ == iArrLength ) {
+                 iTextPos = 0;
+                 iIndex++;
+                 if ( iIndex != aText.length ) {
+                  iArrLength = aText[iIndex].length;
+                  setTimeout("typewriter()", 500);
+                 }
+                } else {
+                 setTimeout("typewriter()", iSpeed);
+                }
+               }
+               
+               
+               typewriter();
+               
+               
+        </script>
+        </div>
     </div>
 </div>
 {% endblock %}

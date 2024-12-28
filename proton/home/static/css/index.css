@@ -6,7 +6,7 @@
     width: 50vw; 
     /* max-width: 800px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .terminal-header {
     display: flex;
@@ -19,12 +19,15 @@
     font-weight: bold;
     font-size: 2vh;
 }
-.terminal-content {
+
+#terminal-content {
     font-size: 0.8rem;
     background-color: #1e1e1e;
     padding: 10px;
     line-height: 0.7;
+
 }
+
 .ascii-art {
     padding-left: -10px;
     color: #00ff00;
@@ -38,4 +41,8 @@
 }
 .warning {
     color: red;
+}
+
+.success {
+    color: #00ff00;
 }
