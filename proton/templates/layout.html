@@ -24,7 +24,15 @@
                 <li><a href="">Team</a></li>
                 <li><a href="">Gallery</a></li>
                 <li><a href="">Playground</a></li>
-                <li><a id="login" href="">Log In</a></li>
+
+                {% if user.is_authenticated %}
+                <li><form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" id="logout">Log Out</button>
+                </form></li>
+                {% else %}
+                <li><a id="login" href="/accounts/login">Log In</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
