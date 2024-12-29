@@ -7,7 +7,6 @@ var terminal = document.getElementById("terminal"); // Terminal display area
 
 // Initialize variables for command history and password handling
 var git = 0; // Index for command history
-
 var commands = []; // Array to store command history
 
 // Start the command line interface after a short delay
@@ -64,20 +63,20 @@ function enterKey(e) {
 function commander(cmd) {
   switch (cmd.toLowerCase()) {
     case "help":
-      loopLines(help, "white margin", 80); // Display help information
+      loopLines(help, "color2 margin", 80); // Display help information
       break;
     case "about":
-      loopLines(about, "white margin", 80); // Display about information
+      loopLines(about, "color2 margin", 80); // Display about information
       break;
     case "members":
-      addLine("Opening GUI-PROTON...", "white", 80); // Notify opening members
+      addLine("Opening GUI-PROTON...", "color2", 80); // Notify opening members
       newTab(members); // Open members link in a new tab break;
       break;
     case "socialmedia":
-      loopLines(socialmedia, "white margin", 80); // Display social media links
+      loopLines(socialmedia, "color2 margin", 80); // Display social media links
       break;
     case "contact":
-      addLine('email        <a href="' + email + '" target="_blank">email' + "</a>", "white", 80); // Display contact email
+      addLine('email        <a href="' + email + '" target="_blank">email' + "</a>", "color2", 80); // Display contact email
       break;
     case "clear":
       setTimeout(function() {
@@ -89,7 +88,7 @@ function commander(cmd) {
       loopLines(home, "", 80); // Display home lines
       break;
     case "gui":
-      addLine("Opening GUI-INTERFACE...", "white", 0); // Notify opening GUI
+      addLine("Opening GUI-INTERFACE...", "color2", 0); // Notify opening GUI
       newTab(GUI); // Open GUI link in a new tab
       break;
     default:
