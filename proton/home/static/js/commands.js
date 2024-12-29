@@ -4,7 +4,7 @@ var instagram = "https://www.instagram.com/proton_nmamit"; // Instagram URL
 var github = "https://github.com/prashithshetty"; // GitHub URL
 var email = "protonemail.com"; // Email address (note: this seems to be missing the '@' symbol)
 var members = 'path to members page homie'; // Placeholder for the path to the members page
-var GUI = 'home.html'; // Placeholder for the path to the GUI home page
+var GUI = 'home'; // Placeholder for the path to the GUI home page
 
 // About section content
 about = [

@@ -10,6 +10,10 @@ def index(request):
     # Render the index.html template
     return render(request, 'index.html')
 
+def home(request):
+    # Render the home.html template
+    return render(request, 'home.html')
+
 # Define a view function to handle user registration
 def register(request):
     # Check if the request method is POST
