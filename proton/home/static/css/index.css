@@ -4,6 +4,7 @@
     border-radius: 8px;
     height: 75vh;
     width: 50vw; 
+    min-height: 500px;
     /* max-width: 800px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     overflow-x: hidden;
@@ -45,4 +46,18 @@
 
 .success {
     color: #00ff00;
+}
+
+.upenvts {
+    display: flex;
+    justify-content:flex-start;
+}
+
+.upevnts_content {
+    height: 500px;
+    margin-right: 10px;
+    padding: 5px;
+    background-color: #00ff00;
+    color: #000;
+    border-radius: 5px;
 }

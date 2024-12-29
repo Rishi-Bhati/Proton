@@ -2,7 +2,7 @@ html, body {
     height: 100%; /* Full height of the viewport */
     width: 100%;
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    overflow-y: auto;
+    /* overflow-y: auto; */
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
 }
@@ -19,6 +19,7 @@ html, body {
 }
 
 .navbar {
+    position: fixed; /* Fixed position */
     display: flex; /* Use flexbox for layout */
     justify-content: space-between; /* Space between logo and links */
     align-items: center; /* Center items vertically */
@@ -76,20 +77,31 @@ button, input[type="submit"], input[type="reset"] {
     margin: 0;
 }
 
+.container {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    height: 100vh; /* Full height of the viewport */
+    overflow-y: auto;
+}
+
 .main {
-    position: absolute; /* Fixed position */
-    display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-    margin: 10px; /* This margin can cause overflow */
+    position: fixed; 
+    top: 87px;
+    z-index: 2;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
+    margin: 10px; 
     margin-top: 2px;
     padding: 10px;
-    height: 88.5vh; /* Full height of the viewport */
-    width: calc(100% - 20px); /* Full width minus margins */
-    overflow-y: auto; /* Vertical scrolling */
+    height: 88.5vh; 
+    max-height: 100vh;
+    width: calc(100% - 20px); 
     color: white;
+    overflow-y: scroll;
     font-size: 2rem;
-    border: #39ff14 2px solid; /* Neon green border */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    border: #39ff14 2px solid; 
+    box-sizing: border-box; 
 
 }
