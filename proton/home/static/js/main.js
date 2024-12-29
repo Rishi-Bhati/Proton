@@ -7,13 +7,12 @@ var terminal = document.getElementById("terminal"); // Terminal display area
 
 // Initialize variables for command history and password handling
 var git = 0; // Index for command history
-var pw = false; // Flag to indicate if password input is expected
-let pwd = false; // Flag to indicate if the correct password has been entered
+
 var commands = []; // Array to store command history
 
 // Start the command line interface after a short delay
 setTimeout(function() {
-  loopLines(home, "", 80); // Display the banner
+  loopLines(home, "", 80); // Display the home
   textarea.focus(); // Focus on the textarea for user input
 }, 100);
 
@@ -73,6 +72,7 @@ function commander(cmd) {
     case "members":
       addLine("Opening GUI-PROTON...", "color2", 80); // Notify opening members
       newTab(members); // Open members link in a new tab break;
+      break;
     case "socialmedia":
       loopLines(socialmedia, "color2 margin", 80); // Display social media links
       break;
