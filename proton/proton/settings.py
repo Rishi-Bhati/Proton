@@ -31,16 +31,26 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# Define the list of installed Django applications
 INSTALLED_APPS = [
+    # Django admin interface
     'django.contrib.admin',
-    'django.contrib.auth', # for user authentication
+    # Django authentication system for user authentication
+    'django.contrib.auth', 
+    # Django content type system
     'django.contrib.contenttypes',
+    # Django session framework
     'django.contrib.sessions',
+    # Django messaging system
     'django.contrib.messages',
+    # Live reload for development
     'livereload',
+    # Django static file serving
     'django.contrib.staticfiles',
+    # Custom 'home' application
     'home',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,10 +138,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Custom settings
+# Define the URL that will be used to serve media files
 MEDIA_URL = '/media/'
+
+# Define the root directory where media files will be stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Define the URL that will be used to serve static files
 STATIC_URL = '/static/'
+
+# Define the directories where static files will be stored
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = '/accounts/login/' # redirect to login page

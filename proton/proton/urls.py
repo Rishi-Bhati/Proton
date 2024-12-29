@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# Import necessary modules from Django framework
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
@@ -21,10 +22,18 @@ from django.conf.urls.static import static
 from django.urls import include
 from django.contrib.auth.urls import views as auth_views
 
+# Define URL patterns for the application
 urlpatterns = [
+    # URL pattern for the admin interface
     path('admin/', admin.site.urls),
+    
+    # Include URL patterns from the 'home' app
     path('', include('home.urls')),
-    # path('accounts/', include('accounts.urls')),
-    path('accounts/', include('django.contrib.auth.urls')), # for login and logout
-    # path('accounts/register/', include('home.urls')),
+    
+    # Include URL patterns for user authentication (login, logout, etc.)
+    # This is provided by Django's built-in auth system
+    path('accounts/', include('django.contrib.auth.urls')), 
+    
+    # Serve media files (e.g., images, videos) from the MEDIA_ROOT directory
+    # This is only active when the application is running in debug mode
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
