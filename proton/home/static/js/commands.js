@@ -2,8 +2,8 @@
 var linkedin = "https://www.linkedin.com/company/proton-nmamit/"; // LinkedIn URL
 var instagram = "https://www.instagram.com/proton_nmamit"; // Instagram URL
 var github = "https://github.com/prashithshetty"; // GitHub URL
-var email = "protonemail.com"; // Email address (note: this seems to be missing the '@' symbol)
-var members = 'path to members page homie'; // Placeholder for the path to the members page
+var email = "proton.cybsec@nmamit.in"; // Email address (note: this seems to be missing the '@' symbol)
+var members = 'members'; // Placeholder for the path to the members page
 var GUI = 'home'; // Placeholder for the path to the GUI home page
 
 // About section content
