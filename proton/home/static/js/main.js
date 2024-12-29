@@ -1,143 +1,135 @@
-var before = document.getElementById("before");
-var liner = document.getElementById("liner");
-var command = document.getElementById("typer"); 
-var textarea = document.getElementById("texter"); 
-var terminal = document.getElementById("terminal");
+// Get references to HTML elements
+var before = document.getElementById("before"); // Element to insert new lines before
+var liner = document.getElementById("liner"); // Element for the command line input
+var command = document.getElementById("typer"); // Element to display the current command
+var textarea = document.getElementById("texter"); // Textarea for user input
+var terminal = document.getElementById("terminal"); // Terminal display area
 
-var git = 0;
-var pw = false;
-let pwd = false;
-var commands = [];
+// Initialize variables for command history and password handling
+var git = 0; // Index for command history
+var pw = false; // Flag to indicate if password input is expected
+let pwd = false; // Flag to indicate if the correct password has been entered
+var commands = []; // Array to store command history
 
+// Start the command line interface after a short delay
 setTimeout(function() {
-  loopLines(banner, "", 80);
-  textarea.focus();
+  loopLines(home, "", 80); // Display the banner
+  textarea.focus(); // Focus on the textarea for user input
 }, 100);
 
+// Add an event listener for keyup events
 window.addEventListener("keyup", enterKey);
 
+// Clear the textarea and command display initially
 textarea.value = "";
 command.innerHTML = textarea.value;
 
+// Function to handle keyup events
 function enterKey(e) {
+  // Reload the page if the F5 key (keyCode 181) is pressed
   if (e.keyCode == 181) {
     document.location.reload(true);
   }
-  if (pw) {
-    let et = "*";
-    let w = textarea.value.length;
-    command.innerHTML = et.repeat(w);
-    if (textarea.value === password) {
-      pwd = true;
+  
+
+    // Handle normal command input
+    if (e.keyCode == 13) { // If Enter is pressed
+      commands.push(command.innerHTML); // Add command to history
+      git = commands.length; // Update command index
+      addLine("user@proton:~$ " + command.innerHTML, "no-animation", 0); // Display command
+      commander(command.innerHTML.toLowerCase()); // Process the command
+      command.innerHTML = ""; // Clear command display
+      textarea.value = ""; // Clear textarea
     }
-    if (pwd && e.keyCode == 13) {
-      loopLines(secret, "color2 margin", 120);
-      command.innerHTML = "";
-      textarea.value = "";
-      pwd = false;
-      pw = false;
-      liner.classList.remove("password");
-    } else if (e.keyCode == 13) {
-      addLine("Wrong password", "error", 0);
-      command.innerHTML = "";
-      textarea.value = "";
-      pw = false;
-      liner.classList.remove("password");
+    
+    // Handle command history navigation
+    if (e.keyCode == 38 && git != 0) { // Up arrow key
+      git -= 1; // Move up in command history
+      textarea.value = commands[git]; // Set textarea to previous command
+      command.innerHTML = textarea.value; // Update command display
     }
-  } else {
-    if (e.keyCode == 13) {
-      commands.push(command.innerHTML);
-      git = commands.length;
-      addLine("user@proton:~$ " + command.innerHTML, "no-animation", 0);
-      commander(command.innerHTML.toLowerCase());
-      command.innerHTML = "";
-      textarea.value = "";
-    }
-    if (e.keyCode == 38 && git != 0) {
-      git -= 1;
-      textarea.value = commands[git];
-      command.innerHTML = textarea.value;
-    }
-    if (e.keyCode == 40 && git != commands.length) {
-      git += 1;
+    if (e.keyCode == 40 && git != commands.length) { // Down arrow key
+      git += 1; // Move down in command history
       if (commands[git] === undefined) {
-        textarea.value = "";
+        textarea.value = ""; // Clear textarea if no more commands
       } else {
-        textarea.value = commands[git];
+        textarea.value = commands[git]; // Set textarea to next command
       }
-      command.innerHTML = textarea.value;
+      command.innerHTML = textarea.value; // Update command display
     }
   }
-}
-loopLines(home, "", 80);
-  
+
+
+
+// Function to process commands
 function commander(cmd) {
   switch (cmd.toLowerCase()) {
     case "help":
-      loopLines(help, "color2 margin", 80);
+      loopLines(help, "color2 margin", 80); // Display help information
       break;
     case "about":
-      loopLines(about, "color2 margin", 80);
+      loopLines(about, "color2 margin", 80); // Display about information
       break;
-  
     case "members":
-      addLine("Opening GUI-PROTON...", "color2", 80);
-      newTab(members);
-      break;
+      addLine("Opening GUI-PROTON...", "color2", 80); // Notify opening members
+      newTab(members); // Open members link in a new tab break;
     case "socialmedia":
-      loopLines(socialmedia, "color2 margin", 80);
+      loopLines(socialmedia, "color2 margin", 80); // Display social media links
       break;
     case "contact":
-      addLine( 'email        <a href="' + email + '" target="_blank">email' + "</a>", "color2", 80);
+      addLine('email        <a href="' + email + '" target="_blank">email' + "</a>", "color2", 80); // Display contact email
       break;
     case "clear":
       setTimeout(function() {
-        terminal.innerHTML = '<a id="before"></a>';
-        before = document.getElementById("before");
+        terminal.innerHTML = '<a id="before"></a>'; // Clear terminal content
+        before = document.getElementById("before"); // Reset before reference
       }, 1);
       break;
     case "home":
-      loopLines(home, "", 80);
+      loopLines(home, "", 80); // Display home lines
       break;
     case "gui":
-      addLine("Opening GUI-INTERFACE...", "color2", 0);
-      newTab(GUI);
+      addLine("Opening GUI-INTERFACE...", "color2", 0); // Notify opening GUI
+      newTab(GUI); // Open GUI link in a new tab
       break;
     default:
-      addLine("<span class=\"inherit\">Command not found. For a list of commands, type <span class=\"command\">'help'</span>.</span>", "error", 100);
+      addLine("<span class=\"inherit\">Command not found. For a list of commands, type <span class=\"command\">'help'</span>.</span>", "error", 100); // Display command not found message
       break;
   }
 }
 
+// Function to open a new tab with the specified link
 function newTab(link) {
   setTimeout(function() {
-    window.open(link, "_blank");
+    window.open(link, "_blank"); // Open the link in a new tab
   }, 500);
 }
 
+// Function to add a new line to the terminal with a specified style and delay
 function addLine(text, style, time) {
   var t = "";
   for (let i = 0; i < text.length; i++) {
     if (text.charAt(i) == " " && text.charAt(i + 1) == " ") {
-      t += "&nbsp;&nbsp;";
+      t += "&nbsp;&nbsp;"; // Handle multiple spaces
       i++;
     } else {
-      t += text.charAt(i);
+      t += text.charAt(i); // Add character to the output string
     }
   }
   setTimeout(function() {
-    var next = document.createElement("p");
-    next.innerHTML = t;
-    next.className = style;
+    var next = document.createElement("p"); // Create a new paragraph element
+    next.innerHTML = t; // Set the inner HTML to the formatted text
+    next.className = style; // Set the class name for styling
 
-    before.parentNode.insertBefore(next, before);
+    before.parentNode.insertBefore(next, before); // Insert the new line before the 'before' element
 
-    window.scrollTo(0, document.body.offsetHeight);
+    window.scrollTo(0, document.body.offsetHeight); // Scroll to the bottom of the terminal
   }, time);
 }
 
+// Function to loop through and display lines with a specified delay
 function loopLines(name, style, time) {
   name.forEach(function(item, index) {
-    addLine(item, style, index * time);
+    addLine(item, style, index * time); // Add each line with a delay based on its index
   });
 }
