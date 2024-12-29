@@ -1,21 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Login</title>
-    <link rel="stylesheet" href="styleslogin.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #00FF00;
+            font-family: 'VT323', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        a {
+            color:rgb(0, 255, 0);
+        }
+        
+
+        a:hover {
+            color:rgb(255, 255, 255);
+        }
+        .login-container {
+            text-align: center;
+            border: 2px solid #00FF00;
+            padding: 20px;
+            width: 300px;
+        }
+        .login-container h1 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            background-color: #000;
+            border: 1px solid #00FF00;
+            color: #00FF00;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .login-container button {
+            background-color: #000;
+            border: 1px solid #00FF00;
+            color: #00FF00;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #00FF00;
+            color: #000;
+        }
+    </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="output">
-            <p>Welcome to the Linux Terminal</p>
-            <p>Please enter your username:</p>
-        </div>
-        <input type="text" id="username" class="input" placeholder="username" autofocus>
-        <input type="password" id="password" class="input" placeholder="password" style="display:none;">
-        <button id="submit" class="button">Login</button>
+    <div class="login-container">
+        <h1><i class="fas fa-user-secret"></i> Login</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            {% comment %} <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required> {% endcomment %}
+            <button type="submit">Enter</button>
+            <p>Don't have account? <a href="{% url 'register' %}">Click here to Register</a></p>
+        </form>
     </div>
-    <script src="scriptlogin.js"></script>
 </body>
 </html>
