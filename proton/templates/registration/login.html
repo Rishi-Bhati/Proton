@@ -1,9 +1,21 @@
-<!-- templates/registration/login.html -->
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit">Log In</button>
-</form>
-
-<p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Login</title>
+    <link rel="stylesheet" href="styleslogin.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="output">
+            <p>Welcome to the Linux Terminal</p>
+            <p>Please enter your username:</p>
+        </div>
+        <input type="text" id="username" class="input" placeholder="username" autofocus>
+        <input type="password" id="password" class="input" placeholder="password" style="display:none;">
+        <button id="submit" class="button">Login</button>
+    </div>
+    <script src="scriptlogin.js"></script>
+</body>
+</html>
