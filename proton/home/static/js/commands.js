@@ -10,24 +10,16 @@ var GUI = 'home'; // Placeholder for the path to the GUI home page
 about = [
   "<br>", // Line break
   "About Us", // Title
-  "PROTON, the PRoactive Organisation for Threats and Online", // Description line 1
-  "Networks, is a distinguished cybersecurity club within the", // Description line 2
-  "Department of Cybersecurity. We are dedicated to advancing the", // Description line 3
-  "field of cybersecurity by empowering students to transform", // Description line 4
-  "innovative ideas into robust, real-world solutions. Our club", // Description line 5
-  "nurtures a culture of vigilance and continuous improvement,", // Description line 6
-  "preparing the next generation of cybersecurity professionals to", // Description line 7
-  "tackle emerging threats with confidence.", // Description line 8
+  "PROTON, the PRoactive Organisation for Threats and Online Networks, is a distinguished cybersecurity club within the", // Description line 
+  "Department of Cybersecurity. We are dedicated to advancing the field of cybersecurity by empowering students to transform", 
+  "innovative ideas into robust, real-world solutions. Our club nurtures a culture of vigilance and continuous improvement,", 
+  "preparing the next generation of cybersecurity professionals to tackle emerging threats with confidence.",
   "     ", // Empty line for spacing
-  "At Proton, we emphasize hands-on experience and practical skills", // Description line 9
-  "essential for cybersecurity. We provide a platform for students to", // Description line 10
-  "engage in simulated cyber attacks, defense strategies, and", // Description line 11
-  "vulnerability assessments, ensuring they are well-equipped to handle", // Description line 12
-  "the complexities of the digital world. Through capture-the-flag", // Description line 13
-  "competitions, penetration testing exercises, and expert-led", // Description line 14
-  "workshops, we offer members the opportunity to sharpen their", // Description line 15
-  "technical skills and stay ahead in the ever-evolving cybersecurity", // Description line 16
-  "landscape.", // Description line 17
+  "At Proton, we emphasize hands-on experience and practical skills essential for cybersecurity. We provide a platform for students to",  
+  "engage in simulated cyber attacks, defense strategies, and vulnerability assessments, ensuring they are well-equipped to handle",  
+  "the complexities of the digital world. Through capture-the-flag competitions, penetration testing exercises, and expert-led", 
+  "workshops, we offer members the opportunity to sharpen their technical skills and stay ahead in the ever-evolving cybersecurity",
+  "landscape.",
   "<br>" // Line break
 ];
 
@@ -57,13 +49,18 @@ help = [
 // Home section content
 home = [
   '<span class="index">© 2025 PROTON. All rights reserved.</span>', // Copyright notice
-  "██████╗░██████╗░░█████╗░████████╗░█████╗░███╗░░██╗", // ASCII art line 1
-  "██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗░██║", // ASCII art line 2
-  "██████╔╝██████╔╝██║░░██║░░░██║░░░██║░░██║██╔██╗██║", // ASCII art line 3
-  "██╔═══╝░██╔══██╗██║░░██║░░░██║░░░██║░░██║██║╚████║", // ASCII art line 4
-  "██║░░░░░██║░░██║╚█████╔╝░░░██║░░░╚█████╔╝██║░╚███║", // ASCII art line 5
-  "╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚══╝", // ASCII art line 6
+  "██████╗░██████╗░░█████╗░████████╗░█████╗░███╗░░██╗░░░░░░███╗░░██╗███╗░░░███╗░█████╗░███╗░░░███╗██╗████████╗", // ASCII art line 1
+  "██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗░██║░░░░░░████╗░██║████╗░████║██╔══██╗████╗░████║██║╚══██╔══╝", // ASCII art line 2
+  "██████╔╝██████╔╝██║░░██║░░░██║░░░██║░░██║██╔██╗██║█████╗██╔██╗██║██╔████╔██║███████║██╔████╔██║██║░░░██║░░░", // ASCII art line 3
+  "██╔═══╝░██╔══██╗██║░░██║░░░██║░░░██║░░██║██║╚████║╚════╝██║╚████║██║╚██╔╝██║██╔══██║██║╚██╔╝██║██║░░░██║░░░", // ASCII art line 4
+  "██║░░░░░██║░░██║╚█████╔╝░░░██║░░░╚█████╔╝██║░╚███║░░░░░░██║░╚███║██║░╚═╝░██║██║░░██║██║░╚═╝░██║██║░░░██║░░░", // ASCII art line 5
+  "╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚══╝░░░░░░╚═╝░░╚══╝╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░╚═╝░░░", // ASCII art line 6
   '<span class="color2">Deal with the terminal,.</span>',
   '<span class="color2">Just type help homie u can do it.</span>', // Instruction for GUI access
   "<span class=\"color2\">For a list of available commands, type help</span>", // Help instruction
 ];
+
+
+
+
+
