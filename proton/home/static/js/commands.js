@@ -5,7 +5,11 @@ var github = "https://github.com/prashithshetty"; // GitHub URL
 var email = "protonemail.com"; // Email address (note: this seems to be missing the '@' symbol)
 var members = 'path to members page homie'; // Placeholder for the path to the members page
 <<<<<<< HEAD
+<<<<<<< HEAD
 var GUI = 'home'; // Placeholder for the path to the GUI home page
+=======
+var GUI = 'path to GUI home page'; // Placeholder for the path to the GUI home page
+>>>>>>> parent of d79253b (cosmetic changes)
 =======
 var GUI = 'path to GUI home page'; // Placeholder for the path to the GUI home page
 >>>>>>> parent of d79253b (cosmetic changes)
