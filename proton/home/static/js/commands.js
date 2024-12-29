@@ -4,7 +4,11 @@ var instagram = "https://www.instagram.com/proton_nmamit"; // Instagram URL
 var github = "https://github.com/prashithshetty"; // GitHub URL
 var email = "protonemail.com"; // Email address (note: this seems to be missing the '@' symbol)
 var members = 'path to members page homie'; // Placeholder for the path to the members page
+<<<<<<< HEAD
 var GUI = 'home'; // Placeholder for the path to the GUI home page
+=======
+var GUI = 'path to GUI home page'; // Placeholder for the path to the GUI home page
+>>>>>>> parent of d79253b (cosmetic changes)
 
 // About section content
 about = [
@@ -18,6 +22,7 @@ about = [
   "nurtures a culture of vigilance and continuous improvement,", // Description line 6
   "preparing the next generation of cybersecurity professionals to", // Description line 7
   "tackle emerging threats with confidence.", // Description line 8
+  "     ", // Empty line for spacing
   "     ", // Empty line for spacing
   "At Proton, we emphasize hands-on experience and practical skills", // Description line 9
   "essential for cybersecurity. We provide a platform for students to", // Description line 10
