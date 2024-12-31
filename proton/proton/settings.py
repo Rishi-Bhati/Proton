@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Custom 'home' application
     'home',
+    'sendemail', #send email
 ]
 
 
@@ -157,3 +158,7 @@ LOGOUT_REDIRECT_URL = "/" # redirect to home page after logout
 STATICFILES_DIRS = [  #static files permission
     BASE_DIR,"static"
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "rahultrivedi123.up@gmail.com"
+NOTIFY_EMAIL = "anujkumar123.mp@gmail.com"

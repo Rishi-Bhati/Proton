@@ -33,6 +33,8 @@ urlpatterns = [
     # Include URL patterns for user authentication (login, logout, etc.)
     # This is provided by Django's built-in auth system
     path('accounts/', include('django.contrib.auth.urls')), 
+
+    path('', include("sendemail.urls")), #send email
     
     # Serve media files (e.g., images, videos) from the MEDIA_ROOT directory
     # This is only active when the application is running in debug mode
