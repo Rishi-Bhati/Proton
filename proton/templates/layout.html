@@ -29,6 +29,7 @@
                 <li><a href="">Team</a></li>
                 <li><a href="">Gallery</a></li>
                 <li><a href="">Playground</a></li>
+                <li><a href="{% url "contact" %}">Contact</a></li>
 
                 {% if user.is_authenticated %}
                 <li><form action="{% url 'logout' %}" method="post" style="display:inline;">
