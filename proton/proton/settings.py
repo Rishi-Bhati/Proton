@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Custom 'home' application
     'home',
-    'sendemail', #send email
+    'contact', #send email
 ]
 
 
@@ -159,6 +161,13 @@ STATICFILES_DIRS = [  #static files permission
     BASE_DIR,"static"
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-DEFAULT_FROM_EMAIL = "rahultrivedi123.up@gmail.com"
-NOTIFY_EMAIL = "anujkumar123.mp@gmail.com"
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # For Gmail
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+load_dotenv()
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
