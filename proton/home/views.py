@@ -43,3 +43,7 @@ def register(request):
         
     # Render the registration/register.html template with the form
     return render(request, 'registration/register.html', {'form': form})
+
+def about(request):
+    # Render the about.html template
+    return render(request, 'about.html')

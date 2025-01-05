@@ -80,7 +80,7 @@ button, input[type="submit"], input[type="reset"] {
 .container {
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    height: 100vh; /* Full height of the viewport */
+    height: auto; /* Full height of the viewport */
     overflow-y: auto;
 }
 
@@ -103,5 +103,69 @@ button, input[type="submit"], input[type="reset"] {
     font-size: 2rem;
     border: #39ff14 2px solid; 
     box-sizing: border-box; 
+    padding-bottom: 0px;
 
+}
+
+.footer {
+    position: relative;
+    /* z-index: 1; */
+    bottom: 0px;
+    width: 100vw;
+    background-color: #1e1e1e;
+    color: #00ff00;
+    margin: 0px;
+    margin-top: 100px;
+    padding: 20px;
+    text-align: center;
+    clear: both; /* Clear floats */
+    /* position: relative; */
+    /* bottom: 0;
+    width: 100%; */
+    font-size: 1rem; /* Reset font size to normal */
+    /* padding: 10px; Reset padding to normal */
+    /* border: none; Remove border */
+    border-top: 2px solid #39ff14; /* Add a neon green border */
+    box-sizing: border-box; /* Include border in width/height */
+
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-left {
+    flex-basis: 30%;
+}
+
+.footer-right {
+    flex-basis: 30%;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer li {
+    margin-bottom: 10px;
+}
+
+.footer a {
+    color: #00ff00;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #ffffff;
+}
+
+.footer h3 {
+    margin-top: 0;
+    color: #39ff14; /* Change the color of the h3 tags to neon green */
 }
