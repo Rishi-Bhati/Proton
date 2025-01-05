@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     # Django static file serving
     'django.contrib.staticfiles',
     # Custom 'home' application
-    'home',
+    'home', #home app
     'contact', #send email
+    'team', #team app
 ]
 
 

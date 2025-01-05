@@ -1,41 +1,172 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block title %}
 About | PROTON Layout
 {% endblock %}
+
 {% block styles %}
 <style>
-    h1 {
-        font-size: 1.1em;
-        margin-bottom: 0.5em;
+
+    .about-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 40px;
     }
-    p {
+    .about-section img {
+        width: 50%%;
+        max-width: 80%;
+        height: auto;
+        border-radius: 10px;
+    }
+    .about-content {
+        flex: 1;
+        margin-right: 20px;
         font-size: 0.6em;
-        line-height: 1.6em;
-        padding: 100px;
+    }
+    .about-content h2 {
+        font-size: 3em;
+        color: #00ff00;
+    }
+    .about-content p {
+        font-size: 1.2em;
+        line-height: 1.6;
+    }
+    .team-section {
+        font-size: 0.5em;
+        margin-top: 60px;
+    }
+    .team-section h2 {
+        font-size: 2em;
+        color: #00ff00;
+        text-align: center;
+    }
+    .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 40px;
+    }
+    .team-member {
+        flex: 1 1 30%;
+        text-align: center;
+        margin: 20px;
+    }
+    .team-member img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+    }
+    .team-member h3 {
+        font-size: 1.5em;
+        color: #00ff00;
+        margin: 10px 0 5px;
+    }
+    .team-member p {
+        font-size: 1em;
+        color: #cccccc;
+    }
+    .view-all {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .view-all a {
+        color: #00ff00;
+        text-decoration: none;
+        font-size: 1.2em;
+        border: 2px solid #00ff00;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .view-all a:hover {
+        background-color: #00ff00;
+        color: #1a1a1a;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<h1>About PROTON</h1>
-<p>PROTON, the PRoactive Organisation for Threats and Online Networks, is a distinguished cybersecurity club within the
 
-    Department of Cybersecurity. We are dedicated to advancing the field of cybersecurity by empowering students to transform
-    
-    innovative ideas into robust, real-world solutions. Our club nurtures a culture of vigilance and continuous improvement,
-    
-    preparing the next generation of cybersecurity professionals to tackle emerging threats with confidence.
-</p>
-    
-<b></b>
-    <p>At Proton, we emphasize hands-on experience and practical skills essential for cybersecurity. We provide a platform for students to
-    
-    engage in simulated cyber attacks, defense strategies, and vulnerability assessments, ensuring they are well-equipped to handle
-    
-    the complexities of the digital world. Through capture-the-flag competitions, penetration testing exercises, and expert-led
-    
-    workshops, we offer members the opportunity to sharpen their technical skills and stay ahead in the ever-evolving cybersecurity
-    
-    landscape.</p>
+<div class="about-section">
+    <div class="about-content">
+     <h2>
+      Our Mission
+     </h2>
+     <p>
+      We are dedicated to providing top-notch cyber security solutions to protect your digital assets. Our team of experts works tirelessly to stay ahead of the latest threats and ensure your data remains secure.
+     </p>
+     <p>
+      With years of experience in the industry, we understand the importance of cyber security in today's digital world. Our mission is to offer comprehensive and reliable security services that give you peace of mind.
+     </p>
+    </div>
+    <img alt="A team of cyber security experts working on computers in a high-tech office environment" height="400" src="https://storage.googleapis.com/a1aa/image/xirkjnClIxaNFpAHgeiZGffebTkxTLEe4HCgk68vrjIJ6mKgC.jpg" width="600"/>
+   </div>
+   <div class="team-section">
+    <h2>
+     Meet Our Team
+    </h2>
+    <div class="team-members">
+     <div class="team-member">
+      <img alt="Portrait of John Doe, Chief Security Officer" height="150" src="https://storage.googleapis.com/a1aa/image/ILK50vHOeO2DASseE7JBOe5ltrJ9xIv02pa80SJrpim1upCoA.jpg" width="150"/>
+      <h3>
+       John Doe
+      </h3>
+      <p>
+       Chief Security Officer
+      </p>
+     </div>
+     <div class="team-member">
+      <img alt="Portrait of Jane Smith, Lead Security Analyst" height="150" src="https://storage.googleapis.com/a1aa/image/rQfJ1Wje51iMikEl1s5g1bZ4LfAx4qsvOGucnq8ZFxGkupCoA.jpg" width="150"/>
+      <h3>
+       Jane Smith
+      </h3>
+      <p>
+       Lead Security Analyst
+      </p>
+     </div>
+     <div class="team-member">
+      <img alt="Portrait of Mike Johnson, Network Security Engineer" height="150" src="https://storage.googleapis.com/a1aa/image/c5NFCiEBsCrrOB5OS6KFYQP7YBQCdHdjkGPDFLXa8X7zNVAF.jpg" width="150"/>
+      <h3>
+       Mike Johnson
+      </h3>
+      <p>
+       Network Security Engineer
+      </p>
+     </div>
+     <div class="team-member">
+      <img alt="Portrait of Emily Davis, Cyber Security Consultant" height="150" src="https://storage.googleapis.com/a1aa/image/thexL3CCjlUYc6uYC4GO9rveu2UmUmhfzt0HOq0ke09hdTFQB.jpg" width="150"/>
+      <h3>
+       Emily Davis
+      </h3>
+      <p>
+       Cyber Security Consultant
+      </p>
+     </div>
+     <div class="team-member">
+      <img alt="Portrait of Robert Brown, Incident Response Specialist" height="150" src="https://storage.googleapis.com/a1aa/image/peNOZ6cHGMVKaymGVMngSW12ew4kesnG2J9NJHjDyjcsupCoA.jpg" width="150"/>
+      <h3>
+       Robert Brown
+      </h3>
+      <p>
+       Incident Response Specialist
+      </p>
+     </div>
+     <div class="team-member">
+      <img alt="Portrait of Sarah Wilson, Security Software Developer" height="150" src="https://storage.googleapis.com/a1aa/image/vCu4qUG8iFrRNdCUqxjawlFrJ6eT4xqBJ8W1vebZwVJU3UBUA.jpg" width="150"/>
+      <h3>
+       Sarah Wilson
+      </h3>
+      <p>
+       Security Software Developer
+      </p>
+     </div>
+    </div>
+    <div class="view-all">
+     <a href="{% url 'team' %}">
+      View All ->
+     </a>
+    </div>
+   </div>
+
 {% endblock %}
