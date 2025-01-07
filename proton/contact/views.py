@@ -5,6 +5,7 @@ from .forms import ContactForm
 from django.contrib import messages
 from django.shortcuts import redirect
 
+
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -23,7 +24,7 @@ def contact_view(request):
                     fail_silently=False,
                 )
                 messages.success(request, "Your message has been sent successfully!")
-                return redirect('/')  # Redirect to the home page
+                return redirect('/home')  # Redirect to the home page
             except Exception as e:
                 messages.error(request, "Failed to send your message. Please try again later.")
             # return redirect('contact')  # Redirect to the contact page

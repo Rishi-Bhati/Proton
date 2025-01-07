@@ -182,4 +182,12 @@ input, textarea {
 {% endblock %}
 
 {% block scripts %}
+<script>
+  const sendBtn = document.getElementById("send-btn");
+  sendBtn.addEventListener("click", () => {
+    sendBtn.innerHTML = "Sending...";
+    sendBtn.style.backgroundColor = "#00ff00";
+    sendBtn.style.color = "#000";
+  });
+</script>
 {% endblock scripts %}

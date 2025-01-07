@@ -12,7 +12,7 @@ from home.views import register
 urlpatterns = [
     # Define the URL pattern for the home page, mapping to the 'index' view
     path('', views.index, name='home'),
-    path('', include('team.urls')),
+    path('team/', include('team.urls')),
     #gui home
     # path("home/", views.home, name="gui-home"),
     path('home/', views.home, name='home'),
