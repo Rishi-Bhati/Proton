@@ -155,8 +155,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = '/accounts/login/' # redirect to login page
-LOGIN_REDIRECT_URL = "/" # redirect to home page after login
-LOGOUT_REDIRECT_URL = "/" # redirect to home page after logout
+LOGIN_REDIRECT_URL = "/home" # redirect to home page after login
+LOGOUT_REDIRECT_URL = "/home" # redirect to home page after logout
 
 STATICFILES_DIRS = [  #static files permission
     BASE_DIR,"static"
