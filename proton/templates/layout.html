@@ -13,10 +13,71 @@
     </title>
 </head>
 <body>
-    <div id="particles-js">
-        <script src="{% static 'js/particles.js' %}" type="text/javascript" ></script>
-        <script src="{% static 'js/app.js' %}" type="text/javascript" ></script>
-    </div>
+<canvas id="matrixCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array.from({ length: columns }, () => Math.floor(Math.random() * canvas.height / fontSize));
+
+        const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        const charArray = characters.split('');
+
+        let mouseX = -1;
+        let mouseY = -1;
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                const distance = Math.abs(mouseX - x) / fontSize;
+                const isHovered = distance <= 4;
+
+                if (i < 4) {
+                    ctx.fillStyle = 'rgba(0, 255, 0, 0.2)';
+                } else {
+                    ctx.fillStyle = isHovered ? 'rgb(0, 255, 0)' : 'rgba(0, 255, 0, 0.26)';
+                }
+
+                ctx.fillText(text, x, y);
+
+                if (Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        canvas.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouseX = -1;
+            mouseY = -1;
+        });
+    </script>
 
     <header>
         <nav class="navbar">

@@ -1,22 +1,20 @@
 html, body {
-    height: 100%; /* Full height of the viewport */
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+    height: 100%; 
     width: 100%;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    /* overflow-y: auto; */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    margin: 0; 
+    padding: 0; 
 }
 
-#particles-js {
-    height: 100%; /* Full height of the viewport */
-    width: 100%; /* Full width of the viewport */
-    position: fixed; /* Fixed position */
-    background-color: black;
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    z-index: -1; /* Send to the back */
-    overflow-x: hidden;
+canvas {
+    display: block;
+    z-index: -1;
 }
+
 
 .navbar {
     position: fixed; /* Fixed position */
@@ -29,6 +27,7 @@ html, body {
     padding: 10px;
     border: 2px solid #39ff14; /* Neon green border */
     z-index: 1; /* Higher z-index to be above particles */
+    top: 0px;
     height: 4rem; /* Fixed height */
     width: calc(100% - 20px); /* Full width minus margins */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
@@ -82,12 +81,14 @@ button, input[type="submit"], input[type="reset"] {
     flex-direction: column; /* Stack children vertically */
     height: auto; /* Full height of the viewport */
     overflow-y: auto;
+    background-color: transparent;
 }
+
 
 .main {
     position: fixed; 
     top: 87px;
-    z-index: 2;
+    z-index: 1;
     display: flex; 
     flex-direction: column; 
     justify-content: flex-start; 
@@ -100,10 +101,12 @@ button, input[type="submit"], input[type="reset"] {
     width: calc(100% - 20px); 
     color: white;
     overflow-y: scroll;
+    overflow-x: hidden; 
     font-size: 2rem;
     border: #39ff14 2px solid; 
     box-sizing: border-box; 
     padding-bottom: 0px;
+    background-color: transparent;
 
 }
 
