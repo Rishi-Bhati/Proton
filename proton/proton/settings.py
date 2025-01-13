@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'home', #home app
     'contact', #send email
     'team', #team app
+    'events', #events app
 ]
 
 

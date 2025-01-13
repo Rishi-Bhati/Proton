@@ -13,6 +13,7 @@ urlpatterns = [
     # Define the URL pattern for the home page, mapping to the 'index' view
     path('', views.index, name='home'),
     path('team/', include('team.urls')),
+    path('events/', include('events.urls')),
     #gui home
     # path("home/", views.home, name="gui-home"),
     path('home/', views.home, name='home'),
