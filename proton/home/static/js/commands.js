@@ -35,7 +35,8 @@ socialmedia = [
 // Help section content
 help = [
   "<br>", // Line break
-  '<span class="command">home</span>           Display the fancy terminal art', // Command description
+  '<span class="command">home</span>           Display the fancy terminal art',  // Command description
+  '<span class="command">login</span>           gives the user the previlages to login inside the terminal', // login interface not gui
   '<span class="command">about</span>          About Proton', // Command description
   '<span class="command">members</span>        Open a page with proton members', // Command description
   '<span class="command">socialmedia</span>    Displays all our social media account links', // Command description
@@ -49,12 +50,12 @@ help = [
 // Home section content
 home = [
   '<span class="index">© 2025 PROTON. All rights reserved.</span>', // Copyright notice
-  "██████╗░██████╗░░█████╗░████████╗░█████╗░███╗░░██╗░░░░░░███╗░░██╗███╗░░░███╗░█████╗░███╗░░░███╗██╗████████╗", // ASCII art line 1
-  "██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗░██║░░░░░░████╗░██║████╗░████║██╔══██╗████╗░████║██║╚══██╔══╝", // ASCII art line 2
-  "██████╔╝██████╔╝██║░░██║░░░██║░░░██║░░██║██╔██╗██║█████╗██╔██╗██║██╔████╔██║███████║██╔████╔██║██║░░░██║░░░", // ASCII art line 3
-  "██╔═══╝░██╔══██╗██║░░██║░░░██║░░░██║░░██║██║╚████║╚════╝██║╚████║██║╚██╔╝██║██╔══██║██║╚██╔╝██║██║░░░██║░░░", // ASCII art line 4
-  "██║░░░░░██║░░██║╚█████╔╝░░░██║░░░╚█████╔╝██║░╚███║░░░░░░██║░╚███║██║░╚═╝░██║██║░░██║██║░╚═╝░██║██║░░░██║░░░", // ASCII art line 5
-  "╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚══╝░░░░░░╚═╝░░╚══╝╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░╚═╝░░░", // ASCII art line 6
+  "██████╗░██████╗░░█████╗░████████╗░█████╗░███╗░░██╗", // ASCII art line 1
+  "██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗░██║", // ASCII art line 2
+  "██████╔╝██████╔╝██║░░██║░░░██║░░░██║░░██║██╔██╗██║", // ASCII art line 3
+  "██╔═══╝░██╔══██╗██║░░██║░░░██║░░░██║░░██║██║╚████║", // ASCII art line 4
+  "██║░░░░░██║░░██║╚█████╔╝░░░██║░░░╚█████╔╝██║░╚███║", // ASCII art line 5
+  "╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚══╝", // ASCII art line 6
   '<span class="color2">Deal with the terminal,.</span>',
   '<span class="color2">Just type help homie u can do it.</span>', // Instruction for GUI access
   "<span class=\"color2\">For a list of available commands, type help</span>", // Help instruction

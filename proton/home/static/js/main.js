@@ -99,6 +99,8 @@ function commander(cmd) {
     case "home":
       loopLines(home, "", 80);
       break;
+    case "login":
+      break;
     case "gui":
       addLine("Opening GUI-INTERFACE...", "color2", 0);
       newTab(GUI);
