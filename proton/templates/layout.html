@@ -90,8 +90,13 @@
                 {% else %}
                 <li><a href="{% url 'about'%}">About</a></li>
                 {% endif %}
-
-                <li><a href="">Events</a></li>
+                
+                {% if request.path == '/events/' %}
+                <li><a href="{% url 'home'%}">Home</a></li>
+                {% else %}
+                <li><a href="{% url 'events' %}">Events</a></li>
+                {% endif %}
+                
 
                 {% if request.path == "/team/"%}
                 <li><a href="{% url 'home'%}">Home</a></li>

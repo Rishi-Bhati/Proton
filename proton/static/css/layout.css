@@ -95,6 +95,7 @@ button, input[type="submit"], input[type="reset"] {
     align-items: center; 
     margin: 10px; 
     margin-top: 2px;
+    margin-bottom: -10px;
     padding: 10px;
     height: 88.5vh; 
     max-height: 100vh;
@@ -111,14 +112,15 @@ button, input[type="submit"], input[type="reset"] {
 }
 
 .footer {
-    position: relative;
+    position: static;
     /* z-index: 1; */
     bottom: 0px;
-    width: 100vw;
+    width: calc(100% + 40px);
     background-color: #1e1e1e;
     color: #00ff00;
     margin: 0px;
     margin-top: 100px;
+    margin-bottom: -20px;
     padding: 20px;
     text-align: center;
     clear: both; /* Clear floats */
