@@ -174,3 +174,7 @@ button, input[type="submit"], input[type="reset"] {
     margin-top: 0;
     color: #39ff14; /* Change the color of the h3 tags to neon green */
 }
+
+@media screen and (max-width: 600px) {
+    
+}

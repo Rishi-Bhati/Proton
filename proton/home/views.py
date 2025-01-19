@@ -4,6 +4,8 @@ from .forms import UserRegistrationForm
 from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from events.models import Event  # Import the Event model
+
 
 # Define a view function to handle the index page
 def index(request):
@@ -11,8 +13,9 @@ def index(request):
     return render(request, 'index.html')
 
 def home(request):
-    # Render the home.html template
-    return render(request, 'home.html')
+    # Render the home.html template'
+    events = Event.objects.all().order_by('-created_at')[:4]
+    return render(request, 'home.html',{'events': events})
 
 # Define a view function to handle user registration
 def register(request):

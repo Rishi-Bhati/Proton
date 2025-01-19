@@ -90,10 +90,17 @@ Home | PROTON Home
         <h1>Upcoming Events</h1>
     </div>
     <div class="upevents-content">
-        <div class="upevents-item" id="upevents-item1"></div>
-        <div class="upevents-item" id="upevents-item2"></div>
+        {% for event in events %}
+        <div class="upevents-item">
+            <img class="upevents-image {% if forloop.counter == 2 %}opacity-75{% elif forloop.counter == 3 %}opacity-50{% elif forloop.counter == 4 %}opacity-25{% endif %}" src="{{ event.image.url }}" alt="{{ event.name }}">
+        </div>
+        {% endfor %}
+        <div class="upevents-item view-all">
+            <span class="view-all-text">View All -></span>
+        </div>
+        {% comment %} <div class="upevents-item" id="upevents-item2"></div>
         <div class="upevents-item" id="upevents-item3"></div>
-        <div class="upevents-item" id="upevents-item4">View All -></div>
+        <div class="upevents-item" id="upevents-item4">View All -></div> {% endcomment %}
     </div>
 </div>
 {% endblock %}
