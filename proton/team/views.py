@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import member
 
 # Create your views here.
 def team(request):
-    return render(request, 'team.html')
+    members = member.objects.all()
+    return render(request, 'team.html', {'members': members})

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/layout.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     {% block styles %}{% endblock %}
     <title>
         {% block title %}
@@ -113,14 +114,19 @@
                 <li><a href="{% url "contact" %}">Contact</a></li>
                 {% endif %}
 
-                {% if user.is_authenticated %}
+                <li class="faq-button"><i class="fa-solid fa-user-secret"></i>
+                    <span class="tooltip">User</span>
+                </li>
+                
+                {% comment %} {% if user.is_authenticated %}
+                <li><i class="fas fa-user-secret"></li>
                 <li><form action="{% url 'logout' %}" method="post" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" id="logout">Log Out</button>
-                </form></li>
+                    <button type="submit" id="logout"></button>
+                </form></li> 
                 {% else %}
                 <li><a id="login" href="/accounts/login">Log In</a></li>
-                {% endif %}
+                {% endif %} {% endcomment %}
             </ul>
         </nav>
     </header>

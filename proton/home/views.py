@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from events.models import Event  # Import the Event model
+from team.models import member  # Import the Team model
 
 
 # Define a view function to handle the index page
@@ -18,6 +19,7 @@ def home(request):
     return render(request, 'home.html',{'events': events})
 
 # Define a view function to handle user registration
+@login_required
 def register(request):
     # Check if the request method is POST
     if request.method == 'POST':
@@ -49,4 +51,5 @@ def register(request):
 
 def about(request):
     # Render the about.html template
-    return render(request, 'about.html')
+    members = member.objects.all()[:6]
+    return render(request, 'about.html', {'members': members}) 

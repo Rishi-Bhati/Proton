@@ -76,6 +76,84 @@ button, input[type="submit"], input[type="reset"] {
     margin: 0;
 }
 
+i {
+    color:antiquewhite; /* Neon green color */
+}
+.faq-button {
+    border-radius: 50%;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+    position: relative;
+  }
+  /* .faq-button i {
+    height: 1.5em;
+    fill: white;
+  } */
+  .faq-button:hover i {
+    animation: jello-vertical 0.7s both;
+  }
+  @keyframes jello-vertical {
+    0% {
+      transform: scale3d(1, 1, 1);
+    }
+    30% {
+      transform: scale3d(0.75, 1.25, 1);
+    }
+    40% {
+      transform: scale3d(1.25, 0.75, 1);
+    }
+    50% {
+      transform: scale3d(0.85, 1.15, 1);
+    }
+    65% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+    75% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .tooltip {
+    position: absolute;
+    bottom: -80px;
+    /* right: 0px; */
+    left: -20px;
+    opacity: 0;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.2s;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+  }
+  
+  .tooltip::before {
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-size: 1000%;
+    background-position: center;
+    transform: rotate(45deg);
+    bottom: -15%;
+    transition-duration: 0.3s;
+  }
+  
+  .faq-button:hover .tooltip {
+    top: -40px;
+    opacity: 1;
+    transition-duration: 0.3s;
+  }
+  
 .container {
     display: flex;
     flex-direction: column; /* Stack children vertically */

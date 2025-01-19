@@ -107,60 +107,17 @@ About | PROTON Layout
      Meet Our Team
     </h2>
     <div class="team-members">
-     <div class="team-member">
-      <img alt="Portrait of John Doe, Chief Security Officer" height="150" src="https://storage.googleapis.com/a1aa/image/ILK50vHOeO2DASseE7JBOe5ltrJ9xIv02pa80SJrpim1upCoA.jpg" width="150"/>
-      <h3>
-       John Doe
-      </h3>
-      <p>
-       Chief Security Officer
-      </p>
-     </div>
-     <div class="team-member">
-      <img alt="Portrait of Jane Smith, Lead Security Analyst" height="150" src="https://storage.googleapis.com/a1aa/image/rQfJ1Wje51iMikEl1s5g1bZ4LfAx4qsvOGucnq8ZFxGkupCoA.jpg" width="150"/>
-      <h3>
-       Jane Smith
-      </h3>
-      <p>
-       Lead Security Analyst
-      </p>
-     </div>
-     <div class="team-member">
-      <img alt="Portrait of Mike Johnson, Network Security Engineer" height="150" src="https://storage.googleapis.com/a1aa/image/c5NFCiEBsCrrOB5OS6KFYQP7YBQCdHdjkGPDFLXa8X7zNVAF.jpg" width="150"/>
-      <h3>
-       Mike Johnson
-      </h3>
-      <p>
-       Network Security Engineer
-      </p>
-     </div>
-     <div class="team-member">
-      <img alt="Portrait of Emily Davis, Cyber Security Consultant" height="150" src="https://storage.googleapis.com/a1aa/image/thexL3CCjlUYc6uYC4GO9rveu2UmUmhfzt0HOq0ke09hdTFQB.jpg" width="150"/>
-      <h3>
-       Emily Davis
-      </h3>
-      <p>
-       Cyber Security Consultant
-      </p>
-     </div>
-     <div class="team-member">
-      <img alt="Portrait of Robert Brown, Incident Response Specialist" height="150" src="https://storage.googleapis.com/a1aa/image/peNOZ6cHGMVKaymGVMngSW12ew4kesnG2J9NJHjDyjcsupCoA.jpg" width="150"/>
-      <h3>
-       Robert Brown
-      </h3>
-      <p>
-       Incident Response Specialist
-      </p>
-     </div>
-     <div class="team-member">
-      <img alt="Portrait of Sarah Wilson, Security Software Developer" height="150" src="https://storage.googleapis.com/a1aa/image/vCu4qUG8iFrRNdCUqxjawlFrJ6eT4xqBJ8W1vebZwVJU3UBUA.jpg" width="150"/>
-      <h3>
-       Sarah Wilson
-      </h3>
-      <p>
-       Security Software Developer
-      </p>
-     </div>
+        {% for member in members %}
+            <div class="team-member">
+             <img alt="photo" height="150" src="{{member.image.url}}" width="150"/>
+             <h3>
+                {{ member.name }}
+             </h3>
+             <p>
+                {{ member.role }}
+             </p>
+            </div>
+        {% endfor %}
     </div>
     <div class="view-all">
      <a href="{% url 'team' %}">
