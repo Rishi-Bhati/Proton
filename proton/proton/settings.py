@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     # Django messaging system
     'django.contrib.messages',
     # Live reload for development
-    'livereload',
+    # 'livereload',
     # Django static file serving
     'django.contrib.staticfiles',
     # Custom 'home' application
@@ -73,7 +73,11 @@ ROOT_URLCONF = 'proton.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            # Add your template directories here
+            BASE_DIR / 'templates',
+        ],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

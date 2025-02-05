@@ -7,7 +7,7 @@ from team.forms import memberForm
 def profile(request):
     user = request.user
     # Get or create the member instance for the logged-in user
-    profile, created = member.objects.get_or_create(user=user)
+    profile = get_object_or_404(member, user=user)
     
     if request.method == 'POST':
         form = memberForm(request.POST, request.FILES, instance=profile)
@@ -17,4 +17,4 @@ def profile(request):
     else:
         form = memberForm(instance=profile)
     
-    return render(request, 'profile.html', {'form': form})
+    return render(request, 'user_profile/profile.html', {'form': form})

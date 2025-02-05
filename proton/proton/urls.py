@@ -30,6 +30,8 @@ urlpatterns = [
     
     # Include URL patterns from the 'home' app
     path('', include('home.urls')),
+
+    path('profile/', include('user_profile.urls')),
     
     # Include URL patterns for user authentication (login, logout, etc.)
     # This is provided by Django's built-in auth system
