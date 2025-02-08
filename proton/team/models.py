@@ -8,7 +8,7 @@ class member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone = models.IntegerField()
+    phone = models.IntegerField(null=True)
     role = models.CharField(max_length=100)
     image = models.ImageField(upload_to='team/members_images')
     linkedin = models.URLField()

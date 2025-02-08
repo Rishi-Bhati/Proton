@@ -40,8 +40,8 @@ def register(request):
             # Log the user in
             login(request, user)
             
-            # Redirect the user to the home page
-            return redirect('home')
+            # Redirect the user to the profile creation page
+            return redirect('profile')
     else:
         # Create an empty UserRegistrationForm instance
         form = UserRegistrationForm()
@@ -52,4 +52,4 @@ def register(request):
 def about(request):
     # Render the about.html template
     members = member.objects.all()[:6]
-    return render(request, 'about.html', {'members': members}) 
+    return render(request, 'about.html', {'members': members})
