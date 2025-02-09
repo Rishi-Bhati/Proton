@@ -7,11 +7,65 @@ Team | PROTON Layout
 {% endblock %}
 
 {% block styles %}
+<style>
+    .team-section {
+        font-size: 0.5em;
+        margin-top: 60px;
+    }
+    .team-section h2 {
+        font-size: 2em;
+        color: #00ff00;
+        text-align: center;
+    }
+    .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 40px;
+    }
+    .team-member {
+        flex: 1 1 30%;
+        text-align: center;
+        margin: 20px;
+    }
+    .team-member img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+    }
+    .team-member h3 {
+        font-size: 1.5em;
+        color: #00ff00;
+        margin: 10px 0 5px;
+    }
+    .team-member p {
+        font-size: 1em;
+        color: #cccccc;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<h1>Team Members will show here</h1>
-<p>if you do not see anything here, it means we are still on it, just wait, if you cant wait, learn to be patient</p>
+
+<div class="team-section">
+    <h2>
+     Meet Our Team
+    </h2>
+    <div class="team-members">
+        {% for member in members %}
+            <div class="team-member">
+             <img alt="photo" height="200" src="{{member.image.url}}" width="200"/>
+             <h3>
+                {{ member.name }}
+             </h3>
+             <p>
+                {{ member.role }}
+             </p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
