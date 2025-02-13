@@ -85,7 +85,12 @@
             <div class="logo">
                 <img id="logo" src="{% static 'assets/logo.png' %}" alt="Proton Logo">
             </div>
-            <ul class="nav-links">
+            <div class="menu-icon" id="menu-icon">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
                 {% if request.path == "/about/"%}
                 <li><a href="{% url 'home'%}">Home</a></li>
                 {% else %}
@@ -164,12 +169,40 @@
         </div>
     </div>
     <script>
-        function menuOnClick() {
-            document.getElementById("menu-bar").classList.toggle("change");
-            document.getElementById("nav").classList.toggle("change");
-            document.getElementById("menu-bg").classList.toggle("change-bg");
-          }
-    </script>
+    const menuIcon = document.getElementById("menu-icon");
+    const navLinks = document.getElementById("nav-links");
+    let isMenuOpen = false;
+
+    menuIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
+        isMenuOpen = !isMenuOpen;
+        menuIcon.classList.toggle("active");
+        navLinks.classList.toggle("active");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+        if (isMenuOpen && !menuIcon.contains(e.target) && !navLinks.contains(e.target)) {
+            menuIcon.classList.remove("active");
+            navLinks.classList.remove("active");
+            isMenuOpen = false;
+        }
+    });
+
+    // Prevent menu from closing when clicking inside nav-links
+    navLinks.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+            menuIcon.classList.remove("active");
+            navLinks.classList.remove("active");
+            isMenuOpen = false;
+        });
+    });
+</script>
     {% block scripts %}{% endblock %}
 </body>
 </html>
