@@ -16,7 +16,7 @@ urlpatterns = [
     path('events/', include('events.urls')),
     #gui home
     # path("home/", views.home, name="gui-home"),
-    path('home/', views.home, name='home'),
+    path('home/', views.home, name='gui'),
  
     # Define the URL pattern for user registration, mapping to the 'register' view
     path("register/", register, name="register"), 

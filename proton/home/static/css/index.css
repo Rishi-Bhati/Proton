@@ -136,3 +136,25 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
+
+.mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .terminal {
+        display: none;
+    }
+    .mobile {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #info {
+        margin-top: 50px;
+        font-size: xx-small;
+    }
+}

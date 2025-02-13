@@ -111,7 +111,7 @@
                 {% endif %}
 
                 <li><a href="">Gallery</a></li>
-                <li><a href="">Playground</a></li>
+                <li><a href="/">Playground</a></li>
 
                 {% if request.path == "/contact/"%}
                 <li><a href="{% url 'home'%}">Home</a></li>
@@ -119,19 +119,30 @@
                 <li><a href="{% url "contact" %}">Contact</a></li>
                 {% endif %}
 
-                <li class="faq-button"><i class="fa-solid fa-user-secret"></i>
-                    <span class="tooltip">User</span>
-                </li>
+                {% comment %} <li class="faq-button"><i class="fa-solid fa-user-secret"></i>
+                    {% if user.is_authenticated %}
+                    <span class="tooltip">Profile</span>
+
+                     <div class="faq-dropdown">
+                        <a href="{% url 'profile' %}">Profile</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div> 
+                    {% else %}
+                    <span class="tooltip">Login</span>
+                    {% endif %}
+                </li> {% endcomment %}
                 
-                {% comment %} {% if user.is_authenticated %}
-                <li><i class="fas fa-user-secret"></li>
-                <li><form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% if user.is_authenticated %}
+                <li class="faq-button"><form action="{% url 'logout' %}" method="post" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" id="logout"></button>
+                    <button type="submit" id="logout"><i class="fas fa-user-secret"></button>
+                        <span class="tooltip">Profile</span>
                 </form></li> 
                 {% else %}
-                <li><a id="login" href="/accounts/login">Log In</a></li>
-                {% endif %} {% endcomment %}
+                <li class="faq-button"><a id="login" href="/accounts/login"></a><i class="fas fa-user-secret">
+                <span class="tooltip">Login</span>
+                </li>
+                {% endif %}
             </ul>
         </nav>
     </header>

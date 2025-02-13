@@ -350,6 +350,8 @@ i {
 
 /* Mobile Footer Styles */
 @media screen and (max-width: 600px) {
+
+    
     .navbar {
         padding: 0 15px;
         position: fixed;
