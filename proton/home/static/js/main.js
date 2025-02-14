@@ -130,7 +130,8 @@ function commander(cmd) {
     case "about":
       loopLines(about, "color2 margin", 80);
       break;
-  
+    case "prashith":
+      addLine("aahhh u found out an easter egg kudos , sha bash ma homie u deserve to get kissed", "color2", 80);
     case "members":
       addLine("Opening GUI-PROTON...", "color2", 80);
       newTab(members);
