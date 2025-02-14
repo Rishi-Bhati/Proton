@@ -65,6 +65,22 @@ function enterKey(e) {
   if (e.keyCode == 181) {
     document.location.reload(true);
   }
+  if (e.keyCode == 13) { // Enter key
+    const inputText = command.innerHTML;
+    commands.push(inputText);
+    git = commands.length;
+    addLine("user@proton:~$ " + inputText, "no-animation", 0);
+
+    // Check if we're in login mode
+    if (loginStep === 1) {
+      handleLoginInput(inputText);
+    } else {
+      commander(inputText.toLowerCase());
+    }
+    
+    command.innerHTML = "";
+    textarea.value = "";
+  }
   if (pw) {
     let et = "*";
     let w = textarea.value.length;
@@ -87,14 +103,6 @@ function enterKey(e) {
       liner.classList.remove("password");
     }
   } else {
-    if (e.keyCode == 13) {
-      commands.push(command.innerHTML);
-      git = commands.length;
-      addLine("user@proton:~$ " + command.innerHTML, "no-animation", 0);
-      commander(command.innerHTML.toLowerCase());
-      command.innerHTML = "";
-      textarea.value = "";
-    }
     if (e.keyCode == 38 && git != 0) {
       git -= 1;
       textarea.value = commands[git];
@@ -116,7 +124,7 @@ loopLines(home, "", 80);
 function commander(cmd) {
   switch (cmd.toLowerCase()) {
     case "help":
-      
+      loopLines(help, "color2 margin", 80);
       break;
     case "about":
       loopLines(about, "color2 margin", 80);
@@ -142,8 +150,8 @@ function commander(cmd) {
       loopLines(home, "", 80);
       break;
     case "login":
-      loopLines(loginInstructions, "color2 margin", 80);
-      login();  // Just call login directly
+      loginStep = 0; // Reset login step
+      login(); 
       break;
     case "gui":
       addLine("Opening GUI-INTERFACE...", "color2", 0);
@@ -155,64 +163,46 @@ function commander(cmd) {
   }
 }
 
-function login() {
-    if (loginStep === 0) {
-        loopLines(loginInstructions, "color2 margin", 80);
-        loginStep = 1;
-        addLine("Please enter your username and password:", "system", 0);
-    } else if (loginStep === 1) {
-        const credentials = command.innerHTML.trim().split(' ');
-        if (credentials.length !== 2) {
-            addLine("Error: Please enter username and password separated by space", "error", 0);
-            addLine("Example: username password", "system", 0);
-            loginStep = 0;
-            return;
-        }
+function handleLoginInput(input) {
+  const credentials = input.trim().split(' ');
+  
+  if (credentials.length !== 2) {
+    addLine("Error: Please enter both username and password", "error", 0);
+    addLine("Example: username password", "system", 0);
+    return;
+  }
 
-        // Create JSON data instead of FormData
-        const loginData = {
-            username: credentials[0],
-            password: credentials[1]
-        };
+  const username = credentials[0];
+  const password = credentials[1];
 
-        fetch('/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken(),
-                'Accept': 'application/json'
-            },
-            credentials: 'include', // Include cookies in the request
-            body: JSON.stringify(loginData)
-        })
-        .then(response => {
-            if (response.status === 403) {
-                throw new Error('CSRF verification failed');
-            }
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success) {
-                addLine("Login successful! Welcome " + credentials[0], "success", 0);
-                // Store user session or token if provided
-                if (data.token) {
-                    localStorage.setItem('userToken', data.token);
-                }
-                setTimeout(() => window.location.href = '/home/', 1500);
-            } else {
-                addLine(data.message || "Invalid username or password. Please try again.", "error", 0);
-                loginStep = 0;
-            }
-        })
-        .catch(error => {
-            console.error('Login error:', error);
-            addLine("Login failed: " + error.message, "error", 0);
-            loginStep = 0;
-        });
+  fetch('/login/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'X-CSRFToken': getCSRFToken()
+    },
+    body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      addLine("Login successful!", "success", 0);
+      setTimeout(() => window.location.href = '/home/', 1500);
+    } else {
+      addLine("Login failed. Please try again.", "error", 0);
+      loginStep = 0;
     }
+  })
+  .catch(error => {
+    console.error('Login error:', error);
+    addLine("Login failed: " + error.message, "error", 0);
+    loginStep = 0;
+  });
+}
+
+function login() {
+  loginStep = 1; // Set login mode
+  loopLines(loginInstructions, "color2 margin", 80);
 }
 
 function getCSRFToken() {
