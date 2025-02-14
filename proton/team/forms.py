@@ -4,4 +4,4 @@ from team.models import member
 class memberForm(forms.ModelForm):
     class Meta:
         model = member
-        exclude = ['user']  # Exclude the user field from the form
+        exclude = ['user', 'position']  # Exclude the user field from the form

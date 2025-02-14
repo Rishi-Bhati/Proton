@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    position = models.IntegerField(null=True)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.IntegerField(null=True)
