@@ -24,7 +24,7 @@ if (isMobile) {
     
     // Update existing setTimeout functions
     setTimeout(function() {
-        loopLines(banner, "", typingSpeed);
+        loopLines(home, "", typingSpeed);
         textarea.focus();
     }, 100);
 
