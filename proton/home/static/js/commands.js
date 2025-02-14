@@ -47,6 +47,17 @@ help = [
   "<br>", // Line break
 ];
 
+// Login instructions
+loginInstructions = [
+    "<br>",
+    "=== Terminal Login Instructions ===",
+    "1. Enter your username and password on a single line",
+    "2. Separate them with a space",
+    "Example: username password",
+    "Enter your credentials now:",
+    "<br>"
+];
+
 // Home section content
 home = [
   '<span class="index">© 2025 PROTON. All rights reserved.</span>', // Copyright notice

@@ -6,6 +6,10 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from events.models import Event  # Import the Event model
 from team.models import member  # Import the Team model
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.auth import authenticate, login as auth_login
+import json
 
 
 # Define a view function to handle the index page
@@ -53,3 +57,18 @@ def about(request):
     # Render the about.html template
     members = member.objects.all()[:6]
     return render(request, 'about.html', {'members': members})
+
+@ensure_csrf_cookie
+def terminal_login(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
