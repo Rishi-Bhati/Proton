@@ -9,10 +9,46 @@ var pw = false;
 let pwd = false;
 var commands = [];
 
-setTimeout(function() {
-  loopLines(banner, "", 80);
-  textarea.focus();
-}, 100);
+// Add mobile detection and optimization
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (isMobile) {
+    // Adjust typing speed for mobile
+    const typingSpeed = 40; // Faster typing on mobile
+    
+    // Update existing setTimeout functions
+    setTimeout(function() {
+        loopLines(banner, "", typingSpeed);
+        textarea.focus();
+    }, 100);
+
+    // Add touch event handlers
+    textarea.addEventListener('touchstart', function(e) {
+        this.focus();
+    });
+
+    // Prevent zoom on input
+    textarea.addEventListener('focus', function(e) {
+        document.body.style.fontSize = '16px';
+    });
+
+    // Auto-scroll to bottom on mobile
+    function scrollToBottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // Update addLine function for mobile
+    const originalAddLine = addLine;
+    addLine = function(text, style, time) {
+        originalAddLine(text, style, time);
+        setTimeout(scrollToBottom, time + 50);
+    };
+} else {
+    setTimeout(function() {
+        loopLines(banner, "", 80);
+        textarea.focus();
+    }, 100);
+}
 
 window.addEventListener("keyup", enterKey);
 
