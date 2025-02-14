@@ -72,12 +72,6 @@ home = [
   "<span class=\"color2\">For a list of available commands, type help</span>", // Help instruction
 ];
 
-// Initialize with home banner instead of undefined banner
-setTimeout(function() {
-    loopLines(home, "", 80);
-    textarea.focus();
-}, 100);
-
 
 
 

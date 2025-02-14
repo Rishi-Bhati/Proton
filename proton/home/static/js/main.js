@@ -179,23 +179,27 @@ function handleLoginInput(input) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'X-CSRFToken': getCSRFToken()
+      'X-CSRFToken': getCSRFToken(),
+      'Accept': 'application/json'
     },
+    credentials: 'same-origin',
     body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
   })
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      addLine("Login successful!", "success", 0);
-      setTimeout(() => window.location.href = '/home/', 1500);
+      addLine("Login successful! Redirecting...", "success", 0);
+      setTimeout(() => {
+        window.location.href = data.redirect || '/home/';
+      }, 1500);
     } else {
-      addLine("Login failed. Please try again.", "error", 0);
+      addLine(`Login failed: ${data.message}`, "error", 0);
       loginStep = 0;
     }
   })
   .catch(error => {
     console.error('Login error:', error);
-    addLine("Login failed: " + error.message, "error", 0);
+    addLine("Login failed: Network or server error", "error", 0);
     loginStep = 0;
   });
 }

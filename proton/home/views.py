@@ -61,17 +61,48 @@ def about(request):
 @ensure_csrf_cookie
 def terminal_login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        if not username or not password:
-            return JsonResponse({'success': False, 'error': 'Missing credentials'})
+        try:
+            if request.content_type == 'application/x-www-form-urlencoded':
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+            else:
+                data = json.loads(request.body)
+                username = data.get('username')
+                password = data.get('password')
+
+            if not username or not password:
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Both username and password are required'
+                })
+
+            user = authenticate(request, username=username, password=password)
             
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'success': True})
-        else:
-            return JsonResponse({'success': False, 'error': 'Invalid credentials'})
-            
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
+            if user is not None:
+                login(request, user)
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Login successful',
+                    'redirect': '/home/'
+                })
+            else:
+                return JsonResponse({
+                    'success': False,
+                    'message': 'Invalid credentials'
+                })
+
+        except json.JSONDecodeError:
+            return JsonResponse({
+                'success': False,
+                'message': 'Invalid request format'
+            })
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'message': str(e)
+            })
+
+    return JsonResponse({
+        'success': False,
+        'message': 'Method not allowed'
+    }, status=405)
