@@ -69,7 +69,8 @@ home = [
   "██║░░░░░██║░░██║╚█████╔╝░░░██║░░░╚█████╔╝██║░╚███║", // ASCII art line 5
   "╚═╝░░░░░╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░░╚════╝░╚═╝░░╚══╝", // ASCII art line 6
   '<span class="color2">Deal with the terminal,.</span>',
-  '<span class="color2">Just type help homie u can do it.</span>', // Instruction for GUI access
+  '<span class="color2">Just type help homie u can do it.</span>',
+  '<span class="color2">If you are using a mobile phone kindly tilt it to land scape mode.</span>', // Instruction for GUI access
   "<span class=\"color2\">For a list of available commands, type help</span>", // Help instruction
 ];
 
