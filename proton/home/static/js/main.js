@@ -9,6 +9,12 @@ var pw = false;
 let pwd = false;
 var commands = [];
 
+var loginStep = 0;
+var loginCredentials = {
+    username: '',
+    password: ''
+};
+
 // Add mobile detection and optimization
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -136,6 +142,7 @@ function commander(cmd) {
       loopLines(home, "", 80);
       break;
     case "login":
+      login();
       break;
     case "gui":
       addLine("Opening GUI-INTERFACE...", "color2", 0);
@@ -145,6 +152,63 @@ function commander(cmd) {
       addLine("<span class=\"inherit\">Command not found. For a list of commands, type <span class=\"command\">'help'</span>.</span>", "error", 100);
       break;
   }
+}
+
+function login() {
+    if (loginStep === 0) {
+        loopLines(loginInstructions, "color2 margin", 80);
+        loginStep = 1;
+    } else if (loginStep === 1) {
+        // Extract username and password from command
+        const credentials = command.innerHTML.split(' ');
+        if (credentials.length !== 2) {
+            addLine("Error: Please enter both username and password separated by space", "error", 0);
+            return;
+        }
+        loginCredentials.username = credentials[0];
+        loginCredentials.password = credentials[1];
+
+        // Send login request
+        fetch('/accounts/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken(),
+            },
+            body: JSON.stringify(loginCredentials)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                addLine("Login successful! Welcome " + loginCredentials.username, "success", 0);
+                setTimeout(() => window.location.href = '/home/', 1500);
+            } else {
+                addLine("Login failed. Please try again.", "error", 0);
+            }
+        })
+        .catch(error => {
+            addLine("Error during login. Please try again.", "error", 0);
+        });
+
+        loginStep = 0;
+        loginCredentials = { username: '', password: '' };
+    }
+}
+
+function getCSRFToken() {
+    const name = 'csrftoken';
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 function newTab(link) {
