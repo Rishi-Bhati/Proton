@@ -133,13 +133,13 @@
                 </li> {% endcomment %}
                 
                 {% if user.is_authenticated %}
-                <li class="faq-button"><form action="{% url 'logout' %}" method="post" style="display:inline;">
+                <li class="faq-button"><form action="{% url 'profile' %}" method="post" style="display:inline;">
                     {% csrf_token %}
                     <button type="submit" id="logout"><i class="fas fa-user-secret"></button>
                         <span class="tooltip">Profile</span>
                 </form></li> 
                 {% else %}
-                <li class="faq-button"><a id="login" href="/accounts/login"></a><i class="fas fa-user-secret">
+                <li class="faq-button"><a id="login" href="/accounts/login"><i class="fas fa-user-secret"></a>
                 <span class="tooltip">Login</span>
                 </li>
                 {% endif %}

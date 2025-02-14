@@ -70,6 +70,24 @@
     .grid > * {
         margin: 10px;
     }
+
+    .register-button {
+        display: inline-block;
+        padding: 8px 15px;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .register-button:hover {
+        background-color: #218838;
+    }
+    
+    .closed-text {
+        color: red;
+        font-weight: bold;
+    }
 </style>
 {% endblock %}
 
@@ -97,6 +115,16 @@
        </p>
         <p>
           {{evt.description}}
+        </p>
+        <p>
+            {% load tz %}  {# Load timezone module #}
+
+            {% now "Y-m-d H:i" as current_time %}  {# Get current date and time #}
+            {% if evt.date|stringformat:"s" > current_time %}
+                <a href="{{ evt.registration_link }}" class="register-button">Register</a>
+            {% else %}
+                <span class="closed-text">Registration Closed</span>
+            {% endif %}
         </p>
      </div>
     </div>

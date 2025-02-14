@@ -13,5 +13,16 @@
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+
+    <br>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+    </form>
+
+    <br>
+
+    <button><a href="{% url 'home'%}">Home</a></button>
 </body>
 </html>
