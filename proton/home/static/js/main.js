@@ -116,7 +116,7 @@ loopLines(home, "", 80);
 function commander(cmd) {
   switch (cmd.toLowerCase()) {
     case "help":
-      loopLines(help, "color2 margin", 80);
+      
       break;
     case "about":
       loopLines(about, "color2 margin", 80);
@@ -142,8 +142,8 @@ function commander(cmd) {
       loopLines(home, "", 80);
       break;
     case "login":
-      loopLines(help, "color2 margin", 80);
-      login();
+      loopLines(loginInstructions, "color2 margin", 80);
+      login();  // Just call login directly
       break;
     case "gui":
       addLine("Opening GUI-INTERFACE...", "color2", 0);
@@ -159,10 +159,12 @@ function login() {
     if (loginStep === 0) {
         loopLines(loginInstructions, "color2 margin", 80);
         loginStep = 1;
+        addLine("Please enter your username and password:", "system", 0);
     } else if (loginStep === 1) {
         const credentials = command.innerHTML.trim().split(' ');
         if (credentials.length !== 2) {
             addLine("Error: Please enter username and password separated by space", "error", 0);
+            addLine("Example: username password", "system", 0);
             loginStep = 0;
             return;
         }
@@ -256,3 +258,5 @@ function loopLines(name, style, time) {
     addLine(item, style, index * time);
   });
 }
+
+
