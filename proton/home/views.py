@@ -61,14 +61,17 @@ def about(request):
 @ensure_csrf_cookie
 def terminal_login(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         
+        if not username or not password:
+            return JsonResponse({'success': False, 'error': 'Missing credentials'})
+            
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            auth_login(request, user)
+            login(request, user)
             return JsonResponse({'success': True})
         else:
-            return JsonResponse({'success': False})
+            return JsonResponse({'success': False, 'error': 'Invalid credentials'})
+            
     return JsonResponse({'error': 'Invalid request method'}, status=400)

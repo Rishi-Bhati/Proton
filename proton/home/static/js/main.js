@@ -142,6 +142,7 @@ function commander(cmd) {
       loopLines(home, "", 80);
       break;
     case "login":
+      loopLines(help, "color2 margin", 80);
       login();
       break;
     case "gui":
@@ -159,56 +160,68 @@ function login() {
         loopLines(loginInstructions, "color2 margin", 80);
         loginStep = 1;
     } else if (loginStep === 1) {
-        // Extract username and password from command
-        const credentials = command.innerHTML.split(' ');
+        const credentials = command.innerHTML.trim().split(' ');
         if (credentials.length !== 2) {
-            addLine("Error: Please enter both username and password separated by space", "error", 0);
+            addLine("Error: Please enter username and password separated by space", "error", 0);
+            loginStep = 0;
             return;
         }
-        loginCredentials.username = credentials[0];
-        loginCredentials.password = credentials[1];
 
-        // Send login request
-        fetch('/accounts/login/', {
+        // Create JSON data instead of FormData
+        const loginData = {
+            username: credentials[0],
+            password: credentials[1]
+        };
+
+        fetch('/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCSRFToken(),
+                'Accept': 'application/json'
             },
-            body: JSON.stringify(loginCredentials)
+            credentials: 'include', // Include cookies in the request
+            body: JSON.stringify(loginData)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.status === 403) {
+                throw new Error('CSRF verification failed');
+            }
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
-                addLine("Login successful! Welcome " + loginCredentials.username, "success", 0);
+                addLine("Login successful! Welcome " + credentials[0], "success", 0);
+                // Store user session or token if provided
+                if (data.token) {
+                    localStorage.setItem('userToken', data.token);
+                }
                 setTimeout(() => window.location.href = '/home/', 1500);
             } else {
-                addLine("Login failed. Please try again.", "error", 0);
+                addLine(data.message || "Invalid username or password. Please try again.", "error", 0);
+                loginStep = 0;
             }
         })
         .catch(error => {
-            addLine("Error during login. Please try again.", "error", 0);
+            console.error('Login error:', error);
+            addLine("Login failed: " + error.message, "error", 0);
+            loginStep = 0;
         });
-
-        loginStep = 0;
-        loginCredentials = { username: '', password: '' };
     }
 }
 
 function getCSRFToken() {
-    const name = 'csrftoken';
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
+    const csrfCookie = document.cookie.split(';')
+        .find(cookie => cookie.trim().startsWith('csrftoken='));
+    if (csrfCookie) {
+        return csrfCookie.split('=')[1];
     }
-    return cookieValue;
+    // Fallback to meta tag
+    const csrfElement = document.querySelector('[name=csrfmiddlewaretoken]');
+    return csrfElement ? csrfElement.value : '';
 }
 
 function newTab(link) {
