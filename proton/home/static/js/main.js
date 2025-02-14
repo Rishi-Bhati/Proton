@@ -8,6 +8,7 @@ var git = 0;
 var pw = false;
 let pwd = false;
 var commands = [];
+var currentUser = 'user'; // Default username
 
 var loginStep = 0;
 var loginCredentials = {
@@ -69,7 +70,7 @@ function enterKey(e) {
     const inputText = command.innerHTML;
     commands.push(inputText);
     git = commands.length;
-    addLine("user@proton:~$ " + inputText, "no-animation", 0);
+    addLine(`${currentUser}@proton:~$ ${inputText}`, "no-animation", 0); // Modified line
 
     // Check if we're in login mode
     if (loginStep === 1) {
@@ -157,6 +158,32 @@ function commander(cmd) {
       addLine("Opening GUI-INTERFACE...", "color2", 0);
       newTab(GUI);
       break;
+    case "logout":
+      fetch('/accounts/logout/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRFToken(),
+        },
+        credentials: 'same-origin'
+      })
+      .then(response => {
+        if (response.ok) {
+          currentUser = 'user'; // Reset username to default after logout
+          updatePrompt('user'); // Reset prompt to default
+          addLine("Logout successful! Redirecting to fresh terminal...", "success", 0);
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1500);
+        } else {
+          addLine("Logout failed. Please try again.", "error", 0);
+        }
+      })
+      .catch(error => {
+        console.error('Logout error:', error);
+        addLine("Logout failed: Network or server error", "error", 0);
+      });
+      break;
     default:
       addLine("<span class=\"inherit\">Command not found. For a list of commands, type <span class=\"command\">'help'</span>.</span>", "error", 100);
       break;
@@ -188,16 +215,20 @@ function handleLoginInput(input) {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      addLine("Login successful!...", "success", 0);
+      currentUser = username; // Set the current username after successful login
+      loginStep = 0; // Reset login step to exit login mode
+      updatePrompt(username); // Update the prompt with the new username
+      addLine(`Login successful! Welcome ${username}`, "success", 0);
+      addLine("Type 'help' for available commands", "system", 0);
     } else {
       addLine(`Login failed: ${data.message}`, "error", 0);
-      loginStep = 0;
+      loginStep = 0; // Reset login step on failure
     }
   })
   .catch(error => {
     console.error('Login error:', error);
     addLine("Login failed: Network or server error", "error", 0);
-    loginStep = 0;
+    loginStep = 0; // Reset login step on error
   });
 }
 
@@ -249,5 +280,16 @@ function loopLines(name, style, time) {
     addLine(item, style, index * time);
   });
 }
+
+// Add this function to update the prompt
+function updatePrompt(username) {
+    const liner = document.getElementById("liner");
+    liner.setAttribute('data-prompt', `${username}@proton:~$ `);
+}
+
+// Add this at the end of the file to set initial prompt
+document.addEventListener('DOMContentLoaded', function() {
+    updatePrompt('user');
+});
 
 

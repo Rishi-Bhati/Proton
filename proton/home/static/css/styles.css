@@ -60,8 +60,8 @@ b {
   opacity: 0;
 }
 #liner::before {
+  content: attr(data-prompt);
   color: #008334;
-  content: "user@proton:~$";
 }
 @keyframes show {
   from {

@@ -37,6 +37,7 @@ help = [
   "<br>", // Line break
   '<span class="command">home</span>           Display the fancy terminal art',  // Command description
   '<span class="command">login</span>           gives the user the previlages to login inside the terminal', // login interface not gui
+  '<span class="command">logout</span>          Logs out the currently logged in user',  // Add this line
   '<span class="command">about</span>          About Proton', // Command description
   '<span class="command">members</span>        Open a page with proton members', // Command description
   '<span class="command">socialmedia</span>    Displays all our social media account links', // Command description
