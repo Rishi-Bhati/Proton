@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'contact', #send email
     'team', #team app
     'events', #events app
+    'gallery', #gallery app
 ]
 
 
