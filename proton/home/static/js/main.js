@@ -188,10 +188,7 @@ function handleLoginInput(input) {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      addLine("Login successful! Redirecting...", "success", 0);
-      setTimeout(() => {
-        window.location.href = data.redirect || '/home/';
-      }, 1500);
+      addLine("Login successful!...", "success", 0);
     } else {
       addLine(`Login failed: ${data.message}`, "error", 0);
       loginStep = 0;
