@@ -66,19 +66,19 @@ def terminal_login(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            username = data.get('username')
-            password = data.get('password')
+            username = data.get('username', '').strip()
+            password = data.get('password', '').strip()
 
             if not username or not password:
                 return JsonResponse({
                     'success': False,
-                    'message': 'Both username and password are required'
-                })
+                    'message': 'Username and password are required'
+                }, status=400)
 
             user = authenticate(request, username=username, password=password)
             
             if user is not None:
-                login(request, user)
+                auth_login(request, user)
                 return JsonResponse({
                     'success': True,
                     'message': 'Login successful',
@@ -88,18 +88,18 @@ def terminal_login(request):
                 return JsonResponse({
                     'success': False,
                     'message': 'Invalid credentials'
-                })
+                }, status=401)
 
         except json.JSONDecodeError:
             return JsonResponse({
                 'success': False,
-                'message': 'Invalid JSON format'
-            })
+                'message': 'Invalid request format'
+            }, status=400)
         except Exception as e:
             return JsonResponse({
                 'success': False,
                 'message': str(e)
-            })
+            }, status=500)
 
     return JsonResponse({
         'success': False,

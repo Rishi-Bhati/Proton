@@ -21,59 +21,57 @@ var tempPassword = '';
 
 // Add mobile detection and optimization
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+let hasInitialized = false;
 
-if (isMobile) {
-    // Adjust typing speed for mobile
-    const typingSpeed = 40; // Faster typing on mobile
-    
-    // Update existing setTimeout functions
-    setTimeout(function() {
-        loopLines(home, "", typingSpeed);
+// Single initialization function
+function initializeTerminal() {
+    if (!hasInitialized) {
         textarea.focus();
-    }, 100);
-
-    // Add touch event handlers
-    textarea.addEventListener('touchstart', function(e) {
-        this.focus();
-    });
-
-    // Prevent zoom on input
-    textarea.addEventListener('focus', function(e) {
-        document.body.style.fontSize = '16px';
-    });
-
-    // Auto-scroll to bottom on mobile
-    function scrollToBottom() {
-        window.scrollTo(0, document.body.scrollHeight);
+        updatePrompt(window.username || 'user');
+        loopLines(home, "", isMobile ? 40 : 80);
+        hasInitialized = true;
     }
-
-    // Update addLine function for mobile
-    const originalAddLine = addLine;
-    addLine = function(text, style, time) {
-        originalAddLine(text, style, time);
-        setTimeout(scrollToBottom, time + 50);
-    };
-} else {
-    setTimeout(function() {
-        loopLines(home, "", 80); // Changed from banner to home
-        textarea.focus();
-    }, 100);
 }
+
+// Remove all other initialization calls and use only DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initializeTerminal);
+
+// Keep focus handler
+document.addEventListener('click', function() {
+    textarea.focus();
+});
 
 window.addEventListener("keyup", enterKey);
 
 textarea.value = "";
 command.innerHTML = textarea.value;
 
+function typeIt(e) {
+    command.innerHTML = e.value;
+}
+
+function moveIt(count, event) {
+    if (event.keyCode === 37 || event.keyCode === 39) {
+        return;
+    }
+    command.innerHTML = textarea.value;
+}
+
 function enterKey(e) {
   if (e.keyCode == 181) {
     document.location.reload(true);
   }
   if (e.keyCode == 13) { // Enter key
-    const inputText = command.innerHTML;
+    const inputText = textarea.value;
     commands.push(inputText);
     git = commands.length;
-    addLine(`${currentUser}@proton:~$ ${inputText}`, "no-animation", 0);
+    
+    // Modify this section to mask password
+    if (loginStep === 1 && isPasswordInput) {
+      addLine(`${currentUser}@proton:~$ ${'*'.repeat(tempPassword.length)}`, "no-animation", 0);
+    } else {
+      addLine(`${currentUser}@proton:~$ ${inputText}`, "no-animation", 0);
+    }
     
     if (loginStep === 1) {
       handleLoginInput(isPasswordInput ? tempPassword : inputText);
@@ -401,11 +399,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Remove updateEmailUrl call since we're using dynamic function
 });
 
-// Initialize terminal
-window.onload = function() {
+// Ensure textarea stays focused
+document.addEventListener('click', function() {
   textarea.focus();
-  updatePrompt(window.username || 'user');
-  loopLines(home, "", 80);
-}
+});
 
 
