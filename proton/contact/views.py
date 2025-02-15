@@ -20,7 +20,7 @@ def contact_view(request):
                     subject,
                     f"Message from {name} ({email}):\n\n{message}",
                     email,
-                    ['rahultrivedi123.up@gmail.com'],
+                    ['proton.cybsec@nmamit.in'],
                     fail_silently=False,
                 )
                 messages.success(request, "Your message has been sent successfully!")
