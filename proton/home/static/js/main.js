@@ -21,61 +21,58 @@ var tempPassword = '';
 
 // Add mobile detection and optimization
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+let hasInitialized = false;
 
-if (isMobile) {
-    // Adjust typing speed for mobile
-    const typingSpeed = 40; // Faster typing on mobile
-    
-    // Update existing setTimeout functions
-    setTimeout(function() {
-        loopLines(home, "", typingSpeed);
+// Single initialization function
+function initializeTerminal() {
+    if (!hasInitialized) {
         textarea.focus();
-    }, 100);
-
-    // Add touch event handlers
-    textarea.addEventListener('touchstart', function(e) {
-        this.focus();
-    });
-
-    // Prevent zoom on input
-    textarea.addEventListener('focus', function(e) {
-        document.body.style.fontSize = '16px';
-    });
-
-    // Auto-scroll to bottom on mobile
-    function scrollToBottom() {
-        window.scrollTo(0, document.body.scrollHeight);
+        updatePrompt(window.username || 'user');
+        loopLines(home, "", isMobile ? 40 : 80);
+        hasInitialized = true;
     }
-
-    // Update addLine function for mobile
-    const originalAddLine = addLine;
-    addLine = function(text, style, time) {
-        originalAddLine(text, style, time);
-        setTimeout(scrollToBottom, time + 50);
-    };
-} else {
-    setTimeout(function() {
-        loopLines(home, "", 80); // Changed from banner to home
-        textarea.focus();
-    }, 100);
 }
+
+// Remove all other initialization calls and use only DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initializeTerminal);
+
+// Keep focus handler
+document.addEventListener('click', function() {
+    textarea.focus();
+});
 
 window.addEventListener("keyup", enterKey);
 
 textarea.value = "";
 command.innerHTML = textarea.value;
 
+function typeIt(e) {
+    command.innerHTML = e.value;
+}
+
+function moveIt(count, event) {
+    if (event.keyCode === 37 || event.keyCode === 39) {
+        return;
+    }
+    command.innerHTML = textarea.value;
+}
+
 function enterKey(e) {
   if (e.keyCode == 181) {
     document.location.reload(true);
   }
   if (e.keyCode == 13) { // Enter key
-    const inputText = isPasswordInput ? '*'.repeat(tempPassword.length) : command.innerHTML;
+    const inputText = textarea.value;
     commands.push(inputText);
     git = commands.length;
-    addLine(`${currentUser}@proton:~$ ${inputText}`, "no-animation", 0); // Modified line
-
-    // Check if we're in login mode
+    
+    // Modify this section to mask password
+    if (loginStep === 1 && isPasswordInput) {
+      addLine(`${currentUser}@proton:~$ ${'*'.repeat(tempPassword.length)}`, "no-animation", 0);
+    } else {
+      addLine(`${currentUser}@proton:~$ ${inputText}`, "no-animation", 0);
+    }
+    
     if (loginStep === 1) {
       handleLoginInput(isPasswordInput ? tempPassword : inputText);
     } else {
@@ -140,7 +137,6 @@ function enterKey(e) {
 
   
 function commander(cmd) {
-  // Convert to string and get the first word as command
   const fullCommand = cmd.toString().trim();
   const parts = fullCommand.split(' ');
   const command = parts[0].toLowerCase();
@@ -154,6 +150,9 @@ function commander(cmd) {
       break;
     case "hehe":
       loopLines(prashith, "color2 margin", 80);
+      break;
+    case "gas":
+      loopLines(rishi, "color2 margin", 80);
       break;
     case "members":
       addLine("Fetching members list...", "system", 0);
@@ -175,9 +174,12 @@ function commander(cmd) {
       loopLines(socialmedia, "color2 margin", 80);
       break;
     case "contact":
+      const emailUrl = isMobile ? 
+        `mailto:proton.cybsec@nmamit.in` :
+        `https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in`;
       addLine(`Opening ${isMobile ? 'email app' : 'Gmail compose'}...`, "system", 0);
       setTimeout(() => {
-        window.open(email, '_blank');
+        window.open(emailUrl, '_blank');
         addLine(`If nothing happened, please email us at: proton.cybsec@nmamit.in`, "color2", 80);
       }, 500);
       break;
@@ -250,14 +252,10 @@ function commander(cmd) {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            const emailUrl = isMobile ? 
-              `mailto:${data.data.email}?subject=Contact%20from%20Terminal&body=Hello%2C%0A%0A` :
-              `https://mail.google.com/mail/?view=cm&fs=1&to=${data.data.email}&su=Contact%20from%20Terminal&body=Hello%2C%0A%0A`;
-            
             addLine("=== Member Information ===", "color2", 80);
             addLine(`Name: ${data.data.name}`, "color2", 160);
             addLine(`Role: ${data.data.role}`, "color2", 240);
-            addLine(`Email: <a href="${emailUrl}" target="_blank">[${data.data.email}]</a>`, "color2", 320);
+            addLine(`Email: ${data.data.email}`, "color2", 320);
             addLine("Social Links:", "color2", 400);
             addLine(`  LinkedIn: <a href="${data.data.linkedin}" target="_blank">[LinkedIn]</a>`, "color2", 480);
             addLine(`  GitHub: <a href="${data.data.github}" target="_blank">[GitHub]</a>`, "color2", 560);
@@ -399,6 +397,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial prompt based on authenticated user
     updatePrompt(window.username || 'user');
     // Remove updateEmailUrl call since we're using dynamic function
+});
+
+// Ensure textarea stays focused
+document.addEventListener('click', function() {
+  textarea.focus();
 });
 
 
