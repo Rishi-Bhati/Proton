@@ -137,7 +137,7 @@ function enterKey(e) {
     }
   }
 }
-loopLines(home, "", 80);
+
   
 function commander(cmd) {
   // Convert to string and get the first word as command
