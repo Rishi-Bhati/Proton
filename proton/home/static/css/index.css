@@ -1,13 +1,35 @@
+.upper {
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    margin: 50px;
+}
+
+.upper-left {
+    display: flex;
+    width: 50%;
+    /* position: absolute; */
+}
+
+.logo-bg {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+    -webkit-filter: brightness(0.3) blur(1px);
+}
 .terminal {
     font-family: 'Poppins', monospace;
     background-color: #1e1e1e;
     border-radius: 8px;
-    height: 45vh;
-    width: 50vw; 
+    height: 18vh;
+    width: 27vw; 
     min-height: 380px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     overflow-x: hidden;
-    position: relative;
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
 .terminal-header {
     display: flex;
