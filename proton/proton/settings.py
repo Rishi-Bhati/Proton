@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-*zmywd*=nj0n$4al*a()s@@s19k$tjp07e*41gi%ln8wf8#y3h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net', 'proton-nmamit.onrender.com']
+ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net', 'proton-nmamit.onrender.com', 'protonnmamit.pythonanywhere.com']
 
 
 # Application definition
