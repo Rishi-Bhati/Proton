@@ -55,6 +55,7 @@ help = [
   '<span class="command">contact</span>       Displays official email (don’t contact us we don’t actually care about you)', // Command description
   '<span class="command">clear</span>         Clear terminal', // Command description
   '<span class="command">gui</span>           Takes you to the graphical interface of the website (normal website);)', // Command description
+  '<span class="command">echo</span>          <span class="color2">Print specified text (e.g., echo "Hello World")</span>',
   "<br>",
 ];
 

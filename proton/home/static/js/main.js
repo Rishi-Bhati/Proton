@@ -140,7 +140,12 @@ function enterKey(e) {
 loopLines(home, "", 80);
   
 function commander(cmd) {
-  switch (cmd.toLowerCase()) {
+  // Convert to string and get the first word as command
+  const fullCommand = cmd.toString().trim();
+  const parts = fullCommand.split(' ');
+  const command = parts[0].toLowerCase();
+  
+  switch (command) {
     case "help":
       loopLines(help, "color2 margin", 80);
       break;
@@ -224,6 +229,14 @@ function commander(cmd) {
         console.error('Logout error:', error);
         addLine("Logout failed: Network or server error", "error", 0);
       });
+      break;
+    case "echo":
+      const matches = fullCommand.match(/echo\s+"([^"]+)"/);
+      if (matches && matches[1]) {
+        addLine(matches[1], "color2", 0);
+      } else {
+        addLine('Usage: echo "your message in quotes"', "system", 0);
+      }
       break;
     default:
       addLine("<span class=\"inherit\">Command not found. For a list of commands, type <span class=\"command\">'help'</span>.</span>", "error", 100);
