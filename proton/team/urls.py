@@ -12,4 +12,5 @@ from .views import render
 urlpatterns = [
     path('', views.team, name='team'),
     path('terminal-members/', views.terminal_members, name='terminal_members'),
+    path('get/<str:name>/', views.get_member_info, name='get_member_info'),
 ]

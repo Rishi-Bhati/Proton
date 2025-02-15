@@ -3,14 +3,27 @@ var linkedin = "https://www.linkedin.com/company/proton-nmamit/";
 var instagram = "https://www.instagram.com/proton_nmamit";
 var github = "https://github.com/prashithshetty";
 
-// Default to Gmail compose URL, will be updated after checking device type
-var email = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
-// Will be updated in main.js after device detection
-function updateEmailUrl() {
-    const mailtoUrl = "mailto:proton.cybsec@nmamit.in?subject=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
-    const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
-    email = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ? mailtoUrl : gmailUrl;
+function getEmailUrl(email, subject, body) {
+    const emailAddress = "proton.cybsec@nmamit.in";
+    const emailSubject = "Contact from Terminal";
+    const emailBody = "Hello PROTON Team,\n\n";
+    
+    // For Android, use mailto:
+    if (/Android/i.test(navigator.userAgent)) {
+        return `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    }
+    // For iOS, also use mailto:
+    else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        return `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    }
+    // For desktop, use Gmail compose URL
+    else {
+        return `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    }
 }
+
+// Update email variable to be dynamic
+var email = getEmailUrl();
 
 var members = 'members'; // Placeholder for the path to the members page
 var GUI = 'home'; // Placeholder for the path to the GUI home page
@@ -54,6 +67,7 @@ help = [
   '<span class="command">contact</span>       Displays official email (don’t contact us we don’t actually care about you)', // Command description
   '<span class="command">clear</span>         Clear terminal', // Command description
   '<span class="command">gui</span>           Takes you to the graphical interface of the website (normal website);)', // Command description
+  '<span class="command">get</span>           <span class="color2">Get member info (e.g., get john)</span>',
   "<br>",
 ];
 

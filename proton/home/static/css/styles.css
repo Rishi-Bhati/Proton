@@ -103,6 +103,17 @@ p {
 .color2 {
   color: var(--terminal-output);
 }
+.color2 a {
+  color: var(--terminal-link);
+  text-decoration: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+.color2 a:hover {
+  background: var(--terminal-link);
+  color: var(--terminal-bg);
+}
 .command {
   color: var(--terminal-command); 
 }
