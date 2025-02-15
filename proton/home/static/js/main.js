@@ -16,6 +16,9 @@ var loginCredentials = {
     password: ''
 };
 
+var isPasswordInput = false;
+var tempPassword = '';
+
 // Add mobile detection and optimization
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -67,56 +70,70 @@ function enterKey(e) {
     document.location.reload(true);
   }
   if (e.keyCode == 13) { // Enter key
-    const inputText = command.innerHTML;
+    const inputText = isPasswordInput ? '*'.repeat(tempPassword.length) : command.innerHTML;
     commands.push(inputText);
     git = commands.length;
     addLine(`${currentUser}@proton:~$ ${inputText}`, "no-animation", 0); // Modified line
 
     // Check if we're in login mode
     if (loginStep === 1) {
-      handleLoginInput(inputText);
+      handleLoginInput(isPasswordInput ? tempPassword : inputText);
     } else {
       commander(inputText.toLowerCase());
     }
     
     command.innerHTML = "";
     textarea.value = "";
-  }
-  if (pw) {
-    let et = "*";
-    let w = textarea.value.length;
-    command.innerHTML = et.repeat(w);
-    if (textarea.value === password) {
-      pwd = true;
-    }
-    if (pwd && e.keyCode == 13) {
-      loopLines(secret, "color2 margin", 120);
-      command.innerHTML = "";
-      textarea.value = "";
-      pwd = false;
-      pw = false;
-      liner.classList.remove("password");
-    } else if (e.keyCode == 13) {
-      addLine("Wrong password", "error", 0);
-      command.innerHTML = "";
-      textarea.value = "";
-      pw = false;
-      liner.classList.remove("password");
-    }
-  } else {
-    if (e.keyCode == 38 && git != 0) {
-      git -= 1;
-      textarea.value = commands[git];
-      command.innerHTML = textarea.value;
-    }
-    if (e.keyCode == 40 && git != commands.length) {
-      git += 1;
-      if (commands[git] === undefined) {
-        textarea.value = "";
-      } else {
-        textarea.value = commands[git];
+    tempPassword = '';
+  } else if (loginStep === 1 && isPasswordInput) {
+    // Handle password input
+    if (e.keyCode === 8) { // Backspace
+      if (tempPassword.length > 0) {
+        tempPassword = tempPassword.slice(0, -1);
+        command.innerHTML = '*'.repeat(tempPassword.length);
       }
-      command.innerHTML = textarea.value;
+    } else if (e.key.length === 1) { // Regular character
+      tempPassword += e.key;
+      command.innerHTML = '*'.repeat(tempPassword.length);
+    }
+    e.preventDefault();
+  } else {
+    if (pw) {
+      let et = "*";
+      let w = textarea.value.length;
+      command.innerHTML = et.repeat(w);
+      if (textarea.value === password) {
+        pwd = true;
+      }
+      if (pwd && e.keyCode == 13) {
+        loopLines(secret, "color2 margin", 120);
+        command.innerHTML = "";
+        textarea.value = "";
+        pwd = false;
+        pw = false;
+        liner.classList.remove("password");
+      } else if (e.keyCode == 13) {
+        addLine("Wrong password", "error", 0);
+        command.innerHTML = "";
+        textarea.value = "";
+        pw = false;
+        liner.classList.remove("password");
+      }
+    } else {
+      if (e.keyCode == 38 && git != 0) {
+        git -= 1;
+        textarea.value = commands[git];
+        command.innerHTML = textarea.value;
+      }
+      if (e.keyCode == 40 && git != commands.length) {
+        git += 1;
+        if (commands[git] === undefined) {
+          textarea.value = "";
+        } else {
+          textarea.value = commands[git];
+        }
+        command.innerHTML = textarea.value;
+      }
     }
   }
 }
@@ -194,17 +211,19 @@ function commander(cmd) {
 }
 
 function handleLoginInput(input) {
-  const credentials = input.trim().split(' ');
-  
-  if (credentials.length !== 2) {
-    addLine("Error: Please enter both username and password", "error", 0);
-    addLine("Example: username password", "system", 0);
-    loginStep = 0; // Reset login step on error
+  if (!isPasswordInput) {
+    // First input is username
+    loginCredentials.username = input.trim();
+    isPasswordInput = true;
+    addLine("Enter password:", "system", 0);
+    command.innerHTML = "";
     return;
   }
 
-  const username = credentials[0];
-  const password = credentials[1];
+  // Second input is password
+  loginCredentials.password = tempPassword;
+  isPasswordInput = false;
+  tempPassword = '';
 
   fetch('/terminal_login/', {  // Updated endpoint to match urls.py
     method: 'POST',
@@ -215,18 +234,18 @@ function handleLoginInput(input) {
     },
     credentials: 'same-origin',
     body: JSON.stringify({
-      username: username,
-      password: password
+      username: loginCredentials.username,
+      password: loginCredentials.password
     })
   })
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      currentUser = username; // Set the current username after successful login
+      currentUser = loginCredentials.username; // Set the current username after successful login
       loginStep = 0; // Reset login step to exit login mode
-      window.username = username; // Update the global username
-      updatePrompt(username); // Update the prompt with the new username
-      addLine(`Login successful! Welcome ${username}`, "success", 0);
+      window.username = loginCredentials.username; // Update the global username
+      updatePrompt(loginCredentials.username); // Update the prompt with the new username
+      addLine(`Login successful! Welcome ${loginCredentials.username}`, "success", 0);
       addLine("Type 'help' for available commands", "system", 0);
     } else {
       addLine(`Login failed: ${data.message}`, "error", 0);
@@ -242,7 +261,10 @@ function handleLoginInput(input) {
 
 function login() {
   loginStep = 1; // Set login mode
-  loopLines(loginInstructions, "color2 margin", 80);
+  isPasswordInput = false;
+  tempPassword = '';
+  addLine("=== Terminal Login ===", "system", 0);
+  addLine("Enter username:", "system", 0);
 }
 
 function getCSRFToken() {
