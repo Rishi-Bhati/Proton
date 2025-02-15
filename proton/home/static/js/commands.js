@@ -3,27 +3,15 @@ var linkedin = "https://www.linkedin.com/company/proton-nmamit/";
 var instagram = "https://www.instagram.com/proton_nmamit";
 var github = "https://github.com/prashithshetty";
 
-function getEmailUrl(email, subject, body) {
-    const emailAddress = "proton.cybsec@nmamit.in";
-    const emailSubject = "Contact from Terminal";
-    const emailBody = "Hello PROTON Team,\n\n";
-    
-    // For Android, use mailto:
-    if (/Android/i.test(navigator.userAgent)) {
-        return `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    }
-    // For iOS, also use mailto:
-    else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        return `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    }
-    // For desktop, use Gmail compose URL
-    else {
-        return `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    }
-}
+// Default to Gmail compose URL, will be updated after checking device type
+var email = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
 
-// Update email variable to be dynamic
-var email = getEmailUrl();
+// Will be updated in main.js after device detection
+function updateEmailUrl() {
+    const mailtoUrl = "mailto:proton.cybsec@nmamit.in?subject=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+    const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+    email = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ? mailtoUrl : gmailUrl;
+}
 
 var members = 'members'; // Placeholder for the path to the members page
 var GUI = 'home'; // Placeholder for the path to the GUI home page
@@ -98,7 +86,18 @@ home = [
   '<span class="system">Type "help" to see available commands</span>',
 ];
 
+function typeIt(e, event) {
+    if (event.key === "Enter") return;
+    var text = e.value;
+    command.innerHTML = text;
+}
 
+function moveIt(count, event) {
+    if (event.keyCode === 37 || event.keyCode === 39) {
+        return;
+    }
+    command.innerHTML = textarea.value;
+}
 
 prashith = [
   "here you go good job beta, u deserve this",
@@ -124,15 +123,34 @@ prashith = [
   "█████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
   "████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
   "████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+  "                                    -Prashith Shetty",
 ];
 
 
-
-
-
-
-
-
-
-
-
+rishi = [
+"aaaah you found me, here is your reward",
+"       .------..                            _------__--___.__.",
+"    /            \_                       /            `  `    \\",
+"  /                \                     |.                     \\",
+" /                   \                   \                       |",
+"/    .--._    .---.   |                   \                      |",
+"|  /      -__-     \   |                    ~-/--`-`-`-\         |",
+"| |                |  |                     |          \        |",
+"||                  ||                     |            |       |",
+"||     ,_   _.      ||                     |            |       |",
+"||      e   e      ||  Hey Rishi,         |   _--    |       |",
+" ||     _  |_      ||   pull my finger!     _| =-.    |.-.    |",
+"@|     (o\_/o)     |@   Heh,Heh!!!          o|/o/       _.   |",
+"  |     _____     |                        /  ~          \ |",
+"   \ ( /uuuuu\ ) /             No way!    (/___@)  ___~    |",
+"    \  `====='  /              Ass wipe!!    |_===~~~.`    |",
+"     \  -___-  /                         _______.--~     |",
+"      |       |            //             \________       |",
+"      /-_____-\       .  _//_                      \      |",
+"    /           \     \\/////                    __/-___-- -_",
+"  /               \    \   /                    /            __\ ",
+" /__|  AC / DC  |__\   / /                      -| Metallica|| |",
+" | ||           |\ \  / /                       ||          || |",
+" | ||           | \ \/ /                        ||          || | - rishi"
+  
+]
