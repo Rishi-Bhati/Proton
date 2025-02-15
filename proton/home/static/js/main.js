@@ -8,7 +8,7 @@ var git = 0;
 var pw = false;
 let pwd = false;
 var commands = [];
-var currentUser = 'user'; // Default username
+var currentUser = window.username || 'user'; // Use the username from Django context
 
 var loginStep = 0;
 var loginCredentials = {
@@ -52,7 +52,7 @@ if (isMobile) {
     };
 } else {
     setTimeout(function() {
-        loopLines(banner, "", 80);
+        loopLines(home, "", 80); // Changed from banner to home
         textarea.focus();
     }, 100);
 }
@@ -199,27 +199,32 @@ function handleLoginInput(input) {
   if (credentials.length !== 2) {
     addLine("Error: Please enter both username and password", "error", 0);
     addLine("Example: username password", "system", 0);
+    loginStep = 0; // Reset login step on error
     return;
   }
 
   const username = credentials[0];
   const password = credentials[1];
 
-  fetch('/login/', {
+  fetch('/terminal_login/', {  // Updated endpoint to match urls.py
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',  // Changed to JSON
       'X-CSRFToken': getCSRFToken(),
       'Accept': 'application/json'
     },
     credentials: 'same-origin',
-    body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+    body: JSON.stringify({
+      username: username,
+      password: password
+    })
   })
   .then(response => response.json())
   .then(data => {
     if (data.success) {
       currentUser = username; // Set the current username after successful login
       loginStep = 0; // Reset login step to exit login mode
+      window.username = username; // Update the global username
       updatePrompt(username); // Update the prompt with the new username
       addLine(`Login successful! Welcome ${username}`, "success", 0);
       addLine("Type 'help' for available commands", "system", 0);
@@ -292,7 +297,8 @@ function updatePrompt(username) {
 
 // Add this at the end of the file to set initial prompt
 document.addEventListener('DOMContentLoaded', function() {
-    updatePrompt('user');
+    // Set initial prompt based on authenticated user
+    updatePrompt(window.username || 'user');
 });
 
 
