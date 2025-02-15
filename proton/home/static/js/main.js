@@ -147,8 +147,7 @@ function commander(cmd) {
     case "about":
       loopLines(about, "color2 margin", 80);
       break;
-    case "prashith":
-      addLine("aahhh u found out an easter egg kudos , sha bash ma homie u deserve to get kissed", "color2", 80);
+    case "hehe":
       loopLines(prashith, "color2 margin", 80);
       break;
     case "members":
@@ -171,8 +170,13 @@ function commander(cmd) {
       loopLines(home, "", 80);
       break;
     case "login":
-      loginStep = 0; // Reset login step
-      login(); 
+      if (window.isAuthenticated) {
+        addLine("Error: You are already logged in as " + currentUser, "error", 0);
+        addLine("Use 'logout' command to log out first", "system", 0);
+      } else {
+        loginStep = 0;
+        login();
+      }
       break;
     case "gui":
       addLine("Opening GUI-INTERFACE...", "color2", 0);
@@ -190,6 +194,7 @@ function commander(cmd) {
       .then(response => {
         if (response.ok) {
           currentUser = 'user'; // Reset username to default after logout
+          window.isAuthenticated = false;
           updatePrompt('user'); // Reset prompt to default
           addLine("Logout successful! Redirecting to fresh terminal...", "success", 0);
           setTimeout(() => {
@@ -211,6 +216,11 @@ function commander(cmd) {
 }
 
 function handleLoginInput(input) {
+  if (window.isAuthenticated) {
+    addLine("Error: You are already logged in", "error", 0);
+    loginStep = 0;
+    return;
+  }
   if (!isPasswordInput) {
     // First input is username
     loginCredentials.username = input.trim();
@@ -244,6 +254,7 @@ function handleLoginInput(input) {
       currentUser = loginCredentials.username; // Set the current username after successful login
       loginStep = 0; // Reset login step to exit login mode
       window.username = loginCredentials.username; // Update the global username
+      window.isAuthenticated = true;
       updatePrompt(loginCredentials.username); // Update the prompt with the new username
       addLine(`Login successful! Welcome ${loginCredentials.username}`, "success", 0);
       addLine("Type 'help' for available commands", "system", 0);
@@ -260,6 +271,10 @@ function handleLoginInput(input) {
 }
 
 function login() {
+  if (window.isAuthenticated) {
+    addLine("Error: You are already logged in as " + currentUser, "error", 0);
+    return;
+  }
   loginStep = 1; // Set login mode
   isPasswordInput = false;
   tempPassword = '';
