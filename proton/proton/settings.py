@@ -98,9 +98,17 @@ WSGI_APPLICATION = 'proton.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "PrAdmin",
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": "proton-cloud-db.postgres.database.azure.com",
+        "PORT": "5432",
+        "OPTIONS": {
+            "sslmode": "require",
+            "sslrootcert": "/path/to/root.crt",  # Path to your root certificate
+        },
     }
 }
 
