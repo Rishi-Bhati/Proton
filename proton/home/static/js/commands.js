@@ -1,8 +1,18 @@
 // Define URLs for social media and contact information
-var linkedin = "https://www.linkedin.com/company/proton-nmamit/"; // LinkedIn URL
-var instagram = "https://www.instagram.com/proton_nmamit"; // Instagram URL
-var github = "https://github.com/prashithshetty"; // GitHub URL
-var email = "proton.cybsec@nmamit.in"; // Email address (note: this seems to be missing the '@' symbol)
+var linkedin = "https://www.linkedin.com/company/proton-nmamit/";
+var instagram = "https://www.instagram.com/proton_nmamit";
+var github = "https://github.com/prashithshetty";
+
+// Default to Gmail compose URL, will be updated after checking device type
+var email = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+
+// Will be updated in main.js after device detection
+function updateEmailUrl() {
+    const mailtoUrl = "mailto:proton.cybsec@nmamit.in?subject=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+    const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+    email = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ? mailtoUrl : gmailUrl;
+}
+
 var members = 'members'; // Placeholder for the path to the members page
 var GUI = 'home'; // Placeholder for the path to the GUI home page
 
@@ -34,18 +44,19 @@ socialmedia = [
 
 // Help section content
 help = [
-  "<br>", // Line break
-  '<span class="command">home</span>           Display the fancy terminal art',  // Command description
-  '<span class="command">login</span>           gives the user the previlages to login inside the terminal', // login interface not gui
-  '<span class="command">logout</span>          Logs out the currently logged in user',  // Add this line
-  '<span class="command">about</span>          About Proton', // Command description
-  '<span class="command">members</span>        Open a page with proton members', // Command description
-  '<span class="command">socialmedia</span>    Displays all our social media account links', // Command description
-  '<span class="command">help</span>           Come on read it again', // Command description
-  '<span class="command">contact</span>        Displays official email (don’t contact us we don’t actually care about you)', // Command description
-  '<span class="command">clear</span>          Clear terminal', // Command description
-  '<span class="command">gui</span>            Takes you to the graphical interface of the website (normal website);)', // Command description
-  "<br>", // Line break
+  "<br>",
+  '<span class="command">home</span>          <span class="color2">Display the terminal banner</span>',
+  '<span class="command">login</span>         <span class="color2">Login to terminal interface</span>',
+  '<span class="command">logout</span>        Logs out the currently logged in user',  // Add this line
+  '<span class="command">about</span>         About Proton', // Command description
+  '<span class="command">members</span>       Open a page with proton members', // Command description
+  '<span class="command">socialmedia</span>   Displays all our social media account links', // Command description
+  '<span class="command">help</span>          Come on read it again', // Command description
+  '<span class="command">contact</span>       Displays official email (don’t contact us we don’t actually care about you)', // Command description
+  '<span class="command">clear</span>         Clear terminal', // Command description
+  '<span class="command">gui</span>           Takes you to the graphical interface of the website (normal website);)', // Command description
+  '<span class="command">echo</span>          <span class="color2">Print specified text (e.g., echo "Hello World")</span>',
+  "<br>",
 ];
 
 // Login instructions
@@ -61,7 +72,8 @@ loginInstructions = [
 
 // Home section content
 home = [
-  '<span class="index">© 2025 PROTON. All rights reserved.</span>', // Copyright notice
+  '<span class="color2">Welcome to PROTON Terminal</span>',
+  '<span class="system">© 2025 PROTON. All rights reserved.</span>',
   "██████╗░██████╗░░█████╗░████████╗░█████╗░███╗░░██╗", // ASCII art line 1
   "██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗░██║", // ASCII art line 2
   "██████╔╝██████╔╝██║░░██║░░░██║░░░██║░░██║██╔██╗██║", // ASCII art line 3
@@ -71,12 +83,13 @@ home = [
   '<span class="color2">Deal with the terminal,.</span>',
   '<span class="color2">Just type help homie u can do it.</span>',
   '<span class="color2">If you are using a mobile phone kindly tilt it to land scape mode.</span>', // Instruction for GUI access
-  "<span class=\"color2\">For a list of available commands, type help</span>", // Help instruction
+  '<span class="system">Type "help" to see available commands</span>',
 ];
 
 
 
 prashith = [
+  "here you go good job beta, u deserve this",
   "▒▒▒▒▒▒▒▒▒▒▒▄▄▄▄░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
   "▒▒▒▒▒▒▒▒▒▄██████▒▒▒▒▒▄▄▄█▄▒▒▒▒▒▒▒▒▒▒",
   "▒▒▒▒▒▒▒▄██▀░░▀██▄▒▒▒▒████████▄▒▒▒▒▒▒",

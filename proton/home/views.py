@@ -14,8 +14,11 @@ import json
 
 # Define a view function to handle the index page
 def index(request):
-    # Render the index.html template
-    return render(request, 'index.html')
+    # Use RequestContext to ensure user context is available
+    context = {
+        'user': request.user,
+    }
+    return render(request, 'index.html', context)
 
 def home(request):
     # Render the home.html template'
@@ -62,13 +65,9 @@ def about(request):
 def terminal_login(request):
     if request.method == 'POST':
         try:
-            if request.content_type == 'application/x-www-form-urlencoded':
-                username = request.POST.get('username')
-                password = request.POST.get('password')
-            else:
-                data = json.loads(request.body)
-                username = data.get('username')
-                password = data.get('password')
+            data = json.loads(request.body)
+            username = data.get('username')
+            password = data.get('password')
 
             if not username or not password:
                 return JsonResponse({
@@ -83,7 +82,7 @@ def terminal_login(request):
                 return JsonResponse({
                     'success': True,
                     'message': 'Login successful',
-                    'redirect': '/home/'
+                    'username': user.username
                 })
             else:
                 return JsonResponse({
@@ -94,7 +93,7 @@ def terminal_login(request):
         except json.JSONDecodeError:
             return JsonResponse({
                 'success': False,
-                'message': 'Invalid request format'
+                'message': 'Invalid JSON format'
             })
         except Exception as e:
             return JsonResponse({

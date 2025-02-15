@@ -22,6 +22,6 @@ urlpatterns = [
     # Define the URL pattern for user registration, mapping to the 'register' view
     path("register/", register, name="register"), 
     path("about/", views.about, name="about"),
-    path('login/', views.terminal_login, name='terminal_login'),  # Changed from accounts/login/
+    path('terminal_login/', views.terminal_login, name='terminal_login'),  # Updated path
     
 ]
