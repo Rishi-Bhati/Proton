@@ -44,9 +44,9 @@ socialmedia = [
 
 // Help section content
 help = [
-  "<br>", // Line break
-  '<span class="command">home</span>          Display the fancy terminal art',  // Command description
-  '<span class="command">login</span>         gives the user the previlages to login inside the terminal', // login interface not gui
+  "<br>",
+  '<span class="command">home</span>          <span class="color2">Display the terminal banner</span>',
+  '<span class="command">login</span>         <span class="color2">Login to terminal interface</span>',
   '<span class="command">logout</span>        Logs out the currently logged in user',  // Add this line
   '<span class="command">about</span>         About Proton', // Command description
   '<span class="command">members</span>       Open a page with proton members', // Command description
@@ -55,7 +55,7 @@ help = [
   '<span class="command">contact</span>       Displays official email (don’t contact us we don’t actually care about you)', // Command description
   '<span class="command">clear</span>         Clear terminal', // Command description
   '<span class="command">gui</span>           Takes you to the graphical interface of the website (normal website);)', // Command description
-  "<br>", // Line break
+  "<br>",
 ];
 
 // Login instructions
@@ -71,7 +71,8 @@ loginInstructions = [
 
 // Home section content
 home = [
-  '<span class="index">© 2025 PROTON. All rights reserved.</span>', // Copyright notice
+  '<span class="color2">Welcome to PROTON Terminal</span>',
+  '<span class="system">© 2025 PROTON. All rights reserved.</span>',
   "██████╗░██████╗░░█████╗░████████╗░█████╗░███╗░░██╗", // ASCII art line 1
   "██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗████╗░██║", // ASCII art line 2
   "██████╔╝██████╔╝██║░░██║░░░██║░░░██║░░██║██╔██╗██║", // ASCII art line 3
@@ -81,7 +82,7 @@ home = [
   '<span class="color2">Deal with the terminal,.</span>',
   '<span class="color2">Just type help homie u can do it.</span>',
   '<span class="color2">If you are using a mobile phone kindly tilt it to land scape mode.</span>', // Instruction for GUI access
-  "<span class=\"color2\">For a list of available commands, type help</span>", // Help instruction
+  '<span class="system">Type "help" to see available commands</span>',
 ];
 
 

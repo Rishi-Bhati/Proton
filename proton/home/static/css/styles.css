@@ -10,12 +10,12 @@ body {
   overflow-x: hidden;
 }
 ::selection {
-  color: #211830;
-  background-color: #ffffff;
+  color: var(--terminal-selection-text);
+  background-color: var(--terminal-selection-bg);
 }
 ::-moz-selection {
-  color: #211830;
-  background-color: #ffffff;
+  color: var(--terminal-selection-text);
+  background-color: var(--terminal-selection-bg);
 }
 textarea {
   left: -1000px;
@@ -28,10 +28,10 @@ b {
 /* Cursor Start */
 .cursor {
   font-size: 12px;
-  color: #a4a4a4;
-  background-color: #c8c8c8;
+  color: var(--terminal-bg);
+  background-color: var(--terminal-cursor);
   position: relative;
-  opacity: 1;
+  opacity: 0.7;
   height: 1.5em;
   width: 10px;
   max-width: 10px;
@@ -61,7 +61,8 @@ b {
 }
 #liner::before {
   content: attr(data-prompt);
-  color: #008334;
+  color: var(--terminal-prompt);
+  font-weight: normal;
 }
 @keyframes show {
   from {
@@ -100,27 +101,27 @@ p {
   color: #DCDCCC;
 }
 .color2 {
-  color: #d8d8d8;
+  color: var(--terminal-output);
 }
 .command {
-  color: #67999a; 
+  color: var(--terminal-command); 
 }
 .error {
-  color: #B89076;
+  color: var(--terminal-error);
 }
 .white {
   color: #fff;
 }
 .inherit,
 a {
-  color: #a28a9b;
+  color: var(--terminal-link);
 }
 a {
   text-decoration: inherit;
 }
 a:hover {
-  background: #5b7879;
-  color: #242029;
+  background: var(--terminal-prompt);
+  color: var(--terminal-bg);
 }
 a:focus {
   outline: 0;
@@ -129,8 +130,22 @@ a:focus {
 /* Base styles (mobile-first) */
 :root {
   --primary-color: #088044;
-  --background-color: #211D1B;
-  --terminal-bg: #000000;
+  --background-color: #1E1E2E;
+  --terminal-bg: #282A36;
+  --terminal-text: #F8F8F2;
+  --terminal-prompt: #8BE9FD;
+  --terminal-cursor: #F8F8F2;
+  --terminal-command: #50FA7B;
+  --terminal-output: #F8F8F2;
+  --terminal-error: #FF5555;
+  --terminal-success: #50FA7B;
+  --terminal-warning: #FFB86C;
+  --terminal-system: #BD93F9;
+  --terminal-link: #8BE9FD;
+  --terminal-selection-bg: #44475A;
+  --terminal-selection-text: #F8F8F2;
+  --scrollbar-bg: #44475A;
+  --scrollbar-thumb: #6272A4;
 }
 
 * {
@@ -140,10 +155,11 @@ a:focus {
 }
 
 body {
-  font-family: 'Waiting for the Sunrise', cursive, monospace;
+  font-family: 'Ubuntu Mono', monospace;
+  font-size: 14px;
   line-height: 1.6;
-  color: var(--primary-color);
-  background: var(--background-color);
+  color: var(--terminal-text);
+  background: var(--terminal-bg);
   padding: 1rem;
   min-height: 100vh;
 }
@@ -254,12 +270,12 @@ body {
 }
 
 /* Utility Classes */
-.success { color: #00ff00; }
-.warning { color: #ff9900; }
+.success { color: var(--terminal-success); }
+.warning { color: var(--terminal-warning); }
 .opacity-75 { opacity: 0.75; }
 .opacity-50 { opacity: 0.5; }
 .opacity-25 { opacity: 0.25; }
-.system { color: #39ff14; }
+.system { color: var(--terminal-system); }
 
 .member-list {
   font-family: monospace;
@@ -274,4 +290,39 @@ body {
 
 .email-link:hover {
   color: #00ff00;
+}
+
+/* Add custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-prompt);
+}
+
+/* Add text shadow for better readability */
+.command, .system, .color2 {
+  text-shadow: none;
+}
+
+/* Add subtle transitions */
+a, .command, .cursor {
+  transition: all 0.3s ease;
+}
+
+/* Improve command hover effect */
+.command:hover {
+  color: var(--terminal-success);
+  text-shadow: 0 0 10px rgba(80, 250, 123, 0.4);
 }
