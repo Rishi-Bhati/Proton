@@ -11,4 +11,5 @@ from .views import render
 # Define URL patterns for the application, mapping URLs to specific views
 urlpatterns = [
     path('', views.team, name='team'),
+    path('terminal-members/', views.terminal_members, name='terminal_members'),
 ]

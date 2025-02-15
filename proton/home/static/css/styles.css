@@ -260,3 +260,8 @@ body {
 .opacity-50 { opacity: 0.5; }
 .opacity-25 { opacity: 0.25; }
 .system { color: #39ff14; }
+
+.member-list {
+  font-family: monospace;
+  white-space: pre;
+}

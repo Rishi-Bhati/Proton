@@ -35,16 +35,16 @@ socialmedia = [
 // Help section content
 help = [
   "<br>", // Line break
-  '<span class="command">home</span>           Display the fancy terminal art',  // Command description
-  '<span class="command">login</span>           gives the user the previlages to login inside the terminal', // login interface not gui
-  '<span class="command">logout</span>          Logs out the currently logged in user',  // Add this line
-  '<span class="command">about</span>          About Proton', // Command description
-  '<span class="command">members</span>        Open a page with proton members', // Command description
-  '<span class="command">socialmedia</span>    Displays all our social media account links', // Command description
-  '<span class="command">help</span>           Come on read it again', // Command description
-  '<span class="command">contact</span>        Displays official email (don’t contact us we don’t actually care about you)', // Command description
-  '<span class="command">clear</span>          Clear terminal', // Command description
-  '<span class="command">gui</span>            Takes you to the graphical interface of the website (normal website);)', // Command description
+  '<span class="command">home</span>          Display the fancy terminal art',  // Command description
+  '<span class="command">login</span>         gives the user the previlages to login inside the terminal', // login interface not gui
+  '<span class="command">logout</span>        Logs out the currently logged in user',  // Add this line
+  '<span class="command">about</span>         About Proton', // Command description
+  '<span class="command">members</span>       Open a page with proton members', // Command description
+  '<span class="command">socialmedia</span>   Displays all our social media account links', // Command description
+  '<span class="command">help</span>          Come on read it again', // Command description
+  '<span class="command">contact</span>       Displays official email (don’t contact us we don’t actually care about you)', // Command description
+  '<span class="command">clear</span>         Clear terminal', // Command description
+  '<span class="command">gui</span>           Takes you to the graphical interface of the website (normal website);)', // Command description
   "<br>", // Line break
 ];
 

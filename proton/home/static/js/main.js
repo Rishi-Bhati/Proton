@@ -151,8 +151,20 @@ function commander(cmd) {
       loopLines(prashith, "color2 margin", 80);
       break;
     case "members":
-      addLine("Opening GUI-PROTON...", "color2", 80);
-      newTab(members);
+      addLine("Fetching members list...", "system", 0);
+      fetch('/team/terminal-members/')
+        .then(response => response.json())
+        .then(data => {
+          addLine("=== PROTON MEMBERS ===", "color2", 80);
+          data.members.forEach((member, index) => {
+            const paddedName = member.name.padEnd(30, ' '); // Pad name for alignment
+            addLine(`${paddedName}${member.role}`, "color2", 80 * (index + 1));
+          });
+          addLine("=====================", "color2", 80 * (data.members.length + 1));
+        })
+        .catch(error => {
+          addLine("Error fetching members list", "error", 0);
+        });
       break;
     case "socialmedia":
       loopLines(socialmedia, "color2 margin", 80);
