@@ -5,7 +5,6 @@ var github = "https://github.com/prashithshetty";
 
 // Default to Gmail compose URL, will be updated after checking device type
 var email = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
-
 // Will be updated in main.js after device detection
 function updateEmailUrl() {
     const mailtoUrl = "mailto:proton.cybsec@nmamit.in?subject=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
@@ -55,7 +54,6 @@ help = [
   '<span class="command">contact</span>       Displays official email (don’t contact us we don’t actually care about you)', // Command description
   '<span class="command">clear</span>         Clear terminal', // Command description
   '<span class="command">gui</span>           Takes you to the graphical interface of the website (normal website);)', // Command description
-  '<span class="command">echo</span>          <span class="color2">Print specified text (e.g., echo "Hello World")</span>',
   "<br>",
 ];
 
