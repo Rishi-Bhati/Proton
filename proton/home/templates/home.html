@@ -110,7 +110,11 @@ Home | PROTON Home
         </div>
         {% endfor %}
         <div class="upevents-item view-all">
-            <a href="{% url 'events' %}"><span class="view-all-text">View All -></span></a>
+            <a href="{% url 'events' %}">
+                <button class="view-all-button">
+                View All ->
+              </button>
+            </a>
         </div>
         {% comment %} <div class="upevents-item" id="upevents-item2"></div>
         <div class="upevents-item" id="upevents-item3"></div>

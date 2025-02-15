@@ -14,6 +14,20 @@
         <button type="submit">Submit</button>
     </form>
 
+    {% if user.is_authenticated %}
+    <script>
+        const list = document.querySelectorAll('input');
+        list[1].value = "{{ profile.name }}";
+        list[2].value = "{{ profile.email }}";
+        list[3].value = "{{ profile.phone }}";
+        list[4].value = "{{ profile.role }}";
+        list[6].value = "{{ profile.linkedin }}";
+        list[7].value = "{{ profile.github }}";
+        list[8].value = "{{ profile.instagram }}";
+
+    </script>
+    {% endif %}
+
     <br>
 
     <form action="{% url 'logout' %}" method="post">

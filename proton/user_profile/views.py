@@ -27,9 +27,11 @@ def profile(request):
     if request.method == 'POST':
         form = memberForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
             return redirect('profile')
     else:
         form = memberForm(instance=profile)
     
-    return render(request, 'user_profile/profile.html', {'form': form})
+    return render(request, 'user_profile/profile.html', {'form': form, 'profile': profile})

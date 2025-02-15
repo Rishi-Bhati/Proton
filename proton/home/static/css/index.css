@@ -109,6 +109,8 @@
 }
 
 .upevents-title {
+    margin-left: 38%;
+    /* margin-right: 40%; */
     font-size: 1.5rem;
     font-weight: bold;
     color: #ffffff;
@@ -162,16 +164,32 @@
     position: relative;
 }
 
-.view-all-text {
-    position: absolute;
-    top: 50%;
-    left: 35%;
-    transform: translate(-50%, -50%);
-    font-size: 0.9em;
-    color: #a9211f;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
+.view-all button {
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    border: none;
+    background: none;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+.view-all button::before {
+    margin-left: auto;
+  }
+  
+.view-all button::after, button::before {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    transition: 0.5s;
+  }
+  
+.view-all button:hover::after, button:hover::before {
+    width: 100%;
+  }
 
 .upevents-item:hover {
     transform: scale(1.02);
