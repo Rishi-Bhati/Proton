@@ -31,6 +31,13 @@ DEBUG = False
 ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net']
 #, 'proton-nmamit.onrender.com', 'protonnmamit.pythonanywhere.com'
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://proton-nmamit.azurewebsites.net",
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 
 # Application definition
 

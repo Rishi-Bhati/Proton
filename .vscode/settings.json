@@ -1,4 +1,4 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/99c8077d-40d3-4ce5-b181-aaac1ff6721f/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/proton-nmamit",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": "proton"
 }
