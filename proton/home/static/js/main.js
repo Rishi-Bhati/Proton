@@ -238,6 +238,39 @@ function commander(cmd) {
         addLine('Usage: echo "your message in quotes"', "system", 0);
       }
       break;
+    case "get":
+      if (parts.length < 2) {
+        addLine("Usage: get <member_name>", "system", 0);
+        return;
+      }
+      const memberName = parts.slice(1).join(' ');
+      addLine(`Fetching info for ${memberName}...`, "system", 0);
+      
+      fetch(`/team/get/${encodeURIComponent(memberName)}/`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const emailUrl = isMobile ? 
+              `mailto:${data.data.email}?subject=Contact%20from%20Terminal&body=Hello%2C%0A%0A` :
+              `https://mail.google.com/mail/?view=cm&fs=1&to=${data.data.email}&su=Contact%20from%20Terminal&body=Hello%2C%0A%0A`;
+            
+            addLine("=== Member Information ===", "color2", 80);
+            addLine(`Name: ${data.data.name}`, "color2", 160);
+            addLine(`Role: ${data.data.role}`, "color2", 240);
+            addLine(`Email: <a href="${emailUrl}" target="_blank">[${data.data.email}]</a>`, "color2", 320);
+            addLine("Social Links:", "color2", 400);
+            addLine(`  LinkedIn: <a href="${data.data.linkedin}" target="_blank">[LinkedIn]</a>`, "color2", 480);
+            addLine(`  GitHub: <a href="${data.data.github}" target="_blank">[GitHub]</a>`, "color2", 560);
+            addLine(`  Instagram: <a href="${data.data.instagram}" target="_blank">[Instagram]</a>`, "color2", 640);
+            addLine("=====================", "color2", 720);
+          } else {
+            addLine(data.message, "error", 0);
+          }
+        })
+        .catch(error => {
+          addLine("Error fetching member information", "error", 0);
+        });
+      break;
     default:
       addLine("<span class=\"inherit\">Command not found. For a list of commands, type <span class=\"command\">'help'</span>.</span>", "error", 100);
       break;
@@ -365,8 +398,7 @@ function updatePrompt(username) {
 document.addEventListener('DOMContentLoaded', function() {
     // Set initial prompt based on authenticated user
     updatePrompt(window.username || 'user');
-    // Update email URL based on device type
-    updateEmailUrl();
+    // Remove updateEmailUrl call since we're using dynamic function
 });
 
 

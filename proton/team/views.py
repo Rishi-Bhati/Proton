@@ -16,3 +16,23 @@ def terminal_members(request):
         } for m in members
     ]
     return JsonResponse({'members': members_list})
+
+def get_member_info(request, name):
+    try:
+        member_obj = member.objects.get(name__iexact=name)
+        return JsonResponse({
+            'success': True,
+            'data': {
+                'name': member_obj.name,
+                'role': member_obj.role,
+                'email': member_obj.email,
+                'linkedin': member_obj.linkedin,
+                'github': member_obj.github,
+                'instagram': member_obj.instagram
+            }
+        })
+    except member.DoesNotExist:
+        return JsonResponse({
+            'success': False,
+            'message': f"Member '{name}' not found"
+        })
