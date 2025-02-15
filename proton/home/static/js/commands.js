@@ -1,8 +1,18 @@
 // Define URLs for social media and contact information
-var linkedin = "https://www.linkedin.com/company/proton-nmamit/"; // LinkedIn URL
-var instagram = "https://www.instagram.com/proton_nmamit"; // Instagram URL
-var github = "https://github.com/prashithshetty"; // GitHub URL
-var email = "proton.cybsec@nmamit.in"; // Email address (note: this seems to be missing the '@' symbol)
+var linkedin = "https://www.linkedin.com/company/proton-nmamit/";
+var instagram = "https://www.instagram.com/proton_nmamit";
+var github = "https://github.com/prashithshetty";
+
+// Default to Gmail compose URL, will be updated after checking device type
+var email = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+
+// Will be updated in main.js after device detection
+function updateEmailUrl() {
+    const mailtoUrl = "mailto:proton.cybsec@nmamit.in?subject=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+    const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=proton.cybsec@nmamit.in&su=Contact%20from%20Terminal&body=Hello%20PROTON%20Team%2C%0A%0A";
+    email = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ? mailtoUrl : gmailUrl;
+}
+
 var members = 'members'; // Placeholder for the path to the members page
 var GUI = 'home'; // Placeholder for the path to the GUI home page
 

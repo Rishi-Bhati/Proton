@@ -170,7 +170,11 @@ function commander(cmd) {
       loopLines(socialmedia, "color2 margin", 80);
       break;
     case "contact":
-      addLine( 'email        <a href="' + email + '" target="_blank">email' + "</a>", "color2", 80);
+      addLine(`Opening ${isMobile ? 'email app' : 'Gmail compose'}...`, "system", 0);
+      setTimeout(() => {
+        window.open(email, '_blank');
+        addLine(`If nothing happened, please email us at: proton.cybsec@nmamit.in`, "color2", 80);
+      }, 500);
       break;
     case "clear":
       setTimeout(function() {
@@ -348,6 +352,8 @@ function updatePrompt(username) {
 document.addEventListener('DOMContentLoaded', function() {
     // Set initial prompt based on authenticated user
     updatePrompt(window.username || 'user');
+    // Update email URL based on device type
+    updateEmailUrl();
 });
 
 

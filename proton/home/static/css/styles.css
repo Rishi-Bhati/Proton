@@ -265,3 +265,13 @@ body {
   font-family: monospace;
   white-space: pre;
 }
+
+.email-link {
+  color: #39ff14;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.email-link:hover {
+  color: #00ff00;
+}
