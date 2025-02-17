@@ -23,20 +23,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*zmywd*=nj0n$4al*a()s@@s19k$tjp07e*41gi%ln8wf8#y3h'
+SECRET_KEY = "django-insecure-*zmywd*=nj0n$4al*a()s@@s19k$tjp07e*41gi%ln8wf8#y3h"
+# SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net']
+ALLOWED_HOSTS = ['*']
+
+# ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net']
 #, 'proton-nmamit.onrender.com', 'protonnmamit.pythonanywhere.com'
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://proton-nmamit.azurewebsites.net",
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://proton-nmamit.azurewebsites.net",
+# ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -67,7 +70,7 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -110,7 +113,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "PrAdmin",
-        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "PASSWORD": 'ThisIs@Proton25',
+        # "PASSWORD": os.getenv('DB_PASSWORD'),
         "HOST": "proton-cloud-db.postgres.database.azure.com",
         "PORT": "5432",
         "OPTIONS": {
@@ -178,7 +182,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 
 # Define the directories where static files will be stored
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = '/terminal_login/'

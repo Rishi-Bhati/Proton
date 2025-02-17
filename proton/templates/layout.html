@@ -90,12 +90,13 @@
         <nav class="navbar">
             <div class="logo">
                 <img id="logo" src="{% static 'assets/logo.png' %}" alt="Proton Logo">
-            </div>
+            </div> 
             <div class="menu-icon" id="menu-icon">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
+            
             <ul class="nav-links" id="nav-links">
                 {% if request.path == "/about/"%}
                 <li><a href="{% url 'home'%}">Home</a></li>
@@ -139,14 +140,10 @@
                 </li> {% endcomment %}
                 
                 {% if user.is_authenticated %}
-                <li class="faq-button"><form action="{% url 'profile' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" id="logout"><i class="fas fa-user-secret"></button>
-                        <span class="tooltip">Profile</span>
-                </form></li> 
+                <li><a href="/accounts/login">Profile</a>
                 {% else %}
-                <li class="faq-button"><a id="login" href="/accounts/login"><i class="fas fa-user-secret"></a>
-                <span class="tooltip">Login</span>
+                <li><a href="/accounts/login">Login</a>
+                
                 </li>
                 {% endif %}
             </ul>
