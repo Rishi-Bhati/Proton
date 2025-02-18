@@ -21,13 +21,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include
 from django.contrib.auth.urls import views as auth_views
+from django.conf import settings
 
 
 
 # Define URL patterns for the application
 urlpatterns = [
     # URL pattern for the admin interface
-    path('admin/', admin.site.urls),
+    path('admin404/', admin.site.urls),
     
     # Include URL patterns from the 'home' app
     path('', include('home.urls')),
@@ -43,7 +44,7 @@ urlpatterns = [
     # Serve media files (e.g., images, videos) from the MEDIA_ROOT directory
     # This is only active when the application is running in debug mode
 ] 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

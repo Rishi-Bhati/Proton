@@ -8,6 +8,7 @@ from django.contrib.auth.urls import views as auth_views
 from . import views
 from home.views import register
 from django_user_agents.utils import get_user_agent
+from .views import custom_404_view
 
 # Define URL patterns for the application, mapping URLs to specific views
 urlpatterns = [
@@ -28,3 +29,5 @@ urlpatterns = [
     path('terminal_login/', views.terminal_login, name='terminal_login'),  # Updated path
     
 ]
+
+handler404 = custom_404_view

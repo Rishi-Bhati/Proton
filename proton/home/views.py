@@ -115,3 +115,6 @@ def terminal_login(request):
         'success': False,
         'message': 'Method not allowed'
     }, status=405)
+
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)

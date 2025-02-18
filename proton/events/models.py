@@ -8,7 +8,7 @@ class Event(models.Model):
     date = models.DateField()
     time = models.TimeField()
     location = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='event_images/')
+    image = models.ImageField(upload_to='')
     registration_link = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
