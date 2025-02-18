@@ -125,6 +125,21 @@ DATABASES = {
     }
 }
 
+# Azure storage account settings
+AZURE_ACCOUNT_NAME = 'protonblob'
+AZURE_ACCOUNT_KEY = 'ihSu+MLmNkKuaLPaBmQito5U7aVga1DwS/iL6myfYdTQiomWt76i3l5FWGq17Pr+QuRpASzjlLEW+AStTzR/bg=='
+AZURE_CONTAINER = 'media'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+MEDIA_URL = f'https://protonblob.blob.core.windows.net/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -174,18 +189,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom settings
 # Define the URL that will be used to serve media files
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
-# Define the root directory where media files will be stored
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# # Define the root directory where media files will be stored
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # # Define the URL that will be used to serve static files
-STATIC_URL = '/static/'
 
 # Define the directories where static files will be stored
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 # Static files configuration for Azure (if you want to use Azure Blob Storage)
 # STATIC_LOCATION = 'static'
@@ -193,15 +205,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
-# Media files configuration for Azure Blob Storage
-MEDIA_LOCATION = 'media'
-MEDIA_URL = f'https://protonblob.z10.web.core.windows.net/{MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
-# Azure storage account settings
-AZURE_ACCOUNT_NAME = 'protonblob'
-AZURE_ACCOUNT_KEY = 'ihSu+MLmNkKuaLPaBmQito5U7aVga1DwS/iL6myfYdTQiomWt76i3l5FWGq17Pr+QuRpASzjlLEW+AStTzR/bg=='
-AZURE_CONTAINER = 'media'
 
 # LOGIN_URL = '/terminal_login/'
 LOGIN_URL = '/accounts/login/'
