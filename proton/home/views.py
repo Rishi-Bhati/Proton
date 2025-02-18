@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from .models import *
 from .forms import UserRegistrationForm
 from django.shortcuts import redirect
@@ -10,11 +11,20 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import authenticate, login as auth_login
 import json
+from django_user_agents.utils import get_user_agent
 
 
 # Define a view function to handle the index page
 def index(request):
     # Use RequestContext to ensure user context is available
+    context = {
+        'user': request.user,
+    }
+    if get_user_agent(request).is_mobile:
+        return render(request, 'home.html')
+    return render(request, 'index.html', context)
+
+def terminal(request):
     context = {
         'user': request.user,
     }

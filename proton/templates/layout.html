@@ -12,6 +12,8 @@
 <!--GOOGLE FONTS-->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise" rel="stylesheet" type="text/css"/>
+
     {% block styles %}{% endblock %}
     <title>
         {% block title %}
@@ -86,11 +88,9 @@
         });
     </script>
 
+
     <header>
         <nav class="navbar">
-            <div class="logo">
-                <img id="logo" src="{% static 'assets/logo.png' %}" alt="Proton Logo">
-            </div> 
             <div class="menu-icon" id="menu-icon">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -98,33 +98,14 @@
             </div>
             
             <ul class="nav-links" id="nav-links">
-                {% if request.path == "/about/"%}
                 <li><a href="{% url 'home'%}">Home</a></li>
-                {% else %}
                 <li><a href="{% url 'about'%}">About</a></li>
-                {% endif %}
-                
-                {% if request.path == '/events/' %}
-                <li><a href="{% url 'home'%}">Home</a></li>
-                {% else %}
                 <li><a href="{% url 'events' %}">Events</a></li>
-                {% endif %}
-                
-
-                {% if request.path == "/team/"%}
-                <li><a href="{% url 'home'%}">Home</a></li>
-                {% else %}
                 <li><a href="{% url 'team'%}">Team</a></li>
-                {% endif %}
-
-                <li><a href="">Gallery</a></li>
-                <li><a href="/">Playground</a></li>
-
-                {% if request.path == "/contact/"%}
-                <li><a href="{% url 'home'%}">Home</a></li>
-                {% else %}
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="{% url 'terminal' %}">Playground</a></li>
                 <li><a href="{% url "contact" %}">Contact</a></li>
-                {% endif %}
+                
 
                 {% comment %} <li class="faq-button"><i class="fa-solid fa-user-secret"></i>
                     {% if user.is_authenticated %}
@@ -140,7 +121,7 @@
                 </li> {% endcomment %}
                 
                 {% if user.is_authenticated %}
-                <li><a href="/accounts/login">Profile</a>
+                <li><a href="/profile">Profile</a>
                 {% else %}
                 <li><a href="/accounts/login">Login</a>
                 
@@ -168,19 +149,21 @@
         <li><a href="{% url 'about' %}">About us</a></li>
         <li><a href="{% url 'events' %}">Our Events</a></li>
         <li><a href="{% url 'team' %}">Our Team</a></li>
-        <li><a href="/">Terminal</a></li>
+        <li><a href="{% url 'terminal' %}">Terminal</a></li>
         <li><a href="{% url 'contact' %}">Contact us</a></li>
         
         </ul>
         </div>
         
-        <div class="row">
+        <div class="row" id="copy">
         PROTON Copyright © 2025 PROTON - All rights reserved 
         </div>
         </div>
 </footer>
         </div>
     </div>
+
+
     <script>
     const menuIcon = document.getElementById("menu-icon");
     const navLinks = document.getElementById("nav-links");
@@ -215,7 +198,8 @@
             isMenuOpen = false;
         });
     });
-</script>
+    </script>
+
     {% block scripts %}{% endblock %}
 </body>
 </html>

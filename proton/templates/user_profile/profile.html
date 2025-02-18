@@ -14,7 +14,7 @@
         <button type="submit">Submit</button>
     </form>
 
-    {% if user.is_authenticated %}
+    {% comment %} {% if user.is_authenticated %}
     <script>
         const list = document.querySelectorAll('input');
         list[1].value = "{{ profile.name }}";
@@ -25,8 +25,8 @@
         list[7].value = "{{ profile.github }}";
         list[8].value = "{{ profile.instagram }}";
 
-    </script>
-    {% endif %}
+    </script> 
+    {% endif %}{% endcomment %}
 
     <br>
 

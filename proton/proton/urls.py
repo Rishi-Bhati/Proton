@@ -23,6 +23,7 @@ from django.urls import include
 from django.contrib.auth.urls import views as auth_views
 
 
+
 # Define URL patterns for the application
 urlpatterns = [
     # URL pattern for the admin interface

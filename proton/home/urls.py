@@ -7,6 +7,7 @@ from django.urls import include
 from django.contrib.auth.urls import views as auth_views
 from . import views
 from home.views import register
+from django_user_agents.utils import get_user_agent
 
 # Define URL patterns for the application, mapping URLs to specific views
 urlpatterns = [
@@ -15,8 +16,10 @@ urlpatterns = [
     path('gallery/', include('gallery.urls')),
     path('team/', include('team.urls')),
     path('events/', include('events.urls')),
+    path('terminal/', views.terminal, name='terminal'),
     #gui home
     # path("home/", views.home, name="gui-home"),
+    path('terminal/home/', views.home, name='home'),
     path('home/', views.home, name='home'),
  
     # Define the URL pattern for user registration, mapping to the 'register' view

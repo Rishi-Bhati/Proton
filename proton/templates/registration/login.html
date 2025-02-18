@@ -100,6 +100,35 @@
             background-color: #00FF00;
             color: #000;
         }
+
+        @media only screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+                padding: 0px;
+            }
+            section {
+                flex-direction: column;
+                height: 100%;
+            }
+            section span {
+                width: calc(20vw - 2px);
+                height: calc(20vw - 2px);
+
+            }
+            .login-container {
+                width: 60%;
+                font-size: x-large;
+                padding: 10px;
+            }
+            .login-container input {
+                font-size: large;
+                padding: 5px;
+            }
+            .login-container button {
+                padding: 5px;
+                font-size: large;
+        }
+}
     </style>
 </head>
 <body>

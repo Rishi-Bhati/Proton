@@ -79,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'livereload.middleware.LiveReloadScript',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'proton.urls'
@@ -185,9 +186,10 @@ STATIC_URL = '/static/'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-LOGIN_URL = '/terminal_login/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+# LOGIN_URL = '/terminal_login/'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/home'
+LOGOUT_REDIRECT_URL = '/home'
 
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

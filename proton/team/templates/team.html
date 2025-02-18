@@ -44,6 +44,11 @@ Team | PROTON Layout
         font-size: 1em;
         color: #cccccc;
     }
+
+    .social a{
+        padding: 5px;
+        font-size: 1.5em;
+    }
 </style>
 {% endblock %}
 
@@ -63,7 +68,7 @@ Team | PROTON Layout
              <p>
                 {{ member.role }}
              </p>
-             <div class="row">
+             <div class="social">
                 <a href="{{member.linkedin}}"><i class="fa fa-linkedin"></i></a>
                 <a href="{{member.github}}"><i class="fa fa-github"></i></a>
                 <a href="{{member.instagram}}"><i class="fa fa-instagram"></i></a>
