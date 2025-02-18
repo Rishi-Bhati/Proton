@@ -1,4 +1,6 @@
 from django.db import models
+from cloudinary_storage.storage import MediaCloudinaryStorage
+
 
 # Create your models here.
 
@@ -8,7 +10,7 @@ class Event(models.Model):
     date = models.DateField()
     time = models.TimeField()
     location = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='events/')
+    image = models.ImageField(upload_to='events_images/', storage=MediaCloudinaryStorage())
     registration_link = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

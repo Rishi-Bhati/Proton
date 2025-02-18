@@ -23,23 +23,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-*zmywd*=nj0n$4al*a()s@@s19k$tjp07e*41gi%ln8wf8#y3h"
-# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
-# ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net']
+ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net']
+
 #, 'proton-nmamit.onrender.com', 'protonnmamit.pythonanywhere.com'
 
-# CSRF_TRUSTED_ORIGINS = [
-#     "https://proton-nmamit.azurewebsites.net",
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://proton-nmamit.azurewebsites.net",
+]
 
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     # Django static file serving
     'django.contrib.staticfiles',
     # Custom 'home' application
+    'cloudinary_storage',  # Add this
+    'cloudinary',         # And this
     'home', #home app
     'contact', #send email
     'team', #team app
@@ -113,10 +115,9 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
-        "USER": "PrAdmin",
-        "PASSWORD": 'ThisIs@Proton25',
-        # "PASSWORD": os.getenv('DB_PASSWORD'),
-        "HOST": "proton-cloud-db.postgres.database.azure.com",
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
+        "HOST": os.getenv('DB_HOST'),
         "PORT": "5432",
         "OPTIONS": {
             "sslmode": "require",
@@ -125,19 +126,21 @@ DATABASES = {
     }
 }
 
-# Azure storage account settings
-AZURE_ACCOUNT_NAME = 'protonblob'
-AZURE_ACCOUNT_KEY = 'ihSu+MLmNkKuaLPaBmQito5U7aVga1DwS/iL6myfYdTQiomWt76i3l5FWGq17Pr+QuRpASzjlLEW+AStTzR/bg=='
-AZURE_CONTAINER = 'media'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-MEDIA_URL = f'https://protonblob.blob.core.windows.net/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+MEDIA_URL = '/media/'  # This can stay as is
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 
 
@@ -197,13 +200,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # # Define the URL that will be used to serve static files
 
 # Define the directories where static files will be stored
-
-
-# Static files configuration for Azure (if you want to use Azure Blob Storage)
-# STATIC_LOCATION = 'static'
-# STATIC_URL = f'https://protonblob.z10.web.core.windows.net/{STATIC_LOCATION}/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 
 
 
