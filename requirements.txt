@@ -7,7 +7,7 @@ cffi==1.17.1
 charset-normalizer==3.4.1
 cloudinary
 cryptography==44.0.1
-Django==5.1.4
+Django
 django-cloudinary-storage
 django-livereload==1.7
 django-livereload-server==0.5.1
