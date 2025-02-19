@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 # Create your models here.
 
@@ -11,7 +11,7 @@ class member(models.Model):
     email = models.EmailField()
     phone = models.IntegerField(null=True)
     role = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='team/members_images')
+    image = models.ImageField(upload_to='team/members_images', storage=MediaCloudinaryStorage())
     linkedin = models.URLField()
     github = models.URLField()
     instagram = models.URLField()
