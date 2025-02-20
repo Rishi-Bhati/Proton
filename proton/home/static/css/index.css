@@ -59,12 +59,12 @@
 
 .terminal {
     font-family: 'Poppins', monospace;
-    background-color: #00000080;
+    background-color: rgba(33, 29, 27, 0.8);
     height:60vh;
     width: 25vw; 
     min-width: 480px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border: #00ff00 solid 1px;
+    box-shadow: 0 0 10px rgba(8, 128, 68, 0.2);
+    border: 1px solid #088044;
     overflow-x: hidden;
 }
 .terminal-header {
@@ -104,21 +104,21 @@
     margin-left: 10px;
     font-family: monospace;
     padding-left: -10px;
-    color: #00ff00;
+    color: #088044;
     font-size: 10px;
     line-height: 1.2;
 }
 .command-line {
     font-family: 'Poppins', monospace;
-    color: #70FCB2;
+    color: #67999a;
     font-weight: bold;
 }
 .warning {
-    color: red;
+    color: #ff0000;
 }
 
 .success {
-    color: #00ff00;
+    color: #088044;
 }
 
 .upevents {
@@ -191,7 +191,7 @@
 }
 
 .view-all button {
-    color: white;
+    color: #088044;
     text-decoration: none;
     font-size: 25px;
     border: none;
@@ -207,7 +207,7 @@
     content: '';
     width: 0%;
     height: 2px;
-    background:#00ff00;
+    background: #088044;
     display: block;
     transition: 0.5s;
   }
@@ -216,10 +216,14 @@
     width: 100%;
   }
 
+.view-all button:hover {
+    color: #67999a;
+}
+
 .upevents-item:hover {
     transform: scale(1.02);
     transition: transform 0.2s ease-in-out;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
     cursor: pointer;
 }
 
@@ -291,7 +295,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #1e1e1e;
+        background-color: #211D1B;
         padding: 10px;
         box-sizing: border-box;
     }
@@ -334,5 +338,5 @@
 
 #liner::before {
     content: attr(data-prompt);
-    color: #70FCB2;
+    color: #67999a;
 }

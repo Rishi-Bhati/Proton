@@ -23,10 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY="django-insecure-*zmywd*=nj0n$4al*a()s@@s19k$tjp07e*41gi%ln8wf8#y3h"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['*']
 
@@ -34,12 +35,12 @@ ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net', '127.0.0.1', 'localhost']
 
 #, 'proton-nmamit.onrender.com', 'protonnmamit.pythonanywhere.com'
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://proton-nmamit.azurewebsites.net",
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://proton-nmamit.azurewebsites.net",
+# ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
 
 # Application definition
@@ -115,9 +116,12 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
-        "USER": os.getenv('DB_USER'),
-        "PASSWORD": os.getenv('DB_PASSWORD'),
-        "HOST": os.getenv('DB_HOST'),
+        # "USER": os.getenv('DB_USER'),
+        "USER" : "PrAdmin",
+        # "PASSWORD": os.getenv('DB_PASSWORD'),
+        "PASSWORD" : "ThisIs@Proton25",
+        # "HOST": os.getenv('DB_HOST'),
+        "HOST" : "proton-cloud-db.postgres.database.azure.com",
         "PORT": "5432",
         "OPTIONS": {
             "sslmode": "require",
@@ -126,12 +130,17 @@ DATABASES = {
     }
 }
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+#     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+#     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+# }
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': "dzcwrwx30",
+    'API_KEY': "615689283988577",
+    'API_SECRET': "Q3dJETTt8bGDLyK2kkgB26gcQMA",
+}
 
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
