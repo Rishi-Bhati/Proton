@@ -165,3 +165,14 @@ rishi = [
 " | ||           | \ \/ /                        ||          || | - rishi"
   
 ]
+function yesu() {
+  const yesu = `
+    <div style="width: 100%; display: flex; justify-content: center; margin: 10px 0;">
+      <img src="/static/assets/yesu.jpg" alt="Rick Roll" style="max-width: 300px; border-radius: 8px;">
+    </div>
+  `;
+  
+  addLine(yesu, "no-animation", 0);
+  addLine("umm actually....", "color2 margin", 500);
+  addLine("I was 10 cgpa dont compare me to ravi", "color2 margin", 1500);
+}
