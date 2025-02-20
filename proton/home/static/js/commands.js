@@ -126,6 +126,17 @@ prashith = [
   "                                    -Prashith Shetty",
 ];
 
+function playRickRoll() {
+  const rickRollGif = `
+    <div style="width: 100%; display: flex; justify-content: center; margin: 10px 0;">
+      <img src="/static/assets/rickroll.gif" alt="Rick Roll" style="max-width: 300px; border-radius: 8px;">
+    </div>
+  `;
+  
+  addLine(rickRollGif, "no-animation", 0);
+  addLine("Never gonna give you up!", "color2 margin", 500);
+  addLine("Never gonna let you down!", "color2 margin", 1500);
+}
 
 rishi = [
 "aaaah you found me, here is your reward",

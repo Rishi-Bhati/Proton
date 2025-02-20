@@ -148,6 +148,17 @@ function commander(cmd) {
     case "about":
       loopLines(about, "color2 margin", 80);
       break;
+    // Add Rick Roll triggers
+    case "proton":
+    case "roshan":
+    case "shyam":
+    case "manjunath":
+    case "prashith":
+    case "rishi":
+    case "prashit":
+      addLine("You've been Rick Rolled!", "color2 margin", 0);
+      playRickRoll();
+      break;
     case "hehe":
       loopLines(prashith, "color2 margin", 80);
       break;
