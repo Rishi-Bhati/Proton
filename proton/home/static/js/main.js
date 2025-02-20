@@ -159,7 +159,7 @@ function commander(cmd) {
       addLine("You've been Rick Rolled!", "color2 margin", 0);
       playRickRoll();
       break;
-    case yash:
+    case yashraj:
       addLine("You've been yash rolled", "color2 margin", 0);
       yesu();
       break;
