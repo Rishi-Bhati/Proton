@@ -10,11 +10,15 @@
     gap : 20px;
 }
 
-/* @font-face {
-    font-family: 'Optician Sans', 'VT323';
-    src: url("/static/fonts/Optician-Sans.otf");
-    src: url("/static/fonts/VT323-Regular.ttf");
-} */
+@font-face { 
+    font-family: 'Optician Sans'; 
+    src: url("/static/fonts/Optician-Sans.otf") format("opentype"); 
+}
+
+@font-face { 
+    font-family: 'VT323'; 
+    src: url("/static/fonts/VT323-Regular.ttf") format("truetype"); 
+}
 
 .upper-left{
     display: flex;  
@@ -120,7 +124,7 @@
 }
 
 .upevents-title {
-    font-family: 'optician sans', monospace;
+    font-family: 'Optician Sans', monospace;
     /* text-decoration: underline #00ff00; */
     display: flex;
     justify-content: center;
@@ -170,7 +174,7 @@
 
 
 .view-all {
-    font-family: 'optician sans', monospace;
+    font-family: 'Optician Sans', monospace;
     display: flex;
     justify-content: center;
     align-items: center;
