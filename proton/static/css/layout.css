@@ -16,10 +16,19 @@ canvas {
 }
 
 @font-face {
-    font-family: 'Optician Sans', 'VT323';
-    src: url("/static/fonts/Optician-Sans.otf");
-    src: url("/static/fonts/VT323-Regular.ttf");
+    font-family: 'Optician Sans';
+    src: url('../fonts/Optician-Sans.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
+
+@font-face {
+    font-family: 'VT323';
+    src: url('../fonts/VT323-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 .navbar {
     font-family: 'Optician Sans', monospace;
@@ -436,5 +445,3 @@ i {
         font-size: small;
     }
 }
-
-

@@ -8,4 +8,5 @@ from . import views
 # Define URL patterns for the application, mapping URLs to specific views
 urlpatterns = [
     path('', views.events, name='events'),
+    path('event/<int:pk>/', views.event_detail, name='event_detail'),
 ]

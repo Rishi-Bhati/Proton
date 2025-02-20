@@ -4,7 +4,7 @@ from .models import member
 
 # Create your views here.
 def team(request):
-    members = member.objects.all()
+    members = member.objects.all().order_by('position')
     return render(request, 'team.html', {'members': members})
 
 def terminal_members(request):

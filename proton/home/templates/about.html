@@ -6,9 +6,20 @@ About PROTON
 
 {% block styles %}
 <style>
+    @font-face { 
+    font-family: 'Optician Sans'; 
+    src: url("/static/fonts/Optician-Sans.otf") format("opentype"); 
+    }
+
+    @font-face { 
+        font-family: 'VT323'; 
+        src: url("/static/fonts/VT323-Regular.ttf") format("truetype"); 
+    }
 
     .about-section {
+        font-family: 'Optician Sans', sans-serif;
         display: flex;
+        flex-direction: row;
         width: 80%;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -16,12 +27,7 @@ About PROTON
         padding-left: 100px;
         padding-right: 100px;
     }
-    .about-section img {
-        width: 40%;
-        max-width: 80%;
-        height: auto;
-        border-radius: 10px;
-    }
+
     .about-content {
         flex: 1;
         margin-right: 20px;
@@ -35,7 +41,20 @@ About PROTON
         font-size: 1.2em;
         line-height: 1.6;
     }
+
+    .about-section-img {
+        padding-top: 80px;
+    }
+
+    .about-section-img img{
+        /* width: fill; */
+        height: 40vh;
+        padding: 100px 0;
+        object-fit:fill;
+    }
+
     .team-section {
+        font-family: 'Optician Sans', sans-serif;
         width: 80%;
         font-size: 0.5em;
         margin-top: 60px;
@@ -102,13 +121,17 @@ About PROTON
       Our Mission
      </h2>
      <p>
-      We are dedicated to providing top-notch cyber security solutions to protect your digital assets. Our team of experts works tirelessly to stay ahead of the latest threats and ensure your data remains secure.
-     </p>
+        PROTON is the official cybersecurity association of our college, dedicated to creating a security-aware community. We focus on bridging the gap between theoretical knowledge and real-world applications through engaging workshops, hands-on training, and cybersecurity competitions. </p>
      <p>
-      With years of experience in the industry, we understand the importance of cyber security in today's digital world. Our mission is to offer comprehensive and reliable security services that give you peace of mind.
-     </p>
+        At PROTON, we believe in learning through experience, encouraging collaboration, and staying ahead in the ever-evolving world of cybersecurity. Whether you're a beginner exploring the field or an expert honing your skills, our community provides the perfect platform to grow, connect, and innovate in the realm of cybersecurity.    
+    </p>
+    <p>
+        Welcome to Proton Club. Think deeper. Hack smarter. Stay secure.
+    </p>
     </div>
-    <img alt="A team of cyber security experts working on computers in a high-tech office environment" height="400" src="https://storage.googleapis.com/a1aa/image/xirkjnClIxaNFpAHgeiZGffebTkxTLEe4HCgk68vrjIJ6mKgC.jpg" width="600"/>
+    <div class="about-section-img">
+        <img alt="Proton'24" height="200"  src="https://res.cloudinary.com/dzcwrwx30/image/upload/v1740048252/Proton24-min_vabhpg.jpg" width="600"/>
+    </div>
    </div>
    <div class="team-section">
     <h2>

@@ -19,6 +19,7 @@
     }
 
     .header {
+        font-family: 'Optician Sans', 'VT323';
         text-align: center;
         padding: 20px;
         background-color: transparent;
@@ -28,6 +29,7 @@
         font-size: 2em;
     }
     .events-container {
+        font-family: 'Play', sans-serif;
         padding: 20px;
     }
     .event {
@@ -42,6 +44,7 @@
         cursor: pointer;
         transform: scale(1.05);
     }
+
     .event img {
         width: 120%;
         height: auto;
@@ -100,6 +103,16 @@
         color: red;
         font-weight: bold;
     }
+
+    .details-button {
+        display: inline-block;
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
 </style>
 {% endblock %}
 
@@ -137,6 +150,8 @@
             {% else %}
                 <span class="closed-text">Registration Closed</span>
             {% endif %}
+
+            <a href="{% url 'event_detail' evt.pk %}" class="details-button">Details</a>
         </p>
      </div>
     </div>

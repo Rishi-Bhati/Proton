@@ -1,17 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gallery</title>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Gallery | Proton Gallery
+{% endblock %}
+
+{% block styles %}
 
     <style>
+        @font-face { 
+            font-family: 'Optician Sans'; 
+            src: url("/static/fonts/Optician-Sans.otf") format("opentype"); 
+        }
+      
+        @font-face { 
+            font-family: 'VT323'; 
+            src: url("/static/fonts/VT323-Regular.ttf") format("truetype"); 
+        }
         body {
             background-color:rgb(0, 0, 0);
         }
 
         .top {
+            font-family: 'Optician Sans', sans-serif;
             display: flex;
             background-color: none;
             color: white;
@@ -173,11 +183,13 @@
         }
           
     </style>
+{% endblock %}
+
 </head>
-<body>
+
+{% block content%}
     <div class="top">
         <h1>Our Gallery</h1>
-        <h1 class="bth"><a href="{% url 'home' %}" class="bth">Back to Home</a></h1>
     </div>
 
 
@@ -225,5 +237,5 @@ gallery.querySelectorAll('.gallery-item').forEach(function (item) {
 });
 
     </script>
-</body>
-</html>
+
+{% endblock%}

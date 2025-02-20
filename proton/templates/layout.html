@@ -112,8 +112,8 @@
 
                 {% comment %} <li class="faq-button"><i class="fa-solid fa-user-secret"></i>
                     {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
                     <span class="tooltip">Profile</span>
-
                      <div class="faq-dropdown">
                         <a href="{% url 'profile' %}">Profile</a>
                         <a href="{% url 'logout' %}">Logout</a>
@@ -124,11 +124,13 @@
                 </li> {% endcomment %}
                 
                 {% if user.is_authenticated %}
-                <li><a href="/profile">Profile</a>
+                    {% if user.is_superuser %}
+                        <li><a href="admin404">Admin</a>
+                    {% else %}
+                        <li><a href="/profile">Profile</a>
+                    {% endif %}
                 {% else %}
-                <li><a href="/accounts/login">Login</a>
-                
-                </li>
+                    <li><a href="/accounts/login">Login</a></li>
                 {% endif %}
             </ul>
         </nav>

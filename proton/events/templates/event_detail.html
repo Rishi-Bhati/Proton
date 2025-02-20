@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+
+{% block styles %}
+
+<style>
+    .event-detail img {
+        width: 40%;
+        height: auto;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+</style>
+    
+{% endblock %}
+{% block content %}
+
+<div class="event-detail">
+    <h1>{{ evt.title }}</h1>
+    <img src="{{ evt.image.url }}" alt="Event Image">
+    <p><strong>Name:</strong> {{ evt.name }}</p>
+    <p><strong>Date:</strong> {{ evt.date }}</p>
+    <p><strong>Location:</strong> {{ evt.location }}</p>
+    <p><strong>Description:</strong> {{ evt.description }}</p>
+</div>
+{% endblock %}
