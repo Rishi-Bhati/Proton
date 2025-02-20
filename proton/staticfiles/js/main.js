@@ -252,10 +252,14 @@ function commander(cmd) {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
+            const emailUrl = isMobile ? 
+              `mailto:${data.data.email}` :
+              `https://mail.google.com/mail/?view=cm&fs=1&to=${data.data.email}`;
+            
             addLine("=== Member Information ===", "color2", 80);
             addLine(`Name: ${data.data.name}`, "color2", 160);
             addLine(`Role: ${data.data.role}`, "color2", 240);
-            addLine(`Email: ${data.data.email}`, "color2", 320);
+            addLine(`Email: <a href="${emailUrl}" target="_blank">${data.data.email}</a>`, "color2", 320);
             addLine("Social Links:", "color2", 400);
             addLine(`  LinkedIn: <a href="${data.data.linkedin}" target="_blank">[LinkedIn]</a>`, "color2", 480);
             addLine(`  GitHub: <a href="${data.data.github}" target="_blank">[GitHub]</a>`, "color2", 560);
