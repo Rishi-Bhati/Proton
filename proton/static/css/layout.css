@@ -15,7 +15,11 @@ canvas {
     z-index: -1;
 }
 
-
+@font-face {
+    font-family: 'Optician Sans', 'VT323';
+    src: url("/static/fonts/Optician-Sans.otf");
+    src: url("/static/fonts/VT323-Regular.ttf");
+}
 
 .navbar {
     font-family: 'Optician Sans', monospace;
