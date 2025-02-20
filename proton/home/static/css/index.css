@@ -63,7 +63,7 @@
     height:60vh;
     width: 25vw; 
     min-width: 480px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
     border: #00ff00 solid 1px;
     overflow-x: hidden;
 }
@@ -105,7 +105,7 @@
     font-weight: bold;
 }
 .warning {
-    color: red;
+    color: #ff0000;
 }
 
 .success {
@@ -182,7 +182,7 @@
 }
 
 .view-all button {
-    color: white;
+    color: #00ff00;
     text-decoration: none;
     font-size: 25px;
     border: none;
@@ -207,10 +207,14 @@
     width: 100%;
   }
 
+.view-all button:hover {
+    color: #70FCB2;
+}
+
 .upevents-item:hover {
     transform: scale(1.02);
     transition: transform 0.2s ease-in-out;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
     cursor: pointer;
 }
 
@@ -282,7 +286,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #1e1e1e;
+        background-color: #000000;
         padding: 10px;
         box-sizing: border-box;
     }
