@@ -70,15 +70,24 @@
 .terminal-header {
 
     display: flex;
-
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
-    height: 4vh;
+    height: 32px;
     border: #00ff00 solid 1px;
     color: #00ff00;
     padding-left: 16px;
-    
+    padding-right: 4px;
     font-size: 1rem;
+}
+
+.expand {
+    height: 24px;
+    width: 24px;
+    background-color: #00ff00;
+    text-align: center;
+}
+.terminal-header i{
+    color: #000000;
 }
 
 #terminal-content {

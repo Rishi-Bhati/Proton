@@ -133,6 +133,7 @@ CLOUDINARY_STORAGE = {
 }
 
 
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'  # This can stay as is
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
