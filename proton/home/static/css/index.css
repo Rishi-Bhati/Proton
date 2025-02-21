@@ -58,13 +58,13 @@
 
 
 .terminal {
-    font-family: 'Space-mono', monospace;
-    background-color: rgba(33, 29, 27, 0.8);
+    font-family: 'Space mono', monospace;
+    background-color: #00000080;
     height:60vh;
     width: 25vw; 
     min-width: 480px;
-    box-shadow: 0 0 10px #000000a0;
-    border: 1px solid #00ff00;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: #00ff00 solid 1px;
     overflow-x: hidden;
 }
 .terminal-header {

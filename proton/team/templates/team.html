@@ -68,20 +68,18 @@ Team | PROTON Layout
     </h2>
     <div class="team-members">
         {% for member in members %}
-            <div class="team-member">
-             <img alt="photo" height="200" src="{{member.image.url}}" width="200"/>
-             <h3>
-                {{ member.name }}
-             </h3>
-             <p>
-                {{ member.role }}
-             </p>
-             <div class="social">
-                <a href="{{member.linkedin}}"><i class="fa fa-linkedin"></i></a>
-                <a href="{{member.github}}"><i class="fa fa-github"></i></a>
-                <a href="{{member.instagram}}"><i class="fa fa-instagram"></i></a>
-             </div>
-            </div>
+        <div class="team-member">
+            {% if member.image %}
+                <img alt="photo" height="200" src="{{ member.image.url }}" width="200"/>
+                <h3>{{ member.name }}</h3>
+                <p>{{ member.role }}</p>
+                <div class="social">
+                    <a href="{{ member.linkedin }}"><i class="fa fa-linkedin"></i></a>
+                    <a href="{{ member.github }}"><i class="fa fa-github"></i></a>
+                    <a href="{{ member.instagram }}"><i class="fa fa-instagram"></i></a>
+                </div>
+        </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>
