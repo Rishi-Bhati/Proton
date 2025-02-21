@@ -136,6 +136,7 @@ function playRickRoll() {
   addLine(rickRollGif, "no-animation", 0);
   addLine("Never gonna give you up!", "color2 margin", 500);
   addLine("Never gonna let you down!", "color2 margin", 1500);
+  addLine("AAAH HAHAHA got ya -prashith", "color2 margin", 2000);
 }
 
 rishi = [
