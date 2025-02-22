@@ -163,6 +163,10 @@ function commander(cmd) {
       addLine("You've been yash rolled", "color2 margin", 0);
       yesu();
       break;
+    case "nihal":
+      addLine("You've been nihal rolled", "color2 margin", 0);
+      annoy();
+      break;
     case "hehe":
       loopLines(prashith, "color2 margin", 80);
       break;
