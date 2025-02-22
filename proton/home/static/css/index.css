@@ -155,8 +155,6 @@
     display: flex;
     margin: 5px;
     padding: 5px;
-    background-color: #f5e90000;
-    color: #a9211f;
     border-radius: 5px;
     height: 100%;
     width: 300px; 
@@ -191,7 +189,7 @@
 }
 
 .view-all button {
-    color: #088044;
+    color: #00ff00;
     text-decoration: none;
     font-size: 25px;
     border: none;
@@ -207,7 +205,7 @@
     content: '';
     width: 0%;
     height: 2px;
-    background: #088044;
+    background: #00ff00;
     display: block;
     transition: 0.5s;
   }
@@ -217,13 +215,12 @@
   }
 
 .view-all button:hover {
-    color: #67999a;
+    color: #ffffff;
 }
 
 .upevents-item:hover {
     transform: scale(1.02);
     transition: transform 0.2s ease-in-out;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
     cursor: pointer;
 }
 
@@ -278,6 +275,10 @@
 
     .upevents h1{
         font-size: x-large;
+    }
+
+    .upevents-content {
+        flex-direction: column; /* Stack content vertically on mobile */
     }
 
     .view-all button{

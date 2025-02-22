@@ -32,7 +32,7 @@ def terminal(request):
 
 def home(request):
     # Render the home.html template'
-    events = Event.objects.all().order_by('-created_at')[:4]
+    events = Event.objects.all().order_by('-date')[:4]
     return render(request, 'home.html',{'events': events})
 
 # Define a view function to handle user registration
