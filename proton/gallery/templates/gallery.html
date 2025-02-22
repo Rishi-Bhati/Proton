@@ -89,40 +89,48 @@
             }
         }
 
-        /* Add these new styles for the lightbox */
+        /* Update lightbox styles */
         .lightbox {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0);
             z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-content {
+            position: fixed;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: top left;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .lightbox img {
-            max-width: 90%;
-            max-height: 80vh;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             border-radius: 5px;
         }
 
         .lightbox .caption {
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.2em;
-            transform: none;
-            background: none;
             position: relative;
+            background: none;
+            transform: none;
+            text-align: center;
+            margin-top: 20px;
         }
 
         .close-lightbox {
@@ -133,6 +141,14 @@
             font-size: 30px;
             cursor: pointer;
             z-index: 10000;
+            opacity: 0;
+            transform: rotate(-90deg);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .lightbox.active .close-lightbox {
+            opacity: 1;
+            transform: rotate(0deg);
         }
     </style>
 {% endblock %}
@@ -159,8 +175,10 @@
             <!-- Lightbox -->
             <div class="lightbox" id="lightbox" onclick="closeLightbox()">
                 <span class="close-lightbox">&times;</span>
-                <img id="lightbox-img" src="" alt="">
-                <div class="caption" id="lightbox-caption"></div>
+                <div class="lightbox-content" id="lightbox-content">
+                    <img id="lightbox-img" src="" alt="">
+                    <div class="caption" id="lightbox-caption"></div>
+                </div>
             </div>
         {% else %}
             <div class="no-photos">
@@ -170,24 +188,77 @@
     </div>
 
     <script>
+        let originalRect = null;
+        let currentClickedImage = null;
+
         function openLightbox(imageUrl, caption) {
             const lightbox = document.getElementById('lightbox');
+            const lightboxContent = document.getElementById('lightbox-content');
             const lightboxImg = document.getElementById('lightbox-img');
             const lightboxCaption = document.getElementById('lightbox-caption');
+            currentClickedImage = event.currentTarget.querySelector('img');
+            originalRect = currentClickedImage.getBoundingClientRect();
+
+            // Reset any previous transforms
+            lightboxContent.style.transition = 'none';
+            lightboxContent.style.transform = 'none';
+
+            // Set initial position and size
+            lightboxContent.style.top = `${originalRect.top}px`;
+            lightboxContent.style.left = `${originalRect.left}px`;
+            lightboxContent.style.width = `${originalRect.width}px`;
+            lightboxContent.style.height = `${originalRect.height}px`;
+
+            // Force reflow
+            lightboxContent.offsetHeight;
+
+            // Enable transitions
+            lightboxContent.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             
+            // Show lightbox and set content
+            lightbox.style.visibility = 'visible';
             lightboxImg.src = imageUrl;
             lightboxCaption.textContent = caption;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            
+            // Animate to center
+            requestAnimationFrame(() => {
+                lightbox.classList.add('active');
+                lightboxContent.style.top = '50%';
+                lightboxContent.style.left = '50%';
+                lightboxContent.style.width = '90vw';
+                lightboxContent.style.height = 'auto';
+                lightboxContent.style.transform = 'translate(-50%, -50%)';
+            });
 
-            // Stop event propagation
+            document.body.style.overflow = 'hidden';
             event.stopPropagation();
         }
 
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
+            const lightboxContent = document.getElementById('lightbox-content');
+            
+            if (originalRect && currentClickedImage) {
+                // Animate back to original position
+                lightboxContent.style.top = `${originalRect.top}px`;
+                lightboxContent.style.left = `${originalRect.left}px`;
+                lightboxContent.style.width = `${originalRect.width}px`;
+                lightboxContent.style.height = `${originalRect.height}px`;
+                lightboxContent.style.transform = 'none';
+            }
+
             lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
+
+            // Reset after animation
+            setTimeout(() => {
+                lightbox.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto';
+                // Reset lightbox content position
+                lightboxContent.style.transition = 'none';
+                lightboxContent.style.transform = 'none';
+                originalRect = null;
+                currentClickedImage = null;
+            }, 300);
         }
 
         // Close lightbox when pressing escape key
@@ -195,6 +266,11 @@
             if (event.key === 'Escape') {
                 closeLightbox();
             }
+        });
+
+        // Prevent lightbox from closing when clicking the image
+        document.querySelector('#lightbox-img').addEventListener('click', function(event) {
+            event.stopPropagation();
         });
     </script>
 {% endblock %}
