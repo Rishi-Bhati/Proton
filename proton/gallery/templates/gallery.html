@@ -98,15 +98,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0);
+            background: rgba(0, 0, 0, 0);
             z-index: 9999;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
 
         .lightbox.active {
             opacity: 1;
             visibility: visible;
-            background-color: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.9);
         }
 
         .lightbox-content {
@@ -114,75 +114,61 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transform-origin: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
         .lightbox-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Start with cover to match thumbnail */
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            transform-origin: center;
-        }
-
-        .lightbox-content.expanded {
-            pointer-events: auto;
-            transform-origin: center;
-        }
-
-        .lightbox-content.expanded img {
-            object-fit: contain; /* Switch to contain when expanded */
-        }
-
-        .lightbox-content.closing {
-            transform-origin: center;
-            transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-
-        .lightbox-content.closing-phase-1 {
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-
-        .lightbox-content.closing-phase-2 {
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-
-        .lightbox img {
-            width: 100%;
-            height: 100%;
+            max-width: 80vw;  /* Reduced from 90vw */
+            max-height: 70vh; /* Reduced from 80vh */
             object-fit: contain;
-            border-radius: 5px;
+            border-radius: 8px;
         }
 
-        .lightbox .caption {
-            position: relative;
-            background: none;
-            transform: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .close-lightbox {
-            position: absolute;
+        .close-button {
+            position: fixed;
             top: 20px;
             right: 20px;
-            color: white;
-            font-size: 30px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
             cursor: pointer;
             z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
-            transform: rotate(-90deg);
-            transition: all 0.3s ease-in-out;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
         }
 
-        .lightbox.active .close-lightbox {
+        .close-button::before,
+        .close-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .close-button::before {
+            transform: rotate(45deg);
+        }
+
+        .close-button::after {
+            transform: rotate(-45deg);
+        }
+
+        .lightbox.active .close-button {
             opacity: 1;
-            transform: rotate(0deg);
+            transform: scale(1);
         }
 
-        .gallery-item.active {
-            visibility: hidden;
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
         }
     </style>
 {% endblock %}
@@ -207,8 +193,8 @@
             </div>
 
             <!-- Lightbox -->
-            <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-                <span class="close-lightbox">&times;</span>
+            <div class="lightbox" id="lightbox">
+                <div class="close-button" onclick="closeLightbox(event)"></div>
                 <div class="lightbox-content" id="lightbox-content">
                     <img id="lightbox-img" src="" alt="">
                     <div class="caption" id="lightbox-caption"></div>
@@ -224,122 +210,125 @@
     <script>
         let originalRect = null;
         let currentClickedItem = null;
-        let originalAspectRatio = null;
 
-        function calculateTargetDimensions(imageWidth, imageHeight) {
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            const maxWidth = windowWidth * 0.9;
-            const maxHeight = windowHeight * 0.8;
-            const imageRatio = imageWidth / imageHeight;
+        function calculateTargetSize(imageUrl) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = function() {
+                    const windowWidth = window.innerWidth;
+                    const windowHeight = window.innerHeight;
+                    const maxWidth = windowWidth * 0.8; // 80% of window width
+                    const maxHeight = windowHeight * 0.7; // 70% of window height
+                    
+                    let targetWidth, targetHeight;
+                    const aspectRatio = this.width / this.height;
 
-            let targetWidth, targetHeight;
+                    if (this.width > maxWidth || this.height > maxHeight) {
+                        if (aspectRatio > maxWidth / maxHeight) {
+                            targetWidth = maxWidth;
+                            targetHeight = maxWidth / aspectRatio;
+                        } else {
+                            targetHeight = maxHeight;
+                            targetWidth = maxHeight * aspectRatio;
+                        }
+                    } else {
+                        targetWidth = this.width;
+                        targetHeight = this.height;
+                    }
 
-            if (imageRatio > maxWidth / maxHeight) {
-                // Image is wider relative to container
-                targetWidth = maxWidth;
-                targetHeight = maxWidth / imageRatio;
-            } else {
-                // Image is taller relative to container
-                targetHeight = maxHeight;
-                targetWidth = maxHeight * imageRatio;
-            }
-
-            return { width: targetWidth, height: targetHeight };
+                    resolve({ width: targetWidth, height: targetHeight });
+                };
+                img.src = imageUrl;
+            });
         }
 
-        function openLightbox(imageUrl, caption) {
+        async function openLightbox(imageUrl, caption) {
             const lightbox = document.getElementById('lightbox');
             const lightboxContent = document.getElementById('lightbox-content');
             const lightboxImg = document.getElementById('lightbox-img');
             const clickedImage = event.currentTarget.querySelector('img');
-            const rect = clickedImage.getBoundingClientRect();
             
-            currentClickedItem = event.currentTarget;
+            const rect = clickedImage.getBoundingClientRect();
             originalRect = rect;
+            currentClickedItem = event.currentTarget;
 
-            // Initial position
+            // Set initial position
             lightboxContent.style.transition = 'none';
             lightboxContent.style.top = `${rect.top}px`;
             lightboxContent.style.left = `${rect.left}px`;
             lightboxContent.style.width = `${rect.width}px`;
-            lightboxContent.style.height = `${rect.width}px`;
-
+            lightboxContent.style.height = `${rect.height}px`;
+            
             // Show lightbox
             lightbox.style.visibility = 'visible';
-            lightbox.style.opacity = '1';
-            currentClickedItem.classList.add('active');
-
-            // Set image
             lightboxImg.src = imageUrl;
             document.getElementById('lightbox-caption').textContent = caption;
+            currentClickedItem.classList.add('active');
+
+            // Calculate proper dimensions
+            const targetSize = await calculateTargetSize(imageUrl);
+            const targetTop = (window.innerHeight - targetSize.height) / 2;
+            const targetLeft = (window.innerWidth - targetSize.width) / 2;
 
             // Force reflow
             lightboxContent.offsetHeight;
 
-            // Expand animation
-            lightboxContent.style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+            // Animate to calculated size
+            lightboxContent.style.transition = 'all 0.3s ease';
             requestAnimationFrame(() => {
-                const targetWidth = Math.min(window.innerWidth * 0.9, 1200);
-                const targetHeight = window.innerHeight * 0.8;
-                const targetTop = (window.innerHeight - targetHeight) / 2;
-                const targetLeft = (window.innerWidth - targetWidth) / 2;
-
-                lightbox.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-                lightboxContent.classList.add('expanded');
-                lightboxContent.style.width = `${targetWidth}px`;
-                lightboxContent.style.height = `${targetHeight}px`;
+                lightbox.classList.add('active');
+                lightboxContent.style.width = `${targetSize.width}px`;
+                lightboxContent.style.height = `${targetSize.height}px`;
                 lightboxContent.style.top = `${targetTop}px`;
                 lightboxContent.style.left = `${targetLeft}px`;
             });
 
             document.body.style.overflow = 'hidden';
-            event.stopPropagation();
         }
 
-        function closeLightbox() {
+        function closeLightbox(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
             const lightbox = document.getElementById('lightbox');
             const lightboxContent = document.getElementById('lightbox-content');
 
             if (originalRect && currentClickedItem) {
-                // First shrink to center square
-                const windowCenter = {
-                    x: window.innerWidth / 2,
-                    y: window.innerHeight / 2
-                };
-                const squareSize = originalRect.width;
-                lightboxContent.classList.remove('expanded');
-                lightboxContent.style.width = `${squareSize}px`;
-                lightboxContent.style.height = `${squareSize}px`;
-                lightboxContent.style.top = `${windowCenter.y - squareSize/2}px`;
-                lightboxContent.style.left = `${windowCenter.x - squareSize/2}px`;
+                lightbox.classList.remove('active');
+                
+                // Animate back to thumbnail
+                lightboxContent.style.width = `${originalRect.width}px`;
+                lightboxContent.style.height = `${originalRect.height}px`;
+                lightboxContent.style.top = `${originalRect.top}px`;
+                lightboxContent.style.left = `${originalRect.left}px`;
 
-                // Then after brief pause, animate to original position
+                // Cleanup
                 setTimeout(() => {
-                    lightboxContent.style.top = `${originalRect.top}px`;
-                    lightboxContent.style.left = `${originalRect.left}px`;
-                    lightbox.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-
-                    setTimeout(() => {
-                        currentClickedItem.classList.remove('active');
-                        lightbox.style.visibility = 'hidden';
-                        lightbox.style.opacity = '0';
-                        document.body.style.overflow = 'auto';
-                        originalRect = null;
-                        currentClickedItem = null;
-                    }, 300);
-                }, 200);
+                    lightbox.style.visibility = 'hidden';
+                    currentClickedItem.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    originalRect = null;
+                    currentClickedItem = null;
+                }, 300);
             }
         }
 
-        // Close lightbox when pressing escape key
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeLightbox(event);
+            }
+        });
+
+        // Close on escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeLightbox();
             }
         });
 
-        // Prevent lightbox from closing when clicking the image
+        // Prevent closing when clicking image
         document.querySelector('#lightbox-img').addEventListener('click', function(event) {
             event.stopPropagation();
         });
