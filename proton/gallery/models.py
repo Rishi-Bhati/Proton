@@ -11,6 +11,8 @@ class Photo(models.Model):
     image = models.ImageField(
     upload_to='gallery/', 
     storage=MediaCloudinaryStorage(),
+    null=True,
+    blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
