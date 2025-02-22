@@ -40,11 +40,12 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')), 
 
     path('contact/', include('contact.urls')),
+
+    path('gallery/', include('gallery.urls')),  # Remove namespace='gallery'
     
     # Serve media files (e.g., images, videos) from the MEDIA_ROOT directory
     # This is only active when the application is running in debug mode
 ] 
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

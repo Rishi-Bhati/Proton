@@ -1,11 +1,8 @@
 {% extends 'layout.html' %}
 
-{% block title %}
-    Gallery | Proton Gallery
-{% endblock %}
+{% block title %}Gallery | Proton Gallery{% endblock %}
 
 {% block styles %}
-
     <style>
         @font-face { 
             font-family: 'Optician Sans'; 
@@ -17,223 +14,105 @@
             src: url("/static/fonts/VT323-Regular.ttf") format("truetype"); 
         }
 
+        .gallery-container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
         .top {
             font-family: 'Optician Sans', sans-serif;
-            display: flex;
-            background-color: none;
+            text-align: center;
             color: white;
-            justify-content: space-between;
-            font-size: 1em;
-            text-decoration: none;
+            margin-bottom: 40px;
         }
-        .bth {
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: white;
-            text-decoration: none;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
         }
-        .bth:hover {
-            color: yellow;
+
+        .gallery-item:hover .caption {
+            transform: translateY(0);
         }
-        .hello {
-          opacity: 1 !important;
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
         }
-        .full {
-          position: fixed;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 1;
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
+            }
         }
-        .full .content {
-          background-color: rgba(0,0,0,0.75) !important;
-          height: 100%;
-          width: 100%;
-          display: grid;
-        }
-        .full .content img {
-          left: 50%;
-          transform: translate3d(0, 0, 0);
-          animation: zoomin 1s ease;
-          max-width: 100%;
-          max-height: 100%;
-          margin: auto;
-        }
-        .byebye {
-          opacity: 0;
-        }
-        .byebye:hover {
-          transform: scale(0.2) !important;
-        }
-        .gallery {
-          display: grid;
-          grid-column-gap: 8px;
-          grid-row-gap: 8px;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-          grid-auto-rows: 8px;
-          z-index: 1000;
-        }
-        .gallery img {
-          max-width: 100%;
-          border-radius: 8px;
-          box-shadow: 0 0 16px #333;
-          transition: all 1.5s ease;
-        }
-        .gallery img:hover {
-          box-shadow: 0 0 32px #333;
-        }
-        .gallery .content {
-          padding: 4px;
-        }
-        .gallery .gallery-item {
-          transition: grid-row-start 300ms linear;
-          transition: transform 300ms ease;
-          transition: all 0.5s ease;
-          cursor: pointer;
-        }
-        .gallery .gallery-item:hover {
-          transform: scale(1.025);
-        }
-        @media (max-width: 600px) {
-          .gallery {
-            grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-          }
-        }
-        @media (max-width: 400px) {
-          .gallery {
-            grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-          }
-        }
-        @-moz-keyframes zoomin {
-          0% {
-            max-width: 50%;
-            transform: rotate(-30deg);
-            filter: blur(4px);
-          }
-          30% {
-            filter: blur(4px);
-            transform: rotate(-80deg);
-          }
-          70% {
-            max-width: 50%;
-            transform: rotate(45deg);
-          }
-          100% {
-            max-width: 100%;
-            transform: rotate(0deg);
-          }
-        }
-        @-webkit-keyframes zoomin {
-          0% {
-            max-width: 50%;
-            transform: rotate(-30deg);
-            filter: blur(4px);
-          }
-          30% {
-            filter: blur(4px);
-            transform: rotate(-80deg);
-          }
-          70% {
-            max-width: 50%;
-            transform: rotate(45deg);
-          }
-          100% {
-            max-width: 100%;
-            transform: rotate(0deg);
-          }
-        }
-        @-o-keyframes zoomin {
-          0% {
-            max-width: 50%;
-            transform: rotate(-30deg);
-            filter: blur(4px);
-          }
-          30% {
-            filter: blur(4px);
-            transform: rotate(-80deg);
-          }
-          70% {
-            max-width: 50%;
-            transform: rotate(45deg);
-          }
-          100% {
-            max-width: 100%;
-            transform: rotate(0deg);
-          }
-        }
-        @keyframes zoomin {
-          0% {
-            max-width: 50%;
-            transform: rotate(-30deg);
-            filter: blur(4px);
-          }
-          30% {
-            filter: blur(4px);
-            transform: rotate(-80deg);
-          }
-          70% {
-            max-width: 50%;
-            transform: rotate(45deg);
-          }
-          100% {
-            max-width: 100%;
-            transform: rotate(0deg);
-          }
-        }
-          
     </style>
 {% endblock %}
 
-</head>
-
-{% block content%}
-    <div class="top">
-        <h1>Our Gallery</h1>
-    </div>
-
-
-    {% for photo in photos %}
-    <div class="gallery" id="gallery">
-        <div class="gallery-item">
-            <div class="content"><img src="{{photo.image.url}}" alt=""></div>
+{% block content %}
+    <div class="gallery-container">
+        <div class="top">
+            <h1>Our Gallery</h1>
         </div>
+
+        {% if photos %}
+            <div class="gallery-grid">
+                {% for photo in photos %}
+                    <div class="gallery-item">
+                        <img src="{{ photo.image.url }}" 
+                             alt="{{ photo.caption }}"
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='/static/images/placeholder.jpg';">
+                        <div class="caption">{{ photo.caption }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-photos">
+                <p style="color: white; text-align: center;">No photos available in the gallery yet.</p>
+            </div>
+        {% endif %}
     </div>
-    {% endfor %}
-
-     
-    <script>
-        var gallery = document.querySelector('#gallery');
-var getVal = function (elem, style) { return parseInt(window.getComputedStyle(elem).getPropertyValue(style)); };
-var getHeight = function (item) { return item.querySelector('.content').getBoundingClientRect().height; };
-var resizeAll = function () {
-    var altura = getVal(gallery, 'grid-auto-rows');
-    var gap = getVal(gallery, 'grid-row-gap');
-    gallery.querySelectorAll('.gallery-item').forEach(function (item) {
-        var el = item;
-        el.style.gridRowEnd = "span " + Math.ceil((getHeight(item) + gap) / (altura + gap));
-    });
-};
-gallery.querySelectorAll('img').forEach(function (item) {
-    item.classList.add('byebye');
-    if (item.complete) {
-        console.log(item.src);
-    }
-    else {
-        item.addEventListener('load', function () {
-            var altura = getVal(gallery, 'grid-auto-rows');
-            var gap = getVal(gallery, 'grid-row-gap');
-            var gitem = item.parentElement.parentElement;
-            gitem.style.gridRowEnd = "span " + Math.ceil((getHeight(gitem) + gap) / (altura + gap));
-            item.classList.remove('byebye');
-        });
-    }
-});
-window.addEventListener('resize', resizeAll);
-gallery.querySelectorAll('.gallery-item').forEach(function (item) {
-    item.addEventListener('click', function () {        
-        item.classList.toggle('full');        
-    });
-});
-
-    </script>
-
-{% endblock%}
+{% endblock %}
