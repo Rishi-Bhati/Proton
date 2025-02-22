@@ -68,7 +68,7 @@ def register(request):
 
 def about(request):
     # Render the about.html template
-    members = member.objects.all()[:6]
+    members = member.objects.all().order_by('position')[:6]
     return render(request, 'about.html', {'members': members})
 
 @ensure_csrf_cookie
