@@ -38,7 +38,7 @@ class Event(models.Model):
                     # Open and convert the image to webp format with compression
                     im = Image.open(self.image)
                     output = io.BytesIO()
-                    im.save(output, format="WEBP", quality=80)
+                    im.save(output, format="WEBP", quality=60)
                     output.seek(0)
                     # Create a new InMemoryUploadedFile instance for the converted image
                     self.image = InMemoryUploadedFile(
