@@ -81,10 +81,18 @@
 }
 
 .expand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 24px;
     width: 24px;
     background-color: #00ff00;
     text-align: center;
+}
+
+.expand:hover{
+    font-size: large;
+    transition: 0.2s;
 }
 .terminal-header i{
     color: #000000;
@@ -92,7 +100,7 @@
 
 #terminal-content {
     margin-left: 10px;
-    font-family: 'Poppins', monospace;
+    font-family: 'Space mono', monospace;
     font-size: 0.8rem;
     padding: 10px;
     line-height: 0.7;
@@ -104,7 +112,7 @@
     margin-left: 10px;
     font-family: monospace;
     padding-left: -10px;
-    color: #088044;
+    color: #00ff00;
     font-size: 10px;
     line-height: 1.2;
 }
