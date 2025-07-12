@@ -30,7 +30,7 @@ DEBUG = False
 
 # ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net', '127.0.0.1', 'localhost', 'proton-eta.vercel.app']
+ALLOWED_HOSTS = ['proton-nmamit.azurewebsites.net', '127.0.0.1', 'localhost', 'proton-bicy.onrender.com']
 
 #, 'proton-nmamit.onrender.com', 'protonnmamit.pythonanywhere.com'
 
