@@ -12,6 +12,7 @@ class member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     position = models.IntegerField(null=True)
     name = models.CharField(max_length=100)
+    year = models.CharField(max_length=10, null=True, default='2024')
     email = models.EmailField()
     phone = models.BigIntegerField(null=True, validators=[
             MinValueValidator(1000000000),  # At least 10 digits
