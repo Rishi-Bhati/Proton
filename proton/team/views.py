@@ -3,12 +3,34 @@ from django.http import JsonResponse
 from .models import member
 
 # Create your views here.
-def team(request):
-    members = member.objects.all().order_by('position')
-    return render(request, 'team.html', {'members': members})
+def team(request, year=None):
+    if year is None:
+        latest_member = member.objects.order_by('-year').first()
+        if latest_member:
+            year = latest_member.year
+        else:
+            year = 2024
+
+    years = member.objects.values_list('year', flat=True).distinct().order_by('-year')
+    
+    members = member.objects.filter(year=year).order_by('position')
+    
+    context = {
+        'members': members,
+        'years': years,
+        'selected_year': str(year),
+        'selected_year_color': '#00ff00',
+        'other_year_color': '#cccccc',
+    }
+    return render(request, 'team.html', context)
 
 def terminal_members(request):
-    members = member.objects.all().order_by('position')
+    latest_member = member.objects.order_by('-year').first()
+    if latest_member:
+        year = latest_member.year
+    else:
+        year = 2024
+    members = member.objects.filter(year=year).order_by('position')
     members_list = [
         {
             'name': m.name,

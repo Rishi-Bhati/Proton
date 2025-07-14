@@ -173,6 +173,7 @@ function commander(cmd) {
     case "gas":
       loopLines(rishi, "color2 margin", 80);
       break;
+
     case "members":
       addLine("Fetching members list...", "system", 0);
       fetch('/team/terminal-members/')
@@ -186,9 +187,10 @@ function commander(cmd) {
           addLine("=====================", "color2", 80 * (data.members.length + 1));
         })
         .catch(error => {
-          addLine("Error fetching members list", "error", 0);
+          addLine(error, "Error fetching members list", 0);
         });
       break;
+
     case "socialmedia":
       loopLines(socialmedia, "color2 margin", 80);
       break;

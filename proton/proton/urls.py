@@ -42,6 +42,8 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
 
     path('gallery/', include('gallery.urls')),  # Remove namespace='gallery'
+
+    path('team/', include('team.urls')),
     
     # Serve media files (e.g., images, videos) from the MEDIA_ROOT directory
     # This is only active when the application is running in debug mode

@@ -40,7 +40,7 @@ Team | PROTON Layout
         border-radius: 2%;
         width: 18rem;
         height: 18rem;
-        object-fit: cover
+        object-fit: cover;
         
     }
     .team-member h3 {
@@ -61,11 +61,20 @@ Team | PROTON Layout
 {% endblock %}
 
 {% block content %}
-
 <div class="team-section">
     <h2>
      This is Us!!!
     </h2>
+    <div class="year-selector" style="text-align: center; margin-bottom: 20px;">
+        {% for y in years %}
+            {% if y == selected_year %}
+            <a href="{% url 'team_by_year' y %}" style="color: #00ff00; margin: 0 10px; text-decoration: none;">Team @{{ y }}</a>
+            {% else %}
+            <a href="{% url 'team_by_year' y %}" style="color: #cccccc; margin: 0 10px; text-decoration: none;">Team @{{ y }}</a>
+            {% endif %}
+        {% endfor %}
+
+    </div>
     <div class="team-members">
         {% for member in members %}
         <div class="team-member">
@@ -83,7 +92,6 @@ Team | PROTON Layout
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}
 
 {% block scripts %}
