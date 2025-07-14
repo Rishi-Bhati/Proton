@@ -6,12 +6,12 @@ from django.urls import include
 from django.contrib.auth.urls import views as auth_views
 from . import views
 from home.views import register
-from .views import render
 
 # Define URL patterns for the application, mapping URLs to specific views
 urlpatterns = [
-    path('', views.team, name='team'),
-    path('<str:year>/', views.team, name='team_by_year'),
     path('terminal-members/', views.terminal_members, name='terminal_members'),
+    path('terminal-login/', views.terminal_login, name='terminal_login'),
     path('get/<str:name>/', views.get_member_info, name='get_member_info'),
+    path('<str:year>/', views.team, name='team_by_year'),
+    path('', views.team, name='team'),
 ]
